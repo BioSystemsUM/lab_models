@@ -1,1 +1,1 @@
-# lab_models
+# Lactic Acid Bacteria Genome-Scale Metabolic Models
