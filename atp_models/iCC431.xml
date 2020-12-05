@@ -20360,21 +20360,21 @@
         <listOfReactants>
           <speciesReference species="M_e_Teichuronic_acid_c" stoichiometry="0.017" constant="true"/>
           <speciesReference species="M_e_Lipoteichoic_acid_c" stoichiometry="0.08" constant="true"/>
-          <speciesReference species="M_atp_c" stoichiometry="21.93" constant="true"/>
+          <speciesReference species="M_atp_c" stoichiometry="21.4967" constant="true"/>
           <speciesReference species="M_e_Teichoic_acid_c" stoichiometry="0.031" constant="true"/>
           <speciesReference species="M_e_Cofactor_c" stoichiometry="0.01" constant="true"/>
           <speciesReference species="M_e_DNA_c" stoichiometry="0.023" constant="true"/>
           <speciesReference species="M_e_Lipid_c" stoichiometry="0.034" constant="true"/>
           <speciesReference species="M_e_Protein_c" stoichiometry="0.46" constant="true"/>
-          <speciesReference species="M_h2o_c" stoichiometry="21.93" constant="true"/>
+          <speciesReference species="M_h2o_c" stoichiometry="21.4967" constant="true"/>
           <speciesReference species="M_e_Peptidoglycan_c" stoichiometry="0.118" constant="true"/>
           <speciesReference species="M_e_RNA_c" stoichiometry="0.107" constant="true"/>
           <speciesReference species="M_e_Exopolysaccharide_c" stoichiometry="0.12" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="M_adp_c" stoichiometry="21.93" constant="true"/>
-          <speciesReference species="M_pi_c" stoichiometry="21.93" constant="true"/>
-          <speciesReference species="M_h_c" stoichiometry="21.93" constant="true"/>
+          <speciesReference species="M_adp_c" stoichiometry="21.4967" constant="true"/>
+          <speciesReference species="M_pi_c" stoichiometry="21.4967" constant="true"/>
+          <speciesReference species="M_h_c" stoichiometry="21.4967" constant="true"/>
         </listOfProducts>
       </reaction>
       <reaction metaid="meta_R_AGMTm" id="R_AGMTm" name="Agmatinase (m)" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_AGMTm_upper_bound">

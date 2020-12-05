@@ -66,8 +66,8 @@
       <parameter constant="true" id="R_EX_met__L_e_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="-1" />
       <parameter constant="true" id="R_T_sym_Citrate_upper_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="9999" />
       <parameter constant="true" id="R_EX_tyr__L_e_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="-1" />
-      <parameter constant="true" id="R_ATPM_upper_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="8.13" />
-      <parameter constant="true" id="R_ATPM_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="8.13" />
+      <parameter constant="true" id="R_ATPM_upper_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="10.52" />
+      <parameter constant="true" id="R_ATPM_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="10.52" />
       <parameter constant="true" id="R_TO1000128_upper_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="9999" />
       <parameter constant="true" id="R_EX_arg__L_e_lower_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="-1" />
       <parameter constant="true" id="R_T_sym_alpha_D_Glucose_upper_bound" sboTerm="SBO:0000625" units="mmol_per_gDW_per_hr" value="9999" />

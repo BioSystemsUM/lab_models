@@ -1,4 +1,6 @@
 import os
+
+from functools import wraps
 from cobra import util, Model, Solution
 from cobra.io import read_sbml_model
 from cobra.exceptions import Infeasible
@@ -11,6 +13,7 @@ from sympy import Add
 def writer(to_write, index=True):
     def writer_decorator(fn):
 
+        @wraps(fn)
         def wrapper(*args, **kwargs):
 
             sol = fn(*args, **kwargs)
@@ -47,7 +50,28 @@ def writer(to_write, index=True):
     return writer_decorator
 
 
+def model_analysis_register(cls):
+    for method in dir(cls):
+
+        _method = getattr(cls, method, None)
+
+        if hasattr(_method, 'registered'):
+            if _method.registered:
+                cls.registered_analysis[method] = _method
+
+    return cls
+
+
+def register(fn):
+    fn.registered = True
+
+    return fn
+
+
+# noinspection PyUnusedLocal
+@model_analysis_register
 class ModelAnalysis:
+    registered_analysis = {}
 
     def __init__(self,
                  directory,
@@ -140,6 +164,9 @@ class ModelAnalysis:
         except Infeasible:
             return Solution(objective_value=0, status='Infeasible', fluxes=Series())
 
+    def get_analysis(self):
+        return self.registered_analysis
+
     def apply_conditions(self, data_frame):
 
         exchanges = data_frame['exchange'].unique()
@@ -151,16 +178,18 @@ class ModelAnalysis:
             lb = -data_frame.loc[ex_mask, 'qs'].iloc[0]
             rxn.lower_bound = lb
 
+    @register
     @writer(to_write=False)
     def summary(self,
-                conditions=False,
-                sheet=False,
+                conditions='',
+                sheet='',
                 fva=None,
                 filter_val=0.0,
                 objectives=True,
                 metabolite_index=True,
                 output=None,
                 output_sheet=None,
+                **kwargs
                 ):
 
         if conditions and sheet:
@@ -269,12 +298,14 @@ class ModelAnalysis:
 
         return solution_frame
 
+    @register
     @writer(to_write=True)
     def connectivity(self,
                      compartments=None,
                      main_metabolites=None,
                      output=None,
                      output_sheet=None,
+                     **kwargs
                      ):
 
         if not compartments:
@@ -302,11 +333,13 @@ class ModelAnalysis:
         data.fillna(0, inplace=True)
         return data
 
+    @register
     @writer(to_write=True)
     def topological_analysis(self,
                              compartments=None,
                              output=None,
                              output_sheet=None,
+                             **kwargs
                              ):
 
         if not compartments:
@@ -346,6 +379,7 @@ class ModelAnalysis:
 
         return data
 
+    @register
     @writer(to_write=True, index=False)
     def growth_atp_tuning(self,
                           conditions,
@@ -358,6 +392,7 @@ class ModelAnalysis:
                           growth_atp_linspace,
                           output=None,
                           output_sheet=None,
+                          **kwargs
                           ):
 
         """
@@ -393,16 +428,14 @@ class ModelAnalysis:
             data = {'ATP growth (mmolATP/gbiomass)': [], 'growth rate (h-1)': [], }
 
             for st in growth_atp_linspace:
-
                 with self.model:
-
                     previous_st = {atp: self.biomass_reaction.get_coefficient(atp),
                                    h2o: self.biomass_reaction.get_coefficient(h2o),
                                    adp: self.biomass_reaction.get_coefficient(adp),
                                    h: self.biomass_reaction.get_coefficient(h),
                                    pi: self.biomass_reaction.get_coefficient(pi)}
 
-                    self.biomass_reaction.subtract_metabolites(new_st)
+                    self.biomass_reaction.subtract_metabolites(previous_st)
 
                     new_st = {atp: -st,
                               h2o: -st,
@@ -413,11 +446,12 @@ class ModelAnalysis:
                     self.biomass_reaction.add_metabolites(new_st)
 
                     data['growth rate (h-1)'].append(self.maximize(is_pfba=True, growth=True))
-                    data['ATP maintenance (mmolATP/gbiomass)'].append(st)
+                    data['ATP growth (mmolATP/gbiomass)'].append(st)
 
         df = DataFrame.from_dict(data, orient='columns')
         return df
 
+    @register
     @writer(to_write=True, index=False)
     def maintenance_atp_tuning(self,
                                conditions,
@@ -426,6 +460,7 @@ class ModelAnalysis:
                                atp_m_linspace,
                                output=None,
                                output_sheet=None,
+                               **kwargs
                                ):
 
         """
@@ -459,6 +494,7 @@ class ModelAnalysis:
         df = DataFrame.from_dict(data, orient='columns')
         return df
 
+    @register
     @writer(to_write=True)
     def atp_tuning(self,
                    conditions,
@@ -466,6 +502,7 @@ class ModelAnalysis:
                    atp_hydrolysis,
                    output=None,
                    output_sheet=None,
+                   **kwargs
                    ):
 
         """
@@ -525,6 +562,7 @@ class ModelAnalysis:
         df = DataFrame.from_dict(data, orient='index', columns=col)
         return df
 
+    @register
     @writer(to_write=False)
     def carbon_sources(self,
                        conditions,
@@ -533,6 +571,7 @@ class ModelAnalysis:
                        output=None,
                        output_sheet=None,
                        minimum_growth=0.1,
+                       **kwargs
                        ):
 
         df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
@@ -558,6 +597,7 @@ class ModelAnalysis:
         df = DataFrame.from_dict(data, orient='index', columns=['growth_rate'])
         return df
 
+    @register
     @writer(to_write=False)
     def amino_acids(self,
                     conditions,
@@ -566,6 +606,7 @@ class ModelAnalysis:
                     output=None,
                     output_sheet=None,
                     minimum_growth=0.1,
+                    **kwargs
                     ):
 
         df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
@@ -591,6 +632,7 @@ class ModelAnalysis:
         df = DataFrame.from_dict(data, orient='index', columns=['growth_rate'])
         return df
 
+    @register
     @writer(to_write=False)
     def minimal_requirements(self,
                              conditions,
@@ -598,6 +640,7 @@ class ModelAnalysis:
                              output=None,
                              output_sheet=None,
                              minimum_growth=0.1,
+                             **kwargs
                              ):
 
         df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
@@ -674,6 +717,7 @@ class ModelAnalysis:
 
         return sol
 
+    @register
     def robustness_analysis(self,
                             conditions,
                             sheet,
@@ -684,6 +728,7 @@ class ModelAnalysis:
                             output=None,
                             output_sheet=None,
                             minimum_growth=0.1,
+                            **kwargs
                             ):
 
         return self._robustness_ppp(conditions=conditions,
@@ -697,6 +742,7 @@ class ModelAnalysis:
                                     output_sheet=output_sheet,
                                     minimum_growth=minimum_growth)
 
+    @register
     def phenotypic_phase_plane_analysis(self,
                                         conditions,
                                         sheet,
@@ -721,6 +767,7 @@ class ModelAnalysis:
                                     output_sheet=output_sheet,
                                     minimum_growth=minimum_growth)
 
+    @register
     @writer(to_write=False)
     def carbon_source_analysis(self,
                                conditions,
@@ -730,6 +777,7 @@ class ModelAnalysis:
                                output=None,
                                output_sheet=None,
                                minimum_growth=0.1,
+                               **kwargs
                                ):
 
         df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
@@ -761,6 +809,7 @@ class ModelAnalysis:
         return data
 
     @writer(to_write=False)
+    @register
     def minimum_substrate_analysis(self,
                                    conditions,
                                    sheet,
@@ -770,6 +819,7 @@ class ModelAnalysis:
                                    output=None,
                                    output_sheet=None,
                                    minimum_growth=0.1,
+                                   **kwargs
                                    ):
 
         if not substrates:
@@ -939,6 +989,7 @@ class ModelAnalysis:
         data = concat(data, axis=1, join='outer', keys=columns)
         return data
 
+    @register
     def enzyme_fva_analysis_growth(self,
                                    conditions,
                                    sheet,
@@ -947,6 +998,7 @@ class ModelAnalysis:
                                    output=None,
                                    output_sheet=None,
                                    minimum_growth=0.1,
+                                   **kwargs
                                    ):
 
         return self._enzyme_fva_analysis(conditions=conditions,
@@ -958,6 +1010,7 @@ class ModelAnalysis:
                                          output_sheet=output_sheet,
                                          minimum_growth=minimum_growth, )
 
+    @register
     def enzyme_fva_analysis_no_growth(self,
                                       conditions,
                                       sheet,
@@ -966,6 +1019,7 @@ class ModelAnalysis:
                                       output=None,
                                       output_sheet=None,
                                       minimum_growth=0.1,
+                                      **kwargs
                                       ):
 
         return self._enzyme_fva_analysis(conditions=conditions,
