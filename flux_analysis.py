@@ -8,8 +8,7 @@ from pandas import Series, read_excel, DataFrame, concat, ExcelWriter
 from sympy import Add
 
 
-def writer(to_write):
-
+def writer(to_write, index=True):
     def writer_decorator(fn):
 
         def wrapper(*args, **kwargs):
@@ -34,15 +33,17 @@ def writer(to_write):
 
             if os.path.exists(path):
                 with ExcelWriter(path, mode='a') as _writer:
-                    sol.to_excel(_writer, sheet_name=output_sheet)
+                    sol.to_excel(_writer, sheet_name=output_sheet, index=index)
 
                 return sol
 
             with ExcelWriter(path) as _writer:
-                sol.to_excel(_writer, sheet_name=output_sheet)
+                sol.to_excel(_writer, sheet_name=output_sheet, index=index)
 
             return sol
+
         return wrapper
+
     return writer_decorator
 
 
@@ -53,7 +54,8 @@ class ModelAnalysis:
                  model,
                  biomass_reaction,
                  set_objective=True,
-                 results_directory=None):
+                 results_directory=None,
+                 conditions_directory=None, ):
 
         """ Model analysis class
         When an object is created, this function automatically loads the model (xml file) using cobrapy built-in
@@ -66,10 +68,14 @@ class ModelAnalysis:
         if not results_directory:
             results_directory = directory
 
+        if not conditions_directory:
+            conditions_directory = conditions_directory
+
         os.chdir(directory)
 
         self.directory = directory
         self.results_directory = results_directory
+        self.conditions_directory = conditions_directory
         self.model_file = model
 
         self.model: Model = read_sbml_model(os.path.join(self.directory, self.model_file))
@@ -158,7 +164,7 @@ class ModelAnalysis:
                 ):
 
         if conditions and sheet:
-            df = read_excel(os.path.join(self.directory, conditions), sheet)
+            df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
 
             with self.model:
                 self.apply_conditions(data_frame=df)
@@ -201,9 +207,6 @@ class ModelAnalysis:
 
             filter_mask = filter_mask.any(1)
             solution_frame = solution_frame.loc[filter_mask, :]
-
-        # if output:
-        #     solution_frame.to_excel(os.path.join(self.directory, output), 'Output')
 
         return solution_frame
 
@@ -266,79 +269,6 @@ class ModelAnalysis:
 
         return solution_frame
 
-    # old cobra version
-    # def summary_from_solution(self,
-    #                           solution,
-    #                           fva=False,
-    #                           flatten=False,
-    #                           inputs=True,
-    #                           outputs=True,
-    #                           objectives=True,
-    #                           ):
-    #
-    #     if flatten:
-    #
-    #         if fva:
-    #             solution = self.model.summary(fva=solution).to_frame()
-    #
-    #         else:
-    #             solution = self.model.summary(solution=solution).to_frame()
-    #
-    #         index = []
-    #         flux_values = []
-    #         min_flux_values = []
-    #         max_flux_values = []
-    #
-    #         if objectives:
-    #             _objectives = list(solution.loc[:, 'OBJECTIVES'].loc[:, 'ID'])
-    #             index.extend(_objectives)
-    #
-    #             objective_fluxes = list(solution.loc[:, 'OBJECTIVES'].loc[:, 'FLUX'])
-    #             flux_values.extend(objective_fluxes)
-    #             min_flux_values.extend(objective_fluxes)
-    #             max_flux_values.extend(objective_fluxes)
-    #
-    #         if inputs:
-    #             _inputs = list(solution.loc[:, 'IN_FLUXES'].loc[:, 'ID'])
-    #             index.extend(_inputs)
-    #
-    #             in_fluxes = [-val for val in solution.loc[:, 'IN_FLUXES'].loc[:, 'FLUX']]
-    #             flux_values.extend(in_fluxes)
-    #
-    #             if fva:
-    #                 min_in_fluxes = [-val for val in solution.loc[:, 'IN_FLUXES'].loc[:, 'FLUX_MIN']]
-    #                 min_flux_values.extend(min_in_fluxes)
-    #
-    #                 max_in_fluxes = [-val for val in solution.loc[:, 'IN_FLUXES'].loc[:, 'FLUX_MAX']]
-    #                 max_flux_values.extend(max_in_fluxes)
-    #
-    #         if outputs:
-    #             _outputs = list(solution.loc[:, 'OUT_FLUXES'].loc[:, 'ID'])
-    #             index.extend(_outputs)
-    #
-    #             out_fluxes = list(solution.loc[:, 'OUT_FLUXES'].loc[:, 'FLUX'])
-    #             flux_values.extend(out_fluxes)
-    #
-    #             if fva:
-    #                 min_out_fluxes = list(solution.loc[:, 'OUT_FLUXES'].loc[:, 'FLUX_MIN'])
-    #                 min_flux_values.extend(min_out_fluxes)
-    #
-    #                 max_out_fluxes = list(solution.loc[:, 'OUT_FLUXES'].loc[:, 'FLUX_MAX'])
-    #                 max_flux_values.extend(max_out_fluxes)
-    #
-    #         if fva:
-    #             values = {'flux': flux_values, 'min_flux': min_flux_values, 'max_flux': max_flux_values}
-    #
-    #         else:
-    #             values = flux_values
-    #
-    #         return DataFrame(data=values, index=index).dropna()
-    #
-    #     if fva:
-    #         return self.model.summary(fva=solution).to_frame()
-    #
-    #     return self.model.summary(solution=solution).to_frame()
-
     @writer(to_write=True)
     def connectivity(self,
                      compartments=None,
@@ -355,7 +285,6 @@ class ModelAnalysis:
         data = DataFrame(index=index, columns=list(compartments.keys()))
 
         for met in self.model.metabolites:
-
             _idd = met.id[:-2]
 
             data.loc[_idd, met.compartment] = len(met.reactions)
@@ -371,7 +300,6 @@ class ModelAnalysis:
             data = data.reindex(_new_index)
 
         data.fillna(0, inplace=True)
-        # data.to_excel(os.path.join(self.directory, output), 'output')
         return data
 
     @writer(to_write=True)
@@ -406,30 +334,138 @@ class ModelAnalysis:
                 data.loc['total', 'exchange reactions'] += 1
 
             for compartment in rxn.compartments:
-
                 data.loc['total', f'{compartment} reactions'] += 1
 
             if rxn.gene_reaction_rule.strip() != '':
                 data.loc['total', 'GPRs'] += 1
 
         for met in self.model.metabolites:
-
             data.loc['total', f'{met.compartment} metabolites'] += 1
 
         data.loc['total', 'genes'] = len(self.model.genes)
 
-        # df = DataFrame.from_dict(data, orient='index', columns=col)
-        # df.to_excel(os.path.join(self.directory, output), 'output')
-
         return data
+
+    @writer(to_write=True, index=False)
+    def growth_atp_tuning(self,
+                          conditions,
+                          sheet,
+                          atp,
+                          h2o,
+                          adp,
+                          h,
+                          pi,
+                          growth_atp_linspace,
+                          output=None,
+                          output_sheet=None,
+                          ):
+
+        """
+
+        Growth ATP tuning for arbitrary and incremented values
+
+        :param conditions: str, path for conditions spreadsheet
+        :param sheet: str, sheet name for conditions spreadsheet
+        :param atp: str, atp identifier
+        :param h2o: str, h2o identifier
+        :param adp: str, adp identifier
+        :param h: str, h identifier
+        :param pi: str, pi identifier
+        :param growth_atp_linspace: array, list, tuple, or iterable with atp maintenance bound value
+        :param output: str, path for results spreadsheet
+        :param output_sheet: str, sheet name for results spreadsheet
+
+        :return: DataFrame, dataframe of the results
+        """
+
+        atp = self.get_metabolite(atp)
+        h2o = self.get_metabolite(h2o)
+
+        adp = self.get_metabolite(adp)
+        h = self.get_metabolite(h)
+        pi = self.get_metabolite(pi)
+
+        df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
+
+        with self.model:
+            self.apply_conditions(data_frame=df)
+
+            data = {'ATP growth (mmolATP/gbiomass)': [], 'growth rate (h-1)': [], }
+
+            for st in growth_atp_linspace:
+
+                with self.model:
+
+                    previous_st = {atp: self.biomass_reaction.get_coefficient(atp),
+                                   h2o: self.biomass_reaction.get_coefficient(h2o),
+                                   adp: self.biomass_reaction.get_coefficient(adp),
+                                   h: self.biomass_reaction.get_coefficient(h),
+                                   pi: self.biomass_reaction.get_coefficient(pi)}
+
+                    self.biomass_reaction.subtract_metabolites(new_st)
+
+                    new_st = {atp: -st,
+                              h2o: -st,
+                              adp: st,
+                              h: st,
+                              pi: st}
+
+                    self.biomass_reaction.add_metabolites(new_st)
+
+                    data['growth rate (h-1)'].append(self.maximize(is_pfba=True, growth=True))
+                    data['ATP maintenance (mmolATP/gbiomass)'].append(st)
+
+        df = DataFrame.from_dict(data, orient='columns')
+        return df
+
+    @writer(to_write=True, index=False)
+    def maintenance_atp_tuning(self,
+                               conditions,
+                               sheet,
+                               atp_m,
+                               atp_m_linspace,
+                               output=None,
+                               output_sheet=None,
+                               ):
+
+        """
+
+        Maintenance ATP tuning for arbitrary and increment values
+
+        :param conditions: str, path for conditions spreadsheet
+        :param sheet: str, sheet name for conditions spreadsheet
+        :param atp_m: str, maintenance atp reaction identifier
+        :param atp_m_linspace: array, list, tuple, or iterable with atp maintenance bound value
+        :param output: str, path for results spreadsheet
+        :param output_sheet: str, sheet name for results spreadsheet
+
+        :return: DataFrame, dataframe of the results
+        """
+
+        df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
+
+        with self.model:
+            self.apply_conditions(data_frame=df)
+
+            data = {'ATP maintenance (mmolATP/gbiomass)': [], 'growth rate (h-1)': [], }
+
+            for atp_bd in atp_m_linspace:
+                with self.model:
+                    self.get_reaction(atp_m).bounds = (atp_bd, atp_bd)
+
+                    data['growth rate (h-1)'].append(self.maximize(is_pfba=True, growth=True))
+                    data['ATP maintenance (mmolATP/gbiomass)'].append(atp_bd)
+
+        df = DataFrame.from_dict(data, orient='columns')
+        return df
 
     @writer(to_write=True)
     def atp_tuning(self,
                    conditions,
                    sheet,
                    atp_hydrolysis,
-                   output=True,
-                   output_sheet=True,
+                   output=None,
+                   output_sheet=None,
                    ):
 
         """
@@ -447,9 +483,16 @@ class ModelAnalysis:
         cysteine   0,4  0,8  1,2
         alanine    0.6  0.9  1.5
 
+        :param conditions: str, path for conditions spreadsheet
+        :param sheet: str, sheet name for conditions spreadsheet
+        :param atp_hydrolysis: str, atp hydrolysis reaction identifier
+        :param output: str, path for results spreadsheet
+        :param output_sheet: str, sheet name for results spreadsheet
+
+        :return: DataFrame, dataframe of the results
         """
 
-        df = read_excel(os.path.join(self.directory, conditions), sheet)
+        df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
 
         df.columns = [str(col) for col in df.columns]
 
@@ -481,17 +524,18 @@ class ModelAnalysis:
 
         df = DataFrame.from_dict(data, orient='index', columns=col)
         return df
-        # df.to_excel(os.path.join(self.directory, output), 'output')
 
     @writer(to_write=False)
     def carbon_sources(self,
                        conditions,
                        sheet,
                        carbon_sources,
-                       output,
-                       minimum_growth=0.1):
+                       output=None,
+                       output_sheet=None,
+                       minimum_growth=0.1,
+                       ):
 
-        df = read_excel(os.path.join(self.directory, conditions), sheet)
+        df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
 
         with self.model:
 
@@ -511,19 +555,20 @@ class ModelAnalysis:
 
                     data[carbon_source] = [growth]
 
-        cols = ['growth_rate']
-        df = DataFrame.from_dict(data, orient='index', columns=cols)
-        df.to_excel(os.path.join(self.directory, output), 'output')
+        df = DataFrame.from_dict(data, orient='index', columns=['growth_rate'])
+        return df
 
     @writer(to_write=False)
     def amino_acids(self,
                     conditions,
                     sheet,
                     amino_acids,
-                    output,
-                    minimum_growth=0.1):
+                    output=None,
+                    output_sheet=None,
+                    minimum_growth=0.1,
+                    ):
 
-        df = read_excel(os.path.join(self.directory, conditions), sheet)
+        df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
 
         with self.model:
 
@@ -543,18 +588,19 @@ class ModelAnalysis:
 
                     data[amino_acid] = [growth]
 
-        cols = ['growth_rate']
-        df = DataFrame.from_dict(data, orient='index', columns=cols)
-        df.to_excel(os.path.join(self.directory, output), 'output')
+        df = DataFrame.from_dict(data, orient='index', columns=['growth_rate'])
+        return df
 
     @writer(to_write=False)
     def minimal_requirements(self,
                              conditions,
                              sheet,
-                             output,
-                             minimum_growth=0.1):
+                             output=None,
+                             output_sheet=None,
+                             minimum_growth=0.1,
+                             ):
 
-        df = read_excel(os.path.join(self.directory, conditions), sheet)
+        df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
 
         with self.model:
 
@@ -575,21 +621,20 @@ class ModelAnalysis:
 
                     data[nutrient] = [growth]
 
-        cols = ['growth_rate']
-        df = DataFrame.from_dict(data, orient='index', columns=cols)
-        df.to_excel(os.path.join(self.directory, output), 'output')
+        df = DataFrame.from_dict(data, orient='index', columns=['growth_rate'])
+        return df
 
     @writer(to_write=False)
     def _robustness_ppp(self,
                         conditions,
                         sheet,
                         reactions,
-                        output,
-                        output_sheet,
                         points=30,
                         carbon_source=None,
                         dense_output=False,
                         columns_to_drop=None,
+                        output=None,
+                        output_sheet=None,
                         minimum_growth=0.1,
                         ):
 
@@ -597,7 +642,7 @@ class ModelAnalysis:
             columns_to_drop = []
 
         # just a wrapper for cobrapy production_envelope function
-        df = read_excel(os.path.join(self.directory, conditions), sheet)
+        df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
 
         with self.model:
 
@@ -627,63 +672,53 @@ class ModelAnalysis:
 
             sol.fillna(0, inplace=True)
 
-        # the writer is needed for appending sheets
-        path = os.path.join(self.directory, output)
-
-        if os.path.exists(path):
-            with ExcelWriter(path, mode='a') as writer:
-                sol.to_excel(writer, sheet_name=output_sheet)
-
-            return
-
-        with ExcelWriter(path) as writer:
-            sol.to_excel(writer, sheet_name=output_sheet)
+        return sol
 
     def robustness_analysis(self,
                             conditions,
                             sheet,
                             reaction,
-                            output,
-                            output_sheet,
                             points=30,
                             carbon_source=None,
                             columns_to_drop=None,
+                            output=None,
+                            output_sheet=None,
                             minimum_growth=0.1,
                             ):
 
         return self._robustness_ppp(conditions=conditions,
                                     sheet=sheet,
                                     reactions=[reaction],
-                                    output=output,
-                                    output_sheet=output_sheet,
                                     points=points,
                                     carbon_source=carbon_source,
                                     dense_output=False,
                                     columns_to_drop=columns_to_drop,
+                                    output=output,
+                                    output_sheet=output_sheet,
                                     minimum_growth=minimum_growth)
 
     def phenotypic_phase_plane_analysis(self,
                                         conditions,
                                         sheet,
                                         reactions,
-                                        output,
-                                        output_sheet,
                                         points=30,
                                         carbon_source=None,
                                         dense_output=True,
                                         columns_to_drop=None,
+                                        output=None,
+                                        output_sheet=None,
                                         minimum_growth=0.1,
-                                        ):
+                                        **kwargs):
 
         return self._robustness_ppp(conditions=conditions,
                                     sheet=sheet,
                                     reactions=reactions,
-                                    output=output,
-                                    output_sheet=output_sheet,
                                     points=points,
                                     carbon_source=carbon_source,
                                     dense_output=dense_output,
                                     columns_to_drop=columns_to_drop,
+                                    output=output,
+                                    output_sheet=output_sheet,
                                     minimum_growth=minimum_growth)
 
     @writer(to_write=False)
@@ -692,10 +727,12 @@ class ModelAnalysis:
                                sheet,
                                carbon_source,
                                carbon_source_linspace,
-                               output,
-                               minimum_growth=0.1):
+                               output=None,
+                               output_sheet=None,
+                               minimum_growth=0.1,
+                               ):
 
-        df = read_excel(os.path.join(self.directory, conditions), sheet)
+        df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
 
         with self.model:
 
@@ -721,7 +758,7 @@ class ModelAnalysis:
                     data.append(sol)
 
         data = concat(data, axis=1, join='outer')
-        data.to_excel(os.path.join(self.directory, output), 'output')
+        return data
 
     @writer(to_write=False)
     def minimum_substrate_analysis(self,
@@ -730,14 +767,15 @@ class ModelAnalysis:
                                    substrates,
                                    objective,
                                    objective_linspace,
-                                   output,
+                                   output=None,
+                                   output_sheet=None,
                                    minimum_growth=0.1,
                                    ):
 
         if not substrates:
             substrates = []
 
-        df = read_excel(os.path.join(self.directory, conditions), sheet)
+        df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
 
         with self.model:
 
@@ -782,25 +820,26 @@ class ModelAnalysis:
                     data.append(sol)
 
         data = concat(data, axis=1, join='outer')
-        data.to_excel(os.path.join(self.directory, output), 'output')
+        return data
 
     @writer(to_write=False)
-    def enzyme_fva_analysis(self,
-                            conditions,
-                            sheet,
-                            enzyme,
-                            output,
-                            constraint_growth=False,
-                            rxns_to_track=None,
-                            minimum_growth=0.1,
-                            ):
+    def _enzyme_fva_analysis(self,
+                             conditions,
+                             sheet,
+                             enzyme,
+                             constraint_growth=False,
+                             rxns_to_track=None,
+                             output=None,
+                             output_sheet=None,
+                             minimum_growth=0.1,
+                             ):
 
         if not rxns_to_track:
             rxns_to_track = []
 
         rxns_to_track = set(rxns_to_track + [enzyme])
 
-        df = read_excel(os.path.join(self.directory, conditions), sheet)
+        df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
 
         with self.model:
 
@@ -898,4 +937,42 @@ class ModelAnalysis:
                     data.append(sol)
 
         data = concat(data, axis=1, join='outer', keys=columns)
-        data.to_excel(os.path.join(self.directory, output), 'output')
+        return data
+
+    def enzyme_fva_analysis_growth(self,
+                                   conditions,
+                                   sheet,
+                                   enzyme,
+                                   rxns_to_track=None,
+                                   output=None,
+                                   output_sheet=None,
+                                   minimum_growth=0.1,
+                                   ):
+
+        return self._enzyme_fva_analysis(conditions=conditions,
+                                         sheet=sheet,
+                                         enzyme=enzyme,
+                                         constraint_growth=False,
+                                         rxns_to_track=rxns_to_track,
+                                         output=output,
+                                         output_sheet=output_sheet,
+                                         minimum_growth=minimum_growth, )
+
+    def enzyme_fva_analysis_no_growth(self,
+                                      conditions,
+                                      sheet,
+                                      enzyme,
+                                      rxns_to_track=None,
+                                      output=None,
+                                      output_sheet=None,
+                                      minimum_growth=0.1,
+                                      ):
+
+        return self._enzyme_fva_analysis(conditions=conditions,
+                                         sheet=sheet,
+                                         enzyme=enzyme,
+                                         constraint_growth=True,
+                                         rxns_to_track=rxns_to_track,
+                                         output=output,
+                                         output_sheet=output_sheet,
+                                         minimum_growth=minimum_growth, )

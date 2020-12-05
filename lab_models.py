@@ -1,56 +1,95 @@
-from numpy import arange
+from collections import namedtuple
+
 from cobra.flux_analysis import pfba
+from numpy import arange
+from pandas import DataFrame
 
 from flux_analysis import ModelAnalysis
 
 
-def s_thermophilus(directory,
-                   biomass_rxn,
-                   model,
-                   results_directory=None,
-                   model_atp=None,
-                   atp_tuning=True,
-                   summary=True,
-                   connectivity=True,
-                   topological_analysis=True,
-                   carbon_sources=True,
-                   amino_acids=True,
-                   minimal_requirements=True,
-                   robustness=True,
-                   ppp=True,
-                   carbon_source=True,
-                   minimum_substrate=True,
-                   enzyme_fva=True,
+def analysis_pipeline(models_analysis, analysis):
+    Solution = namedtuple(typename='Solution', field_names=[model_analysis.model.id
+                                                            for model_analysis in models_analysis])
+
+    _results = {}
+
+    for model_analysis, _analysis in zip(models_analysis, analysis):
+        _results[model_analysis.model.id] = run_analysis(model_analysis=model_analysis,
+                                                         analysis=_analysis)
+
+    # noinspection PyArgumentList
+    return Solution(**_results)
+
+
+def run_analysis(model_analysis, analysis):
+    if not analysis:
+        analysis = {}
+
+    field_names = list(analysis.keys())
+
+    field_names.insert(0, 'id')
+    field_names.insert(1, 'model_analysis')
+    ModelSolution = namedtuple(typename='ModelSolution', field_names=field_names)
+
+    _results = {'id': model_analysis.model.id, 'model_analysis': model_analysis}
+
+    for _analysis, configuration in analysis.items():
+        print(f'Running {_analysis} for {model_analysis.model.id}')
+        method = getattr(model_analysis, _analysis, lambda **kwargs: DataFrame())
+
+        _results[_analysis] = method(**configuration)
+
+    # noinspection PyArgumentList
+    return ModelSolution(**_results)
+
+
+def build_analysis(model_analysis,
+                   model_id,
+                   conditions=None,
+                   atp_tuning_conditions=None,
+                   carbon_sources_conditions=None,
+                   analysis_to_drop=None,
+                   atp='atp_c',
+                   h2o='h2o_c',
+                   adp='adp_c',
+                   h='h_c',
+                   pi='pi_c',
+                   growth_atp_linspace=None,
+                   atp_m='ATP_Maintenance',
+                   atp_m_linspace=None,
+                   atp_hydrolysis='ATP_Maintenance',
+                   main_metabolites=None,
+                   carbon_sources=None,
+                   amino_acids=None,
+                   carbon_source='EX_lcts_e',
+                   carbon_source_linspace=None,
+                   substrates=None,
+                   objective=None,
+                   objective_linspace=None,
+                   enzyme='PFLh',
+                   rxns_to_track=None,
+                   minimum_growth=None,
                    ):
 
-    print("Streptococcus thermophilus")
-    print()
+    if not conditions:
+        conditions = 'wild_type_conditions.xlsx'
 
-    if atp_tuning:
-        sth_tuning = ModelAnalysis(directory=directory, model=model_atp, biomass_reaction=biomass_rxn,
-                                   results_directory=results_directory)
+    if not atp_tuning_conditions:
+        atp_tuning_conditions = conditions
 
-        print("ATP tuning")
-        atp_tuning_conditions = 'validation/atp_tuning_conditions.xlsx'
-        atp_tuning_sheet_name = 'Input'
-        atp_tuning_output = 'validation/sth_atp_tuning.xlsx'
-        sth_tuning.atp_tuning(conditions=atp_tuning_conditions,
-                              sheet=atp_tuning_sheet_name,
-                              atp_hydrolysis='ATP_Maintenance',
-                              output=atp_tuning_output)
+    if not carbon_sources_conditions:
+        carbon_sources_conditions = conditions
 
-    sth = ModelAnalysis(directory=directory, model=model, biomass_reaction=biomass_rxn,
-                        results_directory=results_directory)
+    if not analysis_to_drop:
+        analysis_to_drop = []
 
-    if summary:
-        print("Summary")
-        conditions = 'validation/wild_type_conditions.xlsx'
-        conditions_sheet = 'Input'
-        summary_output = 'sth_wild_type_simulation.xlsx'
-        sth.summary(conditions=conditions, sheet=conditions_sheet, output=summary_output)
+    if not growth_atp_linspace:
+        growth_atp_linspace = arange(0, 52, 2)
 
-    if connectivity:
-        print("Connectivity")
+    if not atp_m_linspace:
+        atp_m_linspace = arange(0.0, 9.5, 0.5)
+
+    if not main_metabolites:
         main_metabolites = ['h',
                             'h2o',
                             'atp',
@@ -65,19 +104,11 @@ def s_thermophilus(directory,
                             'NH4',
                             'amp',
                             'co2',
-                            'pyr',]
+                            'pyr',
+                            'ACP',
+                            'CoA']
 
-        sth.connectivity(main_metabolites=main_metabolites)
-
-    if topological_analysis:
-        print("Topological analysis")
-        sth.topological_analysis(output='sth_topological_analysis.xlsx')
-
-    if carbon_sources:
-        print("Carbon sources")
-        carbon_sources_conditions = 'validation/carbon_sources_conditions.xlsx'
-        carbon_sources_sheet_name = 'Input'
-        carbon_sources_results = 'validation/sth_carbon_sources.xlsx'
+    if not carbon_sources:
         carbon_sources = {
             'EX_lcts_e': (-27.624, 999999),
             'EX_sucr_e': (-13.812, 999999),
@@ -89,20 +120,9 @@ def s_thermophilus(directory,
             'EX_fru_B_e': (-27.624, 999999),
             'EX_man_e': (-27.624, 999999),
             'EX_gal_e': (-27.624, 999999),
-            'EX_rib__D_e': (-27.624, 999999),
-        }
+            'EX_rib__D_e': (-27.624, 999999)}
 
-        sth.carbon_sources(conditions=carbon_sources_conditions,
-                           sheet=carbon_sources_sheet_name,
-                           carbon_sources=carbon_sources,
-                           output=carbon_sources_results,
-                           minimum_growth=pfba(sth.model)[biomass_rxn] * 0.1)
-
-    if amino_acids:
-        print("Amino acids")
-        amino_acids_conditions = 'validation/amino_acids_conditions.xlsx'
-        amino_acids_sheet_name = 'Input'
-        amino_acids_results = 'sth_amino_acids.xlsx'
+    if not amino_acids:
         amino_acids = ['EX_leu__L_e',
                        'EX_glu__L__e',
                        'EX_phe__L_e',
@@ -124,139 +144,10 @@ def s_thermophilus(directory,
                        'EX_ala__L_e',
                        'EX_thr__L_e', ]
 
-        sth.amino_acids(conditions=amino_acids_conditions,
-                        sheet=amino_acids_sheet_name,
-                        amino_acids=amino_acids,
-                        output=amino_acids_results,
-                        minimum_growth=pfba(sth.model)[biomass_rxn] * 0.1)
+    if not carbon_source_linspace:
+        carbon_source_linspace = list(range(2, 42, 2))
 
-    if minimal_requirements:
-        print("Minimal requirements")
-        minimal_requirements_conditions = 'validation/minimal_requirements_conditions.xlsx'
-        minimal_requirements_sheet_name = 'Input'
-        minimal_requirements_results = 'sth_minimal_requirements.xlsx'
-
-        sth.minimal_requirements(conditions=minimal_requirements_conditions,
-                                 sheet=minimal_requirements_sheet_name,
-                                 output=minimal_requirements_results,
-                                 minimum_growth=pfba(sth.model)[biomass_rxn] * 0.1)
-
-    if robustness:
-        print("Robustness analysis")
-        robustness_analysis_conditions = 'validation/robustness_analysis_conditions.xlsx'
-        analysis = ['unconstrained', 'constrained', 'constrained_biomass', 'constrained_o2']
-        robustness_analysis_results = 'sth_robustness_analysis.xlsx'
-        columns_to_drop = ['carbon_source',
-                           'flux_minimum',
-                           'carbon_yield_minimum',
-                           'mass_yield_minimum',
-                           'carbon_yield_maximum',
-                           'mass_yield_maximum']
-
-        for sheet in analysis:
-
-            reaction = 'EX_lcts_e'
-
-            if sheet == 'constrained_o2':
-                reaction = 'EX_o2_e'
-
-            sth.robustness_analysis(conditions=robustness_analysis_conditions,
-                                    sheet=sheet,
-                                    reaction=reaction,
-                                    output=robustness_analysis_results,
-                                    output_sheet=sheet,
-                                    columns_to_drop=columns_to_drop,
-                                    minimum_growth=pfba(sth.model)[biomass_rxn] * 0.1)
-
-        print("PFL KO Robustness analysis")
-        with sth.model:
-            sth.get_reaction('PFLh').bounds = (0.0, 0.0)
-            robustness_analysis_conditions = 'validation/robustness_analysis_conditions.xlsx'
-            analysis = ['unconstrained', 'constrained', 'constrained_biomass', 'constrained_o2']
-            robustness_analysis_results = 'sth_robustness_analysis_pfl_ko.xlsx'
-            columns_to_drop = ['carbon_source',
-                               'flux_minimum',
-                               'carbon_yield_minimum',
-                               'mass_yield_minimum',
-                               'carbon_yield_maximum',
-                               'mass_yield_maximum']
-
-            for sheet in analysis:
-
-                reaction = 'EX_lcts_e'
-
-                if sheet == 'constrained_o2':
-                    reaction = 'EX_o2_e'
-
-                sth.robustness_analysis(conditions=robustness_analysis_conditions,
-                                        sheet=sheet,
-                                        reaction=reaction,
-                                        output=robustness_analysis_results,
-                                        output_sheet=sheet,
-                                        columns_to_drop=columns_to_drop,
-                                        minimum_growth=pfba(sth.model)[biomass_rxn] * 0.1)
-
-    if ppp:
-        print("Phenotypic phase plane analysis")
-        ppp_analysis_conditions = 'validation/ppp_analysis_conditions.xlsx'
-        ppp_analysis_sheet = 'ppp'
-        ppp_analysis_results = 'sth_ppp_analysis.xlsx'
-        columns_to_drop = ['carbon_source',
-                           'flux_minimum',
-                           'carbon_yield_minimum',
-                           'mass_yield_minimum',
-                           'carbon_yield_maximum',
-                           'mass_yield_maximum']
-
-        sth.phenotypic_phase_plane_analysis(conditions=ppp_analysis_conditions,
-                                            sheet=ppp_analysis_sheet,
-                                            reactions=['EX_lcts_e', 'EX_o2_e'],
-                                            output=ppp_analysis_results,
-                                            output_sheet=ppp_analysis_sheet,
-                                            columns_to_drop=columns_to_drop,
-                                            minimum_growth=pfba(sth.model)[biomass_rxn] * 0.1)
-
-        print("PFL KO Phenotypic phase plane analysis")
-        with sth.model:
-            sth.get_reaction('PFLh').bounds = (0.0, 0.0)
-            ppp_analysis_conditions = 'validation/ppp_analysis_conditions.xlsx'
-            ppp_analysis_sheet = 'ppp'
-            ppp_analysis_results = 'validation/sth_ppp_analysis_pfl_ko.xlsx'
-            columns_to_drop = ['carbon_source',
-                               'flux_minimum',
-                               'carbon_yield_minimum',
-                               'mass_yield_minimum',
-                               'carbon_yield_maximum',
-                               'mass_yield_maximum']
-
-            sth.phenotypic_phase_plane_analysis(conditions=ppp_analysis_conditions,
-                                                sheet=ppp_analysis_sheet,
-                                                reactions=['EX_lcts_e', 'EX_o2_e'],
-                                                output=ppp_analysis_results,
-                                                output_sheet=ppp_analysis_sheet,
-                                                columns_to_drop=columns_to_drop,
-                                                minimum_growth=pfba(sth.model)[biomass_rxn] * 0.1)
-
-    if carbon_source:
-        print("Carbon source analysis")
-        carbon_source_analysis_conditions = 'validation/carbon_source_analysis_conditions.xlsx'
-        carbon_source_analysis_sheet_name = 'Input'
-        carbon_source_analysis_results = 'sth_carbon_source_analysis.xlsx'
-
-        sth.carbon_source_analysis(conditions=carbon_source_analysis_conditions,
-                                   sheet=carbon_source_analysis_sheet_name,
-                                   carbon_source='EX_lcts_e',
-                                   carbon_source_linspace=list(range(2, 42, 2)),
-                                   output=carbon_source_analysis_results,
-                                   minimum_growth=pfba(sth.model)[biomass_rxn] * 0.1)
-
-    if minimum_substrate:
-        print("Minimum substrate analysis")
-        minimum_substrate_analysis_conditions = 'validation/minimum_substrate_analysis_conditions.xlsx'
-        minimum_substrate_analysis_sheet_name = 'Input'
-        minimum_substrate_analysis_results = 'sth_minimum_substrate_analysis.xlsx'
-        objective_linspace = arange(0.1, 1.6, 0.1)
-
+    if not substrates:
         substrates = [
             'EX_lcts_e',
             'EX_leu__L_e',
@@ -281,69 +172,237 @@ def s_thermophilus(directory,
             'EX_thr__L_e',
         ]
 
-        sth.minimum_substrate_analysis(conditions=minimum_substrate_analysis_conditions,
-                                       sheet=minimum_substrate_analysis_sheet_name,
-                                       substrates=substrates,
-                                       objective=sth.biomass_reaction.id,
-                                       objective_linspace=objective_linspace,
-                                       output=minimum_substrate_analysis_results,
-                                       minimum_growth=pfba(sth.model)[biomass_rxn] * 0.1)
+    if not objective:
+        objective = model_analysis.biomass_reaction.id
 
-    if enzyme_fva:
-        print("Enzyme FVA analysis no constraint")
-        enzyme_fva_analysis_conditions = 'validation/enzyme_fva_analysis_conditions.xlsx'
-        enzyme_fva_analysis_sheet_name = 'Input'
-        enzyme_fva_analysis_results = 'sth_enzyme_fva_analysis_no_constraint.xlsx'
+    if not objective_linspace:
+        objective_linspace = arange(0.1, 1.6, 0.1)
 
-        rxns_to_track = [
-            'PDHm',
-        ]
+    if not rxns_to_track:
+        rxns_to_track = ['PDHm']
 
-        sth.enzyme_fva_analysis(conditions=enzyme_fva_analysis_conditions,
-                                sheet=enzyme_fva_analysis_sheet_name,
-                                enzyme='PFLh',
-                                constraint_growth=False,
-                                rxns_to_track=rxns_to_track,
-                                output=enzyme_fva_analysis_results,
-                                minimum_growth=pfba(sth.model)[biomass_rxn] * 0.1)
+    if minimum_growth is None:
+        minimum_growth = pfba(model_analysis.model)[model_analysis.biomass_reaction.id] * 0.1
 
-        print("Enzyme FVA analysis constraint")
-        enzyme_fva_analysis_conditions = 'validation/enzyme_fva_analysis_conditions.xlsx'
-        enzyme_fva_analysis_sheet_name = 'Input'
-        enzyme_fva_analysis_results = 'sth_enzyme_fva_analysis_constraint.xlsx'
+    conditions_sheet = model_id
+    output_sheet = model_id
 
-        rxns_to_track = [
-            'PDHm',
-        ]
+    analysis_configuration = {}
 
-        sth.enzyme_fva_analysis(conditions=enzyme_fva_analysis_conditions,
-                                sheet=enzyme_fva_analysis_sheet_name,
-                                enzyme='PFLh',
-                                constraint_growth=True,
-                                rxns_to_track=rxns_to_track,
-                                output=enzyme_fva_analysis_results,
-                                minimum_growth=pfba(sth.model)[biomass_rxn] * 0.1)
+    output = 'growth_atp_tuning_results.xlsx'
+    analysis_configuration['growth_atp_tuning'] = dict(conditions=conditions,
+                                                       sheet=conditions_sheet,
+                                                       atp=atp,
+                                                       h2o=h2o,
+                                                       adp=adp,
+                                                       h=h,
+                                                       pi=pi,
+                                                       growth_atp_linspace=growth_atp_linspace,
+                                                       output=output,
+                                                       output_sheet=output_sheet)
+
+    output = 'maintenance_atp_tuning_results.xlsx'
+    analysis_configuration['maintenance_atp_tuning'] = dict(conditions=conditions,
+                                                            sheet=conditions_sheet,
+                                                            atp_m=atp_m,
+                                                            atp_m_linspace=atp_m_linspace,
+                                                            output=output,
+                                                            output_sheet=output_sheet)
+
+    output = 'atp_tuning.xlsx'
+    analysis_configuration['atp_tuning'] = dict(conditions=atp_tuning_conditions,
+                                                sheet=conditions_sheet,
+                                                atp_hydrolysis=atp_hydrolysis,
+                                                output=output,
+                                                output_sheet=output_sheet)
+
+    output = 'wild_type_simulation_results.xlsx'
+    analysis_configuration['summary'] = dict(conditions=conditions, sheet=conditions_sheet, output=output)
+
+    output = 'connectivity_results.xlsx'
+    analysis_configuration['connectivity'] = dict(main_metabolites=main_metabolites,
+                                                  output=output,
+                                                  output_sheet=output_sheet)
+
+    output = 'topological_analysis_results.xlsx'
+    analysis_configuration['topological_analysis'] = dict(output=output,
+                                                          output_sheet=output_sheet)
+
+    output = 'carbon_sources_results.xlsx'
+    analysis_configuration['carbon_sources'] = dict(conditions=carbon_sources_conditions,
+                                                    sheet=conditions_sheet,
+                                                    carbon_sources=carbon_sources,
+                                                    output=output,
+                                                    output_sheet=output_sheet,
+                                                    minimum_growth=minimum_growth)
+
+    output = 'amino_acids_results.xlsx'
+    analysis_configuration['amino_acids'] = dict(conditions=conditions,
+                                                 sheet=conditions_sheet,
+                                                 amino_acids=amino_acids,
+                                                 output=output,
+                                                 output_sheet=output_sheet,
+                                                 minimum_growth=minimum_growth)
+
+    output = 'minimal_requirements_results.xlsx'
+    analysis_configuration['minimal_requirements'] = dict(conditions=conditions,
+                                                          sheet=conditions_sheet,
+                                                          output=output,
+                                                          output_sheet=output_sheet,
+                                                          minimum_growth=minimum_growth)
+
+    output = 'carbon_source_results.xlsx'
+    analysis_configuration['carbon_source_analysis'] = dict(conditions=conditions,
+                                                            sheet=conditions_sheet,
+                                                            carbon_source=carbon_source,
+                                                            carbon_source_linspace=carbon_source_linspace,
+                                                            output=output,
+                                                            output_sheet=output_sheet,
+                                                            minimum_growth=minimum_growth)
+
+    output = 'minimum_substrate_results.xlsx'
+    analysis_configuration['minimum_substrate_analysis'] = dict(conditions=conditions,
+                                                                sheet=conditions_sheet,
+                                                                substrates=substrates,
+                                                                objective=objective,
+                                                                objective_linspace=objective_linspace,
+                                                                output=output,
+                                                                output_sheet=output_sheet,
+                                                                minimum_growth=minimum_growth)
+
+    output = 'enzyme_fva_growth.xlsx'
+    analysis_configuration['enzyme_fva_analysis_growth'] = dict(conditions=conditions,
+                                                                sheet=conditions_sheet,
+                                                                enzyme=enzyme,
+                                                                rxns_to_track=rxns_to_track,
+                                                                output=output,
+                                                                output_sheet=output_sheet,
+                                                                minimum_growth=minimum_growth)
+
+    output = 'enzyme_fva_no_growth.xlsx'
+    analysis_configuration['enzyme_fva_analysis_no_growth'] = dict(conditions=conditions,
+                                                                   sheet=output_sheet,
+                                                                   enzyme=enzyme,
+                                                                   rxns_to_track=rxns_to_track,
+                                                                   output=output,
+                                                                   output_sheet=output_sheet,
+                                                                   minimum_growth=minimum_growth)
+
+    for del_analysis in analysis_to_drop:
+        del analysis_configuration[del_analysis]
+
+    return analysis_configuration
 
 
-if __name__ == "__main__":
-    # _directory = "C:/Users/ferna/OneDrive - Universidade do Minho/Pycharm_projects/sth/"
-    _directory = "C:/Users/BiSBII/OneDrive - Universidade do Minho/Pycharm_projects/sth/"
-    _results_directory = "C:/Users/BiSBII/OneDrive - Universidade do Minho/Pycharm_projects/sth/validation"
-    _biomass_rxn = 'e-Biomass'
-    _model = 'sth_model_26_11_2020_v4.xml'
-    _model_atp = 'sth_model_26_11_2020_v2_atp_tuning.xml'
+def lab_models(directory,
+               results_directory,
+               conditions_directory,
+               icc390=None,
+               icc431=None,
+               icc464=None,
+               icc644=None,
+               ):
 
-    s_thermophilus(directory=_directory, biomass_rxn=_biomass_rxn, model=_model, results_directory=_results_directory,
-                   model_atp=_model_atp,
-                   atp_tuning=False,
-                   summary=False,
-                   connectivity=True,
-                   topological_analysis=False,
-                   carbon_sources=False,
-                   amino_acids=False,
-                   minimal_requirements=False,
-                   robustness=False,
-                   ppp=False,
-                   carbon_source=False,
-                   minimum_substrate=False,
-                   enzyme_fva=False)
+    _models_analysis = []
+    _analysis = []
+
+    if icc390:
+        icc390 = ModelAnalysis(directory=directory,
+                               model=icc390[0],
+                               biomass_reaction=icc390[1],
+                               results_directory=results_directory,
+                               conditions_directory=conditions_directory)
+
+        _models_analysis.append(icc390)
+
+        icc390_analysis = build_analysis(model_analysis=icc390,
+                                         model_id=icc390.model.id,
+                                         carbon_sources_conditions='carbon_sources_conditions.xlsx',
+                                         analysis_to_drop=['growth_atp_tuning', 'atp_tuning',
+                                                           'maintenance_atp_tuning'], )
+
+        _analysis.append(icc390_analysis)
+
+    if icc431:
+        icc431 = ModelAnalysis(directory=directory,
+                               model=icc431[0],
+                               biomass_reaction=icc431[1],
+                               results_directory=results_directory,
+                               conditions_directory=conditions_directory)
+
+        _models_analysis.append(icc431)
+
+        icc431_analysis = build_analysis(model_analysis=icc431,
+                                         model_id=icc431.model.id,
+                                         carbon_sources_conditions='carbon_sources_conditions.xlsx',
+                                         analysis_to_drop=['growth_atp_tuning', 'atp_tuning',
+                                                           'maintenance_atp_tuning'], )
+
+        _analysis.append(icc431_analysis)
+
+    if icc464:
+        icc464 = ModelAnalysis(directory=directory,
+                               model=icc464[0],
+                               biomass_reaction=icc464[1],
+                               results_directory=results_directory,
+                               conditions_directory=conditions_directory)
+
+        _models_analysis.append(icc464)
+
+        icc464_analysis = build_analysis(model_analysis=icc464,
+                                         model_id=icc464.model.id,
+                                         carbon_sources_conditions='carbon_sources_conditions.xlsx',
+                                         analysis_to_drop=['growth_atp_tuning', 'atp_tuning',
+                                                           'maintenance_atp_tuning'], )
+
+        _analysis.append(icc464_analysis)
+
+    if icc644:
+        icc644 = ModelAnalysis(directory=directory,
+                               model=icc644[0],
+                               biomass_reaction=icc644[1],
+                               results_directory=results_directory,
+                               conditions_directory=conditions_directory)
+
+        _models_analysis.append(icc644)
+
+        icc644_analysis = build_analysis(model_analysis=icc644,
+                                         model_id=icc644.model.id,
+                                         carbon_sources_conditions='carbon_sources_conditions.xlsx',
+                                         analysis_to_drop=['growth_atp_tuning', 'atp_tuning',
+                                                           'maintenance_atp_tuning'], )
+
+        _analysis.append(icc644_analysis)
+
+    return analysis_pipeline(models_analysis=_models_analysis, analysis=_analysis)
+
+
+if __name__ == '__main__':
+    _directory = 'C:/Users/ferna/OneDrive - Universidade do Minho/Pycharm_projects/lab_models/'
+    _results_directory = _directory + 'results/'
+    _conditions_directory = _directory + 'environmental_conditions/'
+
+    icc390_biomass_rxn = 'e_Biomass'
+    icc390_model = 'models/iCC390.xml'
+    _icc390 = (icc390_model, icc390_biomass_rxn)
+
+    icc431_biomass_rxn = 'e_Biomass'
+    icc431_model = 'models/iCC431.xml'
+    _icc431 = (icc431_model, icc431_biomass_rxn)
+
+    icc464_biomass_rxn = 'e_Biomass'
+    icc464_model = 'models/iCC464.xml'
+    _icc464 = (icc464_model, icc464_biomass_rxn)
+
+    icc644_biomass_rxn = 'e_Biomass'
+    icc644_model = 'models/iCC644.xml'
+    _icc644 = (icc644_model, icc644_biomass_rxn)
+
+    lab_models(directory=_directory,
+               results_directory=_results_directory,
+               conditions_directory=_conditions_directory,
+               # icc390=_icc390,
+               icc431=_icc431,
+               # icc464=_icc464,
+               # icc644=_icc644,
+               )
