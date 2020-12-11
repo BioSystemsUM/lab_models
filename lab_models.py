@@ -23,11 +23,9 @@ def analysis_pipeline(analysis):
 
 
 def run_analysis(analysis: Analysis):
-
     _results = {'analysis': analysis}
 
     for _analysis, method in analysis.configuration.items():
-
         # try:
         print(f'Running {_analysis} for {analysis.model_analysis.model.id}')
 
@@ -65,6 +63,10 @@ def build_analysis(model_analysis,
                    amino_acids=None,
                    carbon_source='EX_lcts_e',
                    carbon_source_linspace=None,
+                   production_exchanges=None,
+                   oxygen_exchange=None,
+                   oxygen_linspace=None,
+                   growth_fraction=0.9,
                    substrates=None,
                    objective=None,
                    objective_linspace=None,
@@ -72,7 +74,6 @@ def build_analysis(model_analysis,
                    rxns_to_track=None,
                    minimum_growth=None,
                    ):
-
     if not conditions:
         conditions = 'wild_type_conditions.xlsx'
 
@@ -156,6 +157,21 @@ def build_analysis(model_analysis,
     if not carbon_source_linspace:
         carbon_source_linspace = list(range(2, 42, 2))
 
+    if not production_exchanges:
+        production_exchanges = [
+            'EX_co2_e',
+            'EX_lac__L_e',
+            'EX_ac_e',
+            'EX_for_e',
+            'EX_etoh_e',
+            'EX_fum_e',
+            'EX_succ_e',
+            'EX_acald_e',
+            'EX_alac__S_e',
+            'EX_diact_e',
+            'EX_actn__R_e',
+        ]
+
     if not substrates:
         substrates = [
             'EX_lcts_e',
@@ -233,6 +249,10 @@ def build_analysis(model_analysis,
                                           amino_acids=amino_acids,
                                           carbon_source=carbon_source,
                                           carbon_source_linspace=carbon_source_linspace,
+                                          production_exchanges=production_exchanges,
+                                          oxygen_exchange=oxygen_exchange,
+                                          oxygen_linspace=oxygen_linspace,
+                                          growth_fraction=growth_fraction,
                                           substrates=substrates,
                                           objective=objective,
                                           objective_linspace=objective_linspace,
@@ -324,6 +344,7 @@ def lab_models(directory,
                icc464=None,
                icc644=None,
                ):
+
     _models_analysis = []
     _analysis = []
 
@@ -353,7 +374,8 @@ def lab_models(directory,
         icc431_analysis = build_analysis(model_analysis=icc431,
                                          model_id=icc431.model.id,
                                          carbon_sources_conditions='carbon_sources_conditions.xlsx',
-                                         analysis_to_drop=_analysis_to_drop, )
+                                         analysis_to_drop=_analysis_to_drop,
+                                         )
 
         _analysis.append(icc431_analysis)
 
@@ -397,42 +419,42 @@ if __name__ == '__main__':
 
     # icc390_model = 'models/iCC390.xml'
     # _icc390 = (icc390_model, biomass_rxn)
-    #
-    # icc431_model = 'models/iCC431.xml'
-    # _icc431 = (icc431_model, biomass_rxn)
-    #
+
+    icc431_model = 'models/iCC431.xml'
+    _icc431 = (icc431_model, biomass_rxn)
+
     # icc464_model = 'models/iCC464.xml'
     # _icc464 = (icc464_model, biomass_rxn)
     #
     # icc644_model = 'models/iCC644.xml'
     # _icc644 = (icc644_model, biomass_rxn)
-    #
+
     # _ = lab_models(directory=_directory,
     #                results_directory=_results_directory,
     #                conditions_directory=_conditions_directory,
-    #                icc390=_icc390,
+    #                # icc390=_icc390,
     #                icc431=_icc431,
-    #                icc464=_icc464,
-    #                icc644=_icc644,
+    #                # icc464=_icc464,
+    #                # icc644=_icc644,
     #                )
 
-    icc390_model = 'atp_models/iCC390.xml'
-    _icc390 = (icc390_model, biomass_rxn)
-
-    icc431_model = 'atp_models/iCC431.xml'
-    _icc431 = (icc431_model, biomass_rxn)
-
-    icc464_model = 'atp_models/iCC464.xml'
-    _icc464 = (icc464_model, biomass_rxn)
-
-    icc644_model = 'atp_models/iCC644.xml'
-    _icc644 = (icc644_model, biomass_rxn)
-
-    _ = lab_models_atp(directory=_directory,
-                       results_directory=_results_directory,
-                       conditions_directory=_conditions_directory,
-                       icc390=_icc390,
-                       icc431=_icc431,
-                       icc464=_icc464,
-                       icc644=_icc644,
-                       )
+    # icc390_model = 'atp_models/iCC390.xml'
+    # _icc390 = (icc390_model, biomass_rxn)
+    #
+    # icc431_model = 'atp_models/iCC431.xml'
+    # _icc431 = (icc431_model, biomass_rxn)
+    #
+    # icc464_model = 'atp_models/iCC464.xml'
+    # _icc464 = (icc464_model, biomass_rxn)
+    #
+    # icc644_model = 'atp_models/iCC644.xml'
+    # _icc644 = (icc644_model, biomass_rxn)
+    #
+    # _ = lab_models_atp(directory=_directory,
+    #                    results_directory=_results_directory,
+    #                    conditions_directory=_conditions_directory,
+    #                    icc390=_icc390,
+    #                    icc431=_icc431,
+    #                    icc464=_icc464,
+    #                    icc644=_icc644,
+    #                    )

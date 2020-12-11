@@ -1,7 +1,7 @@
 import os
 
 from functools import wraps
-from cobra import util, Model, Solution
+from cobra import Model, Solution
 from cobra.io import read_sbml_model
 from cobra.exceptions import Infeasible
 from cobra.flux_analysis import flux_variability_analysis, pfba, production_envelope
@@ -10,7 +10,7 @@ from pandas import Series, read_excel, DataFrame, concat, ExcelWriter
 from sympy import Add
 
 
-def writer(to_write, index=True):
+def writer(index=True):
     def writer_decorator(fn):
 
         @wraps(fn)
@@ -20,16 +20,12 @@ def writer(to_write, index=True):
 
             output = kwargs.get('output', None)
 
-            if output is None and to_write is False:
+            if output is None or output is False:
                 return sol
 
             self = args[0]
 
-            output = kwargs.get('output', f'{self.model.id}_{fn.__name__}_results.xlsx')
             output_sheet = kwargs.get('output_sheet', f'{self.model.id}')
-
-            if output is False:
-                return sol
 
             # the writer is needed for appending sheets
             path = os.path.join(self.results_directory, output)
@@ -123,7 +119,7 @@ class ModelAnalysis:
 
             if growth:
                 try:
-                    return pfba(self.model).fluxes[list(util.solver.linear_reaction_coefficients(self.model))[0].id]
+                    return pfba(self.model).fluxes[self.biomass_reaction.id]
 
                 except Infeasible:
                     return 0
@@ -179,7 +175,7 @@ class ModelAnalysis:
             rxn.lower_bound = lb
 
     @register
-    @writer(to_write=False)
+    @writer()
     def summary(self,
                 conditions='',
                 sheet='',
@@ -239,7 +235,7 @@ class ModelAnalysis:
 
         return solution_frame
 
-    @writer(to_write=False)
+    @writer()
     def summary_from_solution(self,
                               solution,
                               fva=False,
@@ -299,7 +295,7 @@ class ModelAnalysis:
         return solution_frame
 
     @register
-    @writer(to_write=True)
+    @writer()
     def connectivity(self,
                      compartments=None,
                      main_metabolites=None,
@@ -334,7 +330,7 @@ class ModelAnalysis:
         return data
 
     @register
-    @writer(to_write=True)
+    @writer()
     def topological_analysis(self,
                              compartments=None,
                              output=None,
@@ -380,7 +376,7 @@ class ModelAnalysis:
         return data
 
     @register
-    @writer(to_write=True, index=False)
+    @writer(index=False)
     def growth_atp_tuning(self,
                           conditions,
                           sheet,
@@ -452,7 +448,7 @@ class ModelAnalysis:
         return df
 
     @register
-    @writer(to_write=True, index=False)
+    @writer(index=False)
     def maintenance_atp_tuning(self,
                                conditions,
                                sheet,
@@ -495,7 +491,7 @@ class ModelAnalysis:
         return df
 
     @register
-    @writer(to_write=True)
+    @writer()
     def atp_tuning(self,
                    conditions,
                    sheet,
@@ -563,7 +559,7 @@ class ModelAnalysis:
         return df
 
     @register
-    @writer(to_write=False)
+    @writer()
     def carbon_sources(self,
                        conditions,
                        sheet,
@@ -598,7 +594,7 @@ class ModelAnalysis:
         return df
 
     @register
-    @writer(to_write=False)
+    @writer()
     def amino_acids(self,
                     conditions,
                     sheet,
@@ -633,7 +629,7 @@ class ModelAnalysis:
         return df
 
     @register
-    @writer(to_write=False)
+    @writer()
     def minimal_requirements(self,
                              conditions,
                              sheet,
@@ -667,7 +663,7 @@ class ModelAnalysis:
         df = DataFrame.from_dict(data, orient='index', columns=['growth_rate'])
         return df
 
-    @writer(to_write=False)
+    @writer()
     def _robustness_ppp(self,
                         conditions,
                         sheet,
@@ -768,7 +764,78 @@ class ModelAnalysis:
                                     minimum_growth=minimum_growth)
 
     @register
-    @writer(to_write=False)
+    @writer()
+    def production_robustness_analysis(self,
+                                       conditions,
+                                       sheet,
+                                       carbon_source,
+                                       carbon_source_linspace,
+                                       production_exchanges,
+                                       oxygen_exchange=None,
+                                       oxygen_linspace=None,
+                                       growth_fraction=0.9,
+                                       output=None,
+                                       output_sheet=None,
+                                       minimum_growth=0.1,
+                                       **kwargs):
+
+        if not oxygen_exchange:
+            oxygen_exchange = ''
+            oxygen_linspace = [0]
+
+        df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
+
+        with self.model:
+
+            self.apply_conditions(data_frame=df)
+
+            _growth = self.maximize(is_pfba=True)
+            if _growth < minimum_growth:
+                raise ValueError(f'Wrong Environmental Conditions, as growth rate is {_growth}')
+
+            dfs = []
+
+            for uptake in carbon_source_linspace:
+
+                data = DataFrame(columns=[f'{oxygen_exchange}_{oxygen_uptake}'
+                                          for oxygen_uptake in oxygen_linspace],
+                                 index=['Optimal growth rate (h-1)'] + [exchange for exchange in production_exchanges])
+
+                for oxygen_uptake in oxygen_linspace:
+
+                    with self.model:
+
+                        if oxygen_exchange:
+                            self.get_reaction(oxygen_exchange).lower_bound = -oxygen_uptake
+
+                        self.get_reaction(carbon_source).lower_bound = -uptake
+
+                        _growth = self.maximize(is_pfba=False, growth=True)
+                        optimal_growth = _growth * growth_fraction
+                        self.biomass_reaction.bounds = (optimal_growth, optimal_growth)
+
+                        data.loc['Optimal growth rate (h-1)', f'{oxygen_exchange}_{oxygen_uptake}'] = optimal_growth
+
+                        for exchange in production_exchanges:
+
+                            self.model.objective = exchange
+
+                            fba_sol = self.maximize(is_pfba=False, growth=False)
+
+                            sol = fba_sol.fluxes.get(exchange, 0)
+
+                            data.loc[exchange, f'{oxygen_exchange}_{oxygen_uptake}'] = sol
+
+                dfs.append(data)
+
+        columns = [f'{carbon_source}_{uptake}' for uptake in carbon_source_linspace]
+
+        df = concat(dfs, axis=1, keys=columns)
+
+        return df
+
+    @register
+    @writer()
     def carbon_source_analysis(self,
                                conditions,
                                sheet,
@@ -808,7 +875,7 @@ class ModelAnalysis:
         data = concat(data, axis=1, join='outer')
         return data
 
-    @writer(to_write=False)
+    @writer()
     @register
     def minimum_substrate_analysis(self,
                                    conditions,
@@ -872,7 +939,7 @@ class ModelAnalysis:
         data = concat(data, axis=1, join='outer')
         return data
 
-    @writer(to_write=False)
+    @writer()
     def _enzyme_fva_analysis(self,
                              conditions,
                              sheet,
