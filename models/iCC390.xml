@@ -12788,6 +12788,11 @@
           <speciesReference constant="true" species="M_h_c" stoichiometry="1" />
         </listOfProducts>
       </reaction>
+	  <reaction fast="false" id="R_EX_lac__D_e" name="D-Lactate exchange" reversible="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="cobra_default_ub">
+        <listOfReactants>
+          <speciesReference constant="true" species="M_lac__D_e" stoichiometry="1" />
+        </listOfReactants>
+      </reaction>
       <reaction fast="false" id="R_EX_lac__L_e" name="L-Lactate exchange" reversible="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="cobra_default_ub">
         <listOfReactants>
           <speciesReference constant="true" species="M_lac__L_e" stoichiometry="1" />

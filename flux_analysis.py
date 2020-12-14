@@ -160,6 +160,25 @@ class ModelAnalysis:
         except Infeasible:
             return Solution(objective_value=0, status='Infeasible', fluxes=Series())
 
+    def fva(self,
+            reaction_list=None,
+            loopless=False,
+            fraction_of_optimum=1.0,
+            pfba_factor=None,
+            processes=None):
+
+        try:
+            return flux_variability_analysis(model=self.model,
+                                             reaction_list=reaction_list,
+                                             loopless=loopless,
+                                             fraction_of_optimum=fraction_of_optimum,
+                                             pfba_factor=pfba_factor,
+                                             processes=processes)
+
+        except Infeasible:
+
+            return DataFrame()
+
     def get_analysis(self):
         return self.registered_analysis
 
@@ -668,8 +687,7 @@ class ModelAnalysis:
                         conditions,
                         sheet,
                         reactions,
-                        points=30,
-                        carbon_source=None,
+                        points=20,
                         dense_output=False,
                         columns_to_drop=None,
                         output=None,
@@ -693,8 +711,7 @@ class ModelAnalysis:
 
             sol = production_envelope(model=self.model,
                                       reactions=reactions,
-                                      points=points,
-                                      carbon_sources=carbon_source)
+                                      points=points, )
 
         sol.drop(columns_to_drop, axis=1, inplace=True)
 
@@ -711,6 +728,9 @@ class ModelAnalysis:
 
             sol.fillna(0, inplace=True)
 
+            sol.sort_index(inplace=True)
+            sol.sort_index(axis=1, inplace=True)
+
         return sol
 
     @register
@@ -718,8 +738,7 @@ class ModelAnalysis:
                             conditions,
                             sheet,
                             reaction,
-                            points=30,
-                            carbon_source=None,
+                            points=20,
                             columns_to_drop=None,
                             output=None,
                             output_sheet=None,
@@ -731,7 +750,6 @@ class ModelAnalysis:
                                     sheet=sheet,
                                     reactions=[reaction],
                                     points=points,
-                                    carbon_source=carbon_source,
                                     dense_output=False,
                                     columns_to_drop=columns_to_drop,
                                     output=output,
@@ -743,8 +761,7 @@ class ModelAnalysis:
                                         conditions,
                                         sheet,
                                         reactions,
-                                        points=30,
-                                        carbon_source=None,
+                                        points=20,
                                         dense_output=True,
                                         columns_to_drop=None,
                                         output=None,
@@ -756,7 +773,6 @@ class ModelAnalysis:
                                     sheet=sheet,
                                     reactions=reactions,
                                     points=points,
-                                    carbon_source=carbon_source,
                                     dense_output=dense_output,
                                     columns_to_drop=columns_to_drop,
                                     output=output,
@@ -818,13 +834,15 @@ class ModelAnalysis:
 
                         for exchange in production_exchanges:
 
-                            self.model.objective = exchange
+                            with self.model:
 
-                            fba_sol = self.maximize(is_pfba=False, growth=False)
+                                self.model.objective = exchange
 
-                            sol = fba_sol.fluxes.get(exchange, 0)
+                                fba_sol = self.maximize(is_pfba=False, growth=False)
 
-                            data.loc[exchange, f'{oxygen_exchange}_{oxygen_uptake}'] = sol
+                                sol = fba_sol.fluxes.get(exchange, 0)
+
+                                data.loc[exchange, f'{oxygen_exchange}_{oxygen_uptake}'] = sol
 
                 dfs.append(data)
 
@@ -865,12 +883,19 @@ class ModelAnalysis:
 
                     pfba_sol = self.maximize(is_pfba=True, growth=False)
 
-                    sol = self.summary_from_solution(solution=pfba_sol,
-                                                     cols_to_drop=['reaction', 'metabolite', 'factor'])
+                    if pfba_sol.fluxes.empty:
+                        sol = DataFrame(columns=[f'{carbon_source}_{uptake}'])
+                        sol.loc['status'] = pfba_sol.status
+                        data.append(sol)
 
-                    sol.columns = [f'{carbon_source}_{uptake}']
+                    else:
 
-                    data.append(sol)
+                        sol = self.summary_from_solution(solution=pfba_sol,
+                                                         cols_to_drop=['reaction', 'metabolite', 'factor'])
+
+                        sol.columns = [f'{carbon_source}_{uptake}']
+                        sol.loc['status'] = pfba_sol.status
+                        data.append(sol)
 
         data = concat(data, axis=1, join='outer')
         return data
@@ -984,8 +1009,7 @@ class ModelAnalysis:
             self.get_reaction(self.biomass_reaction.id).bounds = (growth, growth)
 
             # Get min and max values of pfl when growth rate limited to PFL knock-out phenotype
-            fva_sol = flux_variability_analysis(model=self.model,
-                                                reaction_list=[self.get_reaction(enzyme)], )
+            fva_sol = self.fva(reaction_list=[self.get_reaction(enzyme)], processes=1)
 
             enzyme_min_flux = fva_sol.loc[enzyme, 'minimum']
             enzyme_max_flux = fva_sol.loc[enzyme, 'maximum']
@@ -1003,30 +1027,37 @@ class ModelAnalysis:
             data = []
             columns = []
 
+            reaction_list = [self.get_reaction(rxn) for rxn in rxns_to_track]
+            exchanges_ids = []
+
+            for exchange in self.model.exchanges:
+                reaction_list.append(exchange)
+                exchanges_ids.append(exchange.id)
+
             for enzyme_rate in enzyme_range:
 
                 enzyme_rate = round(enzyme_rate, 4)
-                columns.append(f'PFL_rate_{enzyme_rate}')
+                columns.append(f'{enzyme}_rate_{enzyme_rate}')
 
                 with self.model:
 
                     # limiting enzyme rate to the previously determined
                     self.get_reaction(enzyme).bounds = (enzyme_rate, enzyme_rate)
 
-                    # test if there is a solution
-                    pfba_sol = self.maximize(is_pfba=True, growth=False)
+                    fba_sol = self.maximize(is_pfba=False, growth=False)
 
-                    reaction_list = [self.get_reaction(rxn) for rxn in rxns_to_track]
+                    # fva for the reactions list
+                    fva_sol = self.fva(reaction_list=reaction_list, processes=1)
 
-                    # fva for the reactions to keep track
-                    fva_sol = flux_variability_analysis(model=self.model,
-                                                        reaction_list=reaction_list)
+                    if fva_sol.empty:
+                        sol = DataFrame(columns=['flux', 'minimum', 'maximum'])
+                        sol.loc['status'] = ['infeasible'] * 3
+                        data.append(sol)
+
+                        continue
 
                     # cobrapy model summary method can only accept fva solutions performed for the exchange reactions
-                    fva_sol_exchanges = flux_variability_analysis(model=self.model,
-                                                                  reaction_list=self.model.exchanges,
-                                                                  pfba_factor=1.1,
-                                                                  processes=1)
+                    fva_sol_exchanges = fva_sol.loc[exchanges_ids, :].copy()
 
                     # final solution for the inputs and outputs flattened
                     sol = self.summary_from_solution(solution=fva_sol_exchanges,
@@ -1038,18 +1069,17 @@ class ModelAnalysis:
                     # add additional information
                     for rxn in rxns_to_track:
 
-                        if pfba_sol.status == 'infeasible':
-                            rxn_sol = [0, 0, 0]
-                            sol.loc[rxn] = rxn_sol
+                        rxn_sol = [fba_sol.fluxes.loc[rxn],
+                                   fva_sol.loc[rxn, 'minimum'],
+                                   fva_sol.loc[rxn, 'maximum']]
 
-                        else:
-                            rxn_sol = [pfba_sol.fluxes.loc[rxn],
-                                       fva_sol.loc[rxn, 'minimum'],
-                                       fva_sol.loc[rxn, 'maximum']]
+                        sol.loc[rxn] = rxn_sol
 
-                            sol.loc[rxn] = rxn_sol
+                    sol = sol.fillna(0)
 
-                        sol.loc['status'] = pfba_sol.status
+                    sol = sol * -1
+
+                    sol.loc['status'] = ['optimal'] * 3
 
                     data.append(sol)
 

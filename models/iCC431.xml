@@ -11201,7 +11201,7 @@
       <parameter sboTerm="SBO:0000625" id="R_NDPK5_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_NDPK5_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_PCFPTm_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_PFLh_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_PFL_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_ILETRS_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_R09368_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_R09368_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
@@ -18757,15 +18757,15 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_1156"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_PFLh" id="R_PFLh" name="Pyruvate formate lyase" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_PFLh_upper_bound">
+      <reaction metaid="meta_R_PFL" id="R_PFL" name="Pyruvate formate lyase" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_PFL_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_PFLh">
+            <rdf:Description rdf:about="#meta_R_PFL">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/2.3.1.54"/>
                   <rdf:li rdf:resource="https://identifiers.org/kegg.reaction/R00212"/>
-                  <rdf:li rdf:resource="https://identifiers.org/bigg.reaction/PFLh"/>
+                  <rdf:li rdf:resource="https://identifiers.org/bigg.reaction/PFL"/>
                 </rdf:Bag>
               </bqbiol:is>
             </rdf:Description>
@@ -38218,7 +38218,7 @@
       <groups:group groups:id="G_g4" groups:name="Butanoate metabolism" groups:kind="partonomy">
         <groups:listOfMembers>
           <groups:member groups:name="Acetolactate decarboxylase" groups:idRef="R_ACLDC"/>
-          <groups:member groups:name="Pyruvate formate lyase" groups:idRef="R_PFLh"/>
+          <groups:member groups:name="Pyruvate formate lyase" groups:idRef="R_PFL"/>
           <groups:member groups:name="Hydroxymethylglutaryl CoA synthase" groups:idRef="R_HMGCOAS"/>
           <groups:member groups:name="Pyruvate:pyruvate acetaldehydetransferase (decarboxylating), chloroplast" groups:idRef="R_PPATDh"/>
           <groups:member groups:name="R10506_((S)-2-Acetolactate+NAD+&lt;=&gt;Diacetyl+CO2+NADH)" groups:idRef="R_R10506"/>
@@ -39333,7 +39333,7 @@
         <groups:listOfMembers>
           <groups:member groups:name="Hydroxyacylglutathione hydrolase  mitochondrial" groups:idRef="R_GLYOXm"/>
           <groups:member groups:name="Acetate kinase" groups:idRef="R_ACKr"/>
-          <groups:member groups:name="Pyruvate formate lyase" groups:idRef="R_PFLh"/>
+          <groups:member groups:name="Pyruvate formate lyase" groups:idRef="R_PFL"/>
           <groups:member groups:name="Phosphoenolpyruvate carboxylase" groups:idRef="R_PPC"/>
           <groups:member groups:name="2 isopropylmalate synthase  mitochondrial" groups:idRef="R_IPPSm"/>
           <groups:member groups:name="Acetyl-CoA carboxylase" groups:idRef="R_ACCOAC"/>

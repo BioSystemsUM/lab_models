@@ -2,7 +2,7 @@ from collections import namedtuple
 from functools import partial
 
 from cobra.flux_analysis import pfba
-from numpy import arange
+from numpy import arange, linspace
 
 from flux_analysis import ModelAnalysis
 
@@ -26,15 +26,22 @@ def run_analysis(analysis: Analysis):
     _results = {'analysis': analysis}
 
     for _analysis, method in analysis.configuration.items():
-        # try:
-        print(f'Running {_analysis} for {analysis.model_analysis.model.id}')
 
-        _results[_analysis] = method()
+        # debug
+        # print(f'Running {_analysis} for {analysis.model_analysis.model.id}')
+        # _results[_analysis] = method()
 
-        # except Exception as ex:
-        #     print(f' Failed running {_analysis} for {analysis.model_analysis.model.id}')
-        #     print(ex)
-        #     print(ex.args)
+        try:
+            print(f'Running {_analysis} for {analysis.model_analysis.model.id}')
+
+            _results[_analysis] = method()
+
+        except Exception as ex:
+            print(f'Failed running {_analysis} for {analysis.model_analysis.model.id}')
+            print(ex)
+            print(ex.args)
+            with open('Logger.txt', 'a') as text_file:
+                text_file.write(f'Failed running {_analysis} for {analysis.model_analysis.model.id} \n')
 
     ModelSolution = namedtuple(typename='ModelSolution', field_names=list(_results.keys()))
 
@@ -47,6 +54,7 @@ def build_analysis(model_analysis,
                    conditions=None,
                    atp_tuning_conditions=None,
                    carbon_sources_conditions=None,
+                   ppp_conditions=None,
                    analysis_to_drop=None,
                    analysis_to_build=None,
                    atp='atp_c',
@@ -63,6 +71,10 @@ def build_analysis(model_analysis,
                    amino_acids=None,
                    carbon_source='EX_lcts_e',
                    carbon_source_linspace=None,
+                   reactions=None,
+                   points=20,
+                   dense_output=True,
+                   columns_to_drop=None,
                    production_exchanges=None,
                    oxygen_exchange=None,
                    oxygen_linspace=None,
@@ -83,8 +95,11 @@ def build_analysis(model_analysis,
     if not carbon_sources_conditions:
         carbon_sources_conditions = conditions
 
+    if not ppp_conditions:
+        ppp_conditions = conditions
+
     if not analysis_to_build:
-        to_build = model_analysis.get_analysis()
+        to_build = {key: val for key, val in model_analysis.get_analysis().items()}
 
     else:
         registered = model_analysis.get_analysis()
@@ -157,6 +172,12 @@ def build_analysis(model_analysis,
     if not carbon_source_linspace:
         carbon_source_linspace = list(range(2, 42, 2))
 
+    if not reactions:
+        reactions = []
+
+    if not columns_to_drop:
+        columns_to_drop = []
+
     if not production_exchanges:
         production_exchanges = [
             'EX_co2_e',
@@ -204,7 +225,7 @@ def build_analysis(model_analysis,
         objective_linspace = arange(0.1, 1.6, 0.1)
 
     if not rxns_to_track:
-        rxns_to_track = ['PDHm']
+        rxns_to_track = []
 
     if minimum_growth is None:
         minimum_growth = pfba(model_analysis.model)[model_analysis.biomass_reaction.id] * 0.1
@@ -224,15 +245,20 @@ def build_analysis(model_analysis,
         if analysis == 'carbon_sources':
             _conditions = carbon_sources_conditions
 
-        if analysis == 'atp_tuning':
+        elif analysis == 'atp_tuning':
 
             _conditions = atp_tuning_conditions
+
+        elif analysis == 'phenotypic_phase_plane_analysis':
+
+            _conditions = ppp_conditions
 
         else:
 
             _conditions = conditions
 
-        configuration[analysis] = partial(method, model_analysis,
+        configuration[analysis] = partial(method,
+                                          model_analysis,
                                           conditions=_conditions,
                                           sheet=conditions_sheet,
                                           atp=atp,
@@ -249,6 +275,10 @@ def build_analysis(model_analysis,
                                           amino_acids=amino_acids,
                                           carbon_source=carbon_source,
                                           carbon_source_linspace=carbon_source_linspace,
+                                          reactions=reactions,
+                                          points=points,
+                                          dense_output=dense_output,
+                                          columns_to_drop=columns_to_drop,
                                           production_exchanges=production_exchanges,
                                           oxygen_exchange=oxygen_exchange,
                                           oxygen_linspace=oxygen_linspace,
@@ -339,16 +369,65 @@ def lab_models_atp(directory,
 def lab_models(directory,
                results_directory,
                conditions_directory,
+               analysis_to_build=None,
+               analysis_to_drop=None,
                icc390=None,
                icc431=None,
                icc464=None,
                icc644=None,
                ):
-
     _models_analysis = []
     _analysis = []
 
-    _analysis_to_drop = ['growth_atp_tuning', 'atp_tuning', 'maintenance_atp_tuning'],
+    main_metabolites = ['h',
+                        'h2o',
+                        'atp',
+                        'pi',
+                        'adp',
+                        'ppi',
+                        'nad',
+                        'nadh',
+                        'glu__L_',
+                        'nadp',
+                        'nadph',
+                        'NH4',
+                        'amp',
+                        'co2',
+                        'pyr',
+                        'ACP',
+                        'CoA']
+
+    amino_acids = ['EX_leu__L_e',
+                   'EX_glu__L_e',
+                   'EX_phe__L_e',
+                   'EX_val__L_e',
+                   'EX_asn__L_e',
+                   'EX_trp__L_e',
+                   'EX_tyr__L_e',
+                   'EX_met__L_e',
+                   'EX_ile__L_e',
+                   'EX_gln__L_e',
+                   'EX_gly_e',
+                   'EX_lys__L_e',
+                   'EX_his__L_e',
+                   'EX_asp__L_e',
+                   'EX_arg__L_e',
+                   'EX_cys__L_e',
+                   'EX_pro__L_e',
+                   'EX_ser__L_e',
+                   'EX_ala__L_e',
+                   'EX_thr__L_e', ]
+
+    columns_to_drop = ['carbon_source',
+                       'flux_minimum',
+                       'carbon_yield_minimum',
+                       'mass_yield_minimum',
+                       'carbon_yield_maximum',
+                       'mass_yield_maximum']
+
+    oxygen_exchange = 'EX_o2_e'
+    oxygen_linspace = linspace(0, 5, 3)
+    growth_fraction = 0.9
 
     if icc390:
         icc390 = ModelAnalysis(directory=directory,
@@ -357,10 +436,90 @@ def lab_models(directory,
                                results_directory=results_directory,
                                conditions_directory=conditions_directory)
 
+        carbon_sources = {
+            'EX_lcts_e': (-4.69, 999999),
+            'EX_sucr_e': (-4.69, 999999),
+            'EX_glc__aD_e': (-9.38, 999999),
+            'EX_glc_D_B_e': (-9.38, 999999),
+            'EX_fru_B_e': (-9.38, 999999),
+            'EX_man_e': (-9.38, 999999),
+            'EX_a_gal__D_e': (-9.38, 999999),
+            'EX_gal_bD_e': (-9.38, 999999),
+            'EX_arbt_e': (-4.69, 999999),
+            'EX_malt_e': (-4.69, 999999),
+            'EX_tre_e': (-4.69, 999999),
+        }
+
+        production_exchanges = [
+            'EX_co2_e',
+            'EX_lac__L_e',
+            'EX_lac__D_e',
+            'EX_ac_e',
+            'EX_for_e',
+            'EX_etoh_e',
+            'EX_cit_e',
+            'EX_succ_e',
+            'EX_acald_e',
+        ]
+
+        substrates = [
+            'EX_glc__aD_e',
+            'EX_leu__L_e',
+            'EX_glu__L_e',
+            'EX_phe__L_e',
+            'EX_val__L_e',
+            'EX_asn__L_e',
+            'EX_trp__L_e',
+            'EX_tyr__L_e',
+            'EX_met__L_e',
+            'EX_ile__L_e',
+            'EX_gln__L_e',
+            'EX_gly_e',
+            'EX_lys__L_e',
+            'EX_his__L_e',
+            'EX_asp__L_e',
+            'EX_arg__L_e',
+            'EX_cys__L_e',
+            'EX_pro__L_e',
+            'EX_ser__L_e',
+            'EX_ala__L_e',
+            'EX_thr__L_e',
+        ]
+
+        reactions = ['EX_glc__aD_e', 'EX_ac_e']
+
+        carbon_source_linspace = list(linspace(1, 20, 20))
+
+        objective_linspace = list(linspace(0.01, 0.3, 15))
+
+        rxns_to_track = []
+
         icc390_analysis = build_analysis(model_analysis=icc390,
                                          model_id=icc390.model.id,
+                                         conditions='wild_type_conditions.xlsx',
                                          carbon_sources_conditions='carbon_sources_conditions.xlsx',
-                                         analysis_to_drop=_analysis_to_drop, )
+                                         ppp_conditions='ppp_conditions.xlsx',
+                                         analysis_to_build=analysis_to_build,
+                                         analysis_to_drop=analysis_to_drop,
+                                         main_metabolites=main_metabolites,
+                                         carbon_sources=carbon_sources,
+                                         amino_acids=amino_acids,
+                                         carbon_source='EX_glc__aD_e',
+                                         carbon_source_linspace=carbon_source_linspace,
+                                         reactions=reactions,
+                                         points=20,
+                                         dense_output=True,
+                                         columns_to_drop=columns_to_drop,
+                                         production_exchanges=production_exchanges,
+                                         oxygen_exchange=oxygen_exchange,
+                                         oxygen_linspace=oxygen_linspace,
+                                         growth_fraction=growth_fraction,
+                                         substrates=substrates,
+                                         objective=icc390.biomass_reaction.id,
+                                         objective_linspace=objective_linspace,
+                                         enzyme='PKETX',
+                                         rxns_to_track=rxns_to_track,
+                                         )
 
         _analysis.append(icc390_analysis)
 
@@ -371,11 +530,90 @@ def lab_models(directory,
                                results_directory=results_directory,
                                conditions_directory=conditions_directory)
 
+        carbon_sources = {
+            'EX_lcts_e': (-27.624, 999999),
+            'EX_sucr_e': (-13.812, 999999),
+            'EX_cellb_e': (-13.812, 999999),
+            'EX_xyl__D_e': (-27.624, 999999),
+            'EX_arab__D_e': (-27.624, 999999),
+            'EX_glc__aD_e': (-27.624, 999999),
+            'EX_glc_D_B_e': (-27.624, 999999),
+            'EX_fru_B_e': (-27.624, 999999),
+            'EX_man_e': (-27.624, 999999),
+            'EX_gal_e': (-27.624, 999999),
+            'EX_rib__D_e': (-27.624, 999999)}
+
+        production_exchanges = [
+            'EX_co2_e',
+            'EX_lac__L_e',
+            'EX_ac_e',
+            'EX_for_e',
+            'EX_etoh_e',
+            'EX_fum_e',
+            'EX_succ_e',
+            'EX_acald_e',
+            'EX_alac__S_e',
+            'EX_diact_e',
+            'EX_actn__R_e',
+        ]
+
+        substrates = [
+            'EX_lcts_e',
+            'EX_leu__L_e',
+            'EX_glu__L_e',
+            'EX_phe__L_e',
+            'EX_val__L_e',
+            'EX_asn__L_e',
+            'EX_trp__L_e',
+            'EX_tyr__L_e',
+            'EX_met__L_e',
+            'EX_ile__L_e',
+            'EX_gln__L_e',
+            'EX_gly_e',
+            'EX_lys__L_e',
+            'EX_his__L_e',
+            'EX_asp__L_e',
+            'EX_arg__L_e',
+            'EX_cys__L_e',
+            'EX_pro__L_e',
+            'EX_ser__L_e',
+            'EX_ala__L_e',
+            'EX_thr__L_e',
+        ]
+
+        reactions = ['EX_lcts_e', 'EX_ac_e']
+
+        carbon_source_linspace = list(range(2, 42, 2))
+
+        objective_linspace = list(linspace(0.1, 1.5, 15))
+
+        rxns_to_track = ['PDHm']
+
         icc431_analysis = build_analysis(model_analysis=icc431,
                                          model_id=icc431.model.id,
+                                         conditions='wild_type_conditions.xlsx',
                                          carbon_sources_conditions='carbon_sources_conditions.xlsx',
-                                         analysis_to_drop=_analysis_to_drop,
-                                         )
+                                         ppp_conditions='ppp_conditions.xlsx',
+                                         analysis_to_build=analysis_to_build,
+                                         analysis_to_drop=analysis_to_drop,
+                                         main_metabolites=main_metabolites,
+                                         carbon_sources=carbon_sources,
+                                         amino_acids=amino_acids,
+                                         carbon_source='EX_lcts_e',
+                                         carbon_source_linspace=carbon_source_linspace,
+                                         reactions=reactions,
+                                         points=20,
+                                         dense_output=True,
+                                         columns_to_drop=columns_to_drop,
+                                         production_exchanges=production_exchanges,
+                                         oxygen_exchange=oxygen_exchange,
+                                         oxygen_linspace=oxygen_linspace,
+                                         growth_fraction=growth_fraction,
+                                         substrates=substrates,
+                                         objective=icc431.biomass_reaction.id,
+                                         objective_linspace=objective_linspace,
+                                         enzyme='PFL',
+                                         rxns_to_track=rxns_to_track, )
 
         _analysis.append(icc431_analysis)
 
@@ -386,10 +624,97 @@ def lab_models(directory,
                                results_directory=results_directory,
                                conditions_directory=conditions_directory)
 
+        carbon_sources = {
+            'EX_lcts_e': (-8.2, 999999),
+            'EX_sucr_e': (-8.2, 999999),
+            'EX_glc__aD_e': (-16.4, 999999),
+            'EX_glc_D_B_e': (-16.4, 999999),
+            'EX_fru_B_e': (-16.4, 999999),
+            'EX_man_e': (-16.4, 999999),
+            'EX_a_gal__D_e': (-16.4, 999999),
+            'EX_gal_bD_e': (-16.4, 999999),
+            'EX_arbt_e': (-8.2, 999999),
+            'EX_malt_e': (-8.2, 999999),
+            'EX_acgam_e': (-8.2, 999999),
+            'EX_stys_e': (-4.1, 999999),
+            'EX_tre_e': (-8.2, 999999),
+            'EX_cellb_e': (-8.2, 999999),
+            'EX_melib_e': (-8.2, 999999),
+            'EX_raffin_e': (-5.5, 999999),
+            'EX_rib__D_e': (-16.4, 999999),
+            'EX_C16639_e': (-16.4, 999999),
+        }
+
+        production_exchanges = [
+            'EX_co2_e',
+            'EX_lac__L_e',
+            'EX_lac__D_e',
+            'EX_ac_e',
+            'EX_for_e',
+            'EX_etoh_e',
+            'EX_cit_e',
+            'EX_succ_e',
+            'EX_acald_e',
+            'EX_mal__L_e'
+        ]
+
+        substrates = [
+            'EX_glc__aD_e',
+            'EX_leu__L_e',
+            'EX_glu__L_e',
+            'EX_phe__L_e',
+            'EX_val__L_e',
+            'EX_asn__L_e',
+            'EX_trp__L_e',
+            'EX_tyr__L_e',
+            'EX_met__L_e',
+            'EX_ile__L_e',
+            'EX_gln__L_e',
+            'EX_gly_e',
+            'EX_lys__L_e',
+            'EX_his__L_e',
+            'EX_asp__L_e',
+            'EX_arg__L_e',
+            'EX_cys__L_e',
+            'EX_pro__L_e',
+            'EX_ser__L_e',
+            'EX_ala__L_e',
+            'EX_thr__L_e',
+        ]
+
+        reactions = ['EX_glc__aD_e', 'EX_ac_e']
+
+        carbon_source_linspace = list(linspace(1, 25, 20))
+
+        objective_linspace = list(linspace(0.1, 1.5, 15))
+
+        rxns_to_track = []
+
         icc464_analysis = build_analysis(model_analysis=icc464,
                                          model_id=icc464.model.id,
+                                         conditions='wild_type_conditions.xlsx',
                                          carbon_sources_conditions='carbon_sources_conditions.xlsx',
-                                         analysis_to_drop=_analysis_to_drop, )
+                                         ppp_conditions='ppp_conditions.xlsx',
+                                         analysis_to_build=analysis_to_build,
+                                         analysis_to_drop=analysis_to_drop,
+                                         main_metabolites=main_metabolites,
+                                         carbon_sources=carbon_sources,
+                                         amino_acids=amino_acids,
+                                         carbon_source='EX_glc__aD_e',
+                                         carbon_source_linspace=carbon_source_linspace,
+                                         reactions=reactions,
+                                         points=20,
+                                         dense_output=True,
+                                         columns_to_drop=columns_to_drop,
+                                         production_exchanges=production_exchanges,
+                                         oxygen_exchange=oxygen_exchange,
+                                         oxygen_linspace=oxygen_linspace,
+                                         growth_fraction=growth_fraction,
+                                         substrates=substrates,
+                                         objective=icc464.biomass_reaction.id,
+                                         objective_linspace=objective_linspace,
+                                         enzyme='PKETX',
+                                         rxns_to_track=rxns_to_track, )
 
         _analysis.append(icc464_analysis)
 
@@ -400,10 +725,103 @@ def lab_models(directory,
                                results_directory=results_directory,
                                conditions_directory=conditions_directory)
 
+        carbon_sources = {
+            'EX_lcts_e': (-4.415, 999999),
+            'EX_sucr_e': (-4.415, 999999),
+            'EX_glc__aD_e': (-8.83, 999999),
+            'EX_glc_D_B_e': (-8.83, 999999),
+            'EX_fru_B_e': (-8.83, 999999),
+            'EX_man_e': (-8.83, 999999),
+            'EX_a_gal__D_e': (-8.83, 999999),
+            'EX_gal_bD_e': (-8.83, 999999),
+            'EX_arbt_e': (-4.415, 999999),
+            'EX_malt_e': (-4.415, 999999),
+            'EX_acgam_e': (-4.415, 999999),
+            'EX_tre_e': (-4.415, 999999),
+            'EX_cellb_e': (-4.415, 999999),
+            'EX_melib_e': (-4.415, 999999),
+            'EX_rib__D_e': (-8.83, 999999),
+            'EX_HC00832_e': (-8.83, 999999),
+            'EX_tag__D_e': (-8.83, 999999),
+            'EX_srb__L_e': (-8.83, 999999),
+            'EX_HC00822_e': (-4.415, 999999),
+            'EX_rmn_e': (-8.83, 999999),
+        }
+
+        production_exchanges = [
+            'EX_co2_e',
+            'EX_lac__L_e',
+            'EX_lac__D_e',
+            'EX_ac_e',
+            'EX_for_e',
+            'EX_etoh_e',
+            'EX_cit_e',
+            'EX_fum_e',
+            'EX_succ_e',
+            'EX_acald_e',
+            'EX_mal__L_e',
+            'EX_diact_e',
+            'EX_actn__R_e',
+            'EX_lald__L_e',
+        ]
+
+        substrates = [
+            'EX_glc__aD_e',
+            'EX_leu__L_e',
+            'EX_glu__L_e',
+            'EX_phe__L_e',
+            'EX_val__L_e',
+            'EX_asn__L_e',
+            'EX_trp__L_e',
+            'EX_tyr__L_e',
+            'EX_met__L_e',
+            'EX_ile__L_e',
+            'EX_gln__L_e',
+            'EX_gly_e',
+            'EX_lys__L_e',
+            'EX_his__L_e',
+            'EX_asp__L_e',
+            'EX_arg__L_e',
+            'EX_cys__L_e',
+            'EX_pro__L_e',
+            'EX_ser__L_e',
+            'EX_ala__L_e',
+            'EX_thr__L_e',
+        ]
+
+        reactions = ['EX_glc__aD_e', 'EX_ac_e']
+
+        carbon_source_linspace = list(linspace(1, 25, 20))
+
+        objective_linspace = list(linspace(0.01, 0.6, 15))
+
+        rxns_to_track = []
+
         icc644_analysis = build_analysis(model_analysis=icc644,
                                          model_id=icc644.model.id,
+                                         conditions='wild_type_conditions.xlsx',
                                          carbon_sources_conditions='carbon_sources_conditions.xlsx',
-                                         analysis_to_drop=_analysis_to_drop, )
+                                         ppp_conditions='ppp_conditions.xlsx',
+                                         analysis_to_build=analysis_to_build,
+                                         analysis_to_drop=analysis_to_drop,
+                                         main_metabolites=main_metabolites,
+                                         carbon_sources=carbon_sources,
+                                         amino_acids=amino_acids,
+                                         carbon_source='EX_glc__aD_e',
+                                         carbon_source_linspace=carbon_source_linspace,
+                                         reactions=reactions,
+                                         points=20,
+                                         dense_output=True,
+                                         columns_to_drop=columns_to_drop,
+                                         production_exchanges=production_exchanges,
+                                         oxygen_exchange=oxygen_exchange,
+                                         oxygen_linspace=oxygen_linspace,
+                                         growth_fraction=growth_fraction,
+                                         substrates=substrates,
+                                         objective=icc644.biomass_reaction.id,
+                                         objective_linspace=objective_linspace,
+                                         enzyme='PFL',
+                                         rxns_to_track=rxns_to_track, )
 
         _analysis.append(icc644_analysis)
 
@@ -411,32 +829,43 @@ def lab_models(directory,
 
 
 if __name__ == '__main__':
-    _directory = 'C:/Users/ferna/OneDrive - Universidade do Minho/Pycharm_projects/lab_models/'
-    _results_directory = _directory + 'results/'
-    _conditions_directory = _directory + 'environmental_conditions/'
+    import os
+
+    _directory = os.getcwd()
+    _results_directory = os.path.join(_directory, 'results')
+    _conditions_directory = os.path.join(_directory, 'environmental_conditions')
 
     biomass_rxn = 'e_Biomass'
 
-    # icc390_model = 'models/iCC390.xml'
-    # _icc390 = (icc390_model, biomass_rxn)
+    icc390_model = 'models/iCC390.xml'
+    _icc390 = (icc390_model, biomass_rxn)
 
     icc431_model = 'models/iCC431.xml'
     _icc431 = (icc431_model, biomass_rxn)
 
-    # icc464_model = 'models/iCC464.xml'
-    # _icc464 = (icc464_model, biomass_rxn)
-    #
-    # icc644_model = 'models/iCC644.xml'
-    # _icc644 = (icc644_model, biomass_rxn)
+    icc464_model = 'models/iCC464.xml'
+    _icc464 = (icc464_model, biomass_rxn)
 
-    # _ = lab_models(directory=_directory,
-    #                results_directory=_results_directory,
-    #                conditions_directory=_conditions_directory,
-    #                # icc390=_icc390,
-    #                icc431=_icc431,
-    #                # icc464=_icc464,
-    #                # icc644=_icc644,
-    #                )
+    icc644_model = 'models/iCC644.xml'
+    _icc644 = (icc644_model, biomass_rxn)
+
+    _analysis_to_drop = ['growth_atp_tuning',
+                         'atp_tuning',
+                         'maintenance_atp_tuning',
+                         'robustness_analysis']
+
+    # _analysis_to_build = ['phenotypic_phase_plane_analysis']
+
+    _ = lab_models(directory=_directory,
+                   results_directory=_results_directory,
+                   conditions_directory=_conditions_directory,
+                   # analysis_to_build=_analysis_to_build,
+                   analysis_to_drop=_analysis_to_drop,
+                   icc390=_icc390,
+                   icc431=_icc431,
+                   icc464=_icc464,
+                   icc644=_icc644,
+                   )
 
     # icc390_model = 'atp_models/iCC390.xml'
     # _icc390 = (icc390_model, biomass_rxn)
