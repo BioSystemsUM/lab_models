@@ -84,8 +84,11 @@ def build_analysis(model_analysis,
                    objective_linspace=None,
                    enzyme='PFLh',
                    rxns_to_track=None,
+                   tol=1E-5,
+                   special_conditions=None,
                    minimum_growth=None,
                    ):
+
     if not conditions:
         conditions = 'wild_type_conditions.xlsx'
 
@@ -227,6 +230,9 @@ def build_analysis(model_analysis,
     if not rxns_to_track:
         rxns_to_track = []
 
+    if not special_conditions:
+        special_conditions = {}
+
     if minimum_growth is None:
         minimum_growth = pfba(model_analysis.model)[model_analysis.biomass_reaction.id] * 0.1
 
@@ -288,6 +294,8 @@ def build_analysis(model_analysis,
                                           objective_linspace=objective_linspace,
                                           enzyme=enzyme,
                                           rxns_to_track=rxns_to_track,
+                                          tol=tol,
+                                          special_conditions=special_conditions,
                                           output=output,
                                           output_sheet=output_sheet,
                                           minimum_growth=minimum_growth,
@@ -519,6 +527,8 @@ def lab_models(directory,
                                          objective_linspace=objective_linspace,
                                          enzyme='PKETX',
                                          rxns_to_track=rxns_to_track,
+                                         special_conditions={'EX_lac__D_e': (0.0, 0.0)},
+                                         tol=1E-4,
                                          )
 
         _analysis.append(icc390_analysis)
@@ -613,7 +623,9 @@ def lab_models(directory,
                                          objective=icc431.biomass_reaction.id,
                                          objective_linspace=objective_linspace,
                                          enzyme='PFL',
-                                         rxns_to_track=rxns_to_track, )
+                                         rxns_to_track=rxns_to_track,
+                                         tol=1E-4,
+                                         )
 
         _analysis.append(icc431_analysis)
 
@@ -714,7 +726,10 @@ def lab_models(directory,
                                          objective=icc464.biomass_reaction.id,
                                          objective_linspace=objective_linspace,
                                          enzyme='PKETX',
-                                         rxns_to_track=rxns_to_track, )
+                                         rxns_to_track=rxns_to_track,
+                                         special_conditions={'EX_lac__D_e': (0.0, 0.0)},
+                                         tol=1E-4,
+                                         )
 
         _analysis.append(icc464_analysis)
 
@@ -821,7 +836,10 @@ def lab_models(directory,
                                          objective=icc644.biomass_reaction.id,
                                          objective_linspace=objective_linspace,
                                          enzyme='PFL',
-                                         rxns_to_track=rxns_to_track, )
+                                         rxns_to_track=rxns_to_track,
+                                         special_conditions={'EX_lac__D_e': (0.0, 0.0)},
+                                         tol=1E-4,
+                                         )
 
         _analysis.append(icc644_analysis)
 
@@ -849,41 +867,20 @@ if __name__ == '__main__':
     icc644_model = 'models/iCC644.xml'
     _icc644 = (icc644_model, biomass_rxn)
 
-    _analysis_to_drop = ['growth_atp_tuning',
-                         'atp_tuning',
-                         'maintenance_atp_tuning',
-                         'robustness_analysis']
+    # _analysis_to_drop = ['growth_atp_tuning',
+    #                      'atp_tuning',
+    #                      'maintenance_atp_tuning',
+    #                      'robustness_analysis']
 
-    # _analysis_to_build = ['phenotypic_phase_plane_analysis']
+    _analysis_to_build = ['enzyme_fva_analysis_no_growth', 'enzyme_fva_analysis_growth']
 
     _ = lab_models(directory=_directory,
                    results_directory=_results_directory,
                    conditions_directory=_conditions_directory,
-                   # analysis_to_build=_analysis_to_build,
-                   analysis_to_drop=_analysis_to_drop,
+                   analysis_to_build=_analysis_to_build,
+                   # analysis_to_drop=_analysis_to_drop,
                    icc390=_icc390,
                    icc431=_icc431,
                    icc464=_icc464,
                    icc644=_icc644,
                    )
-
-    # icc390_model = 'atp_models/iCC390.xml'
-    # _icc390 = (icc390_model, biomass_rxn)
-    #
-    # icc431_model = 'atp_models/iCC431.xml'
-    # _icc431 = (icc431_model, biomass_rxn)
-    #
-    # icc464_model = 'atp_models/iCC464.xml'
-    # _icc464 = (icc464_model, biomass_rxn)
-    #
-    # icc644_model = 'atp_models/iCC644.xml'
-    # _icc644 = (icc644_model, biomass_rxn)
-    #
-    # _ = lab_models_atp(directory=_directory,
-    #                    results_directory=_results_directory,
-    #                    conditions_directory=_conditions_directory,
-    #                    icc390=_icc390,
-    #                    icc431=_icc431,
-    #                    icc464=_icc464,
-    #                    icc644=_icc644,
-    #                    )

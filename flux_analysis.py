@@ -313,6 +313,43 @@ class ModelAnalysis:
 
         return solution_frame
 
+    def summary_from_fva(self, fva_solution, fba_solution, tol=1E-6):
+
+        def get_metabolite(reaction):
+
+            reaction = self.get_reaction(reaction)
+
+            if reaction.boundary:
+                if len(reaction.reactants) == 1:
+                    return reaction.reactants[0].id
+
+            return reaction.id
+
+        sol = fva_solution.copy()
+        new_index = []
+
+        flux_col = []
+
+        for _reaction in fva_solution.index:
+
+            new_index.append(get_metabolite(_reaction))
+            flux_col.append(fba_solution.fluxes.get(_reaction, 0))
+
+        sol.index = new_index
+        sol.loc[:, 'flux'] = flux_col
+        sol.fillna(0.0, inplace=True)
+
+        # rounding to zero
+        sol_mask = (-tol <= sol) & (sol <= tol)
+        sol[sol_mask] = 0.0
+
+        # removing empty rows
+        sol_mask = sol != 0.0
+        sol_mask = sol_mask.any(1)
+        sol = sol.loc[sol_mask, :]
+
+        return sol
+
     @register
     @writer()
     def connectivity(self,
@@ -833,9 +870,7 @@ class ModelAnalysis:
                         data.loc['Optimal growth rate (h-1)', f'{oxygen_exchange}_{oxygen_uptake}'] = optimal_growth
 
                         for exchange in production_exchanges:
-
                             with self.model:
-
                                 self.model.objective = exchange
 
                                 fba_sol = self.maximize(is_pfba=False, growth=False)
@@ -971,6 +1006,8 @@ class ModelAnalysis:
                              enzyme,
                              constraint_growth=False,
                              rxns_to_track=None,
+                             tol=1E-5,
+                             special_conditions=None,
                              output=None,
                              output_sheet=None,
                              minimum_growth=0.1,
@@ -979,6 +1016,9 @@ class ModelAnalysis:
         if not rxns_to_track:
             rxns_to_track = []
 
+        if not special_conditions:
+            special_conditions = {}
+
         rxns_to_track = set(rxns_to_track + [enzyme])
 
         df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
@@ -986,6 +1026,9 @@ class ModelAnalysis:
         with self.model:
 
             self.apply_conditions(data_frame=df)
+
+            for condition, bds in special_conditions.items():
+                self.get_reaction(condition).bounds = bds
 
             _growth = self.maximize(is_pfba=True)
             if _growth < minimum_growth:
@@ -1037,12 +1080,24 @@ class ModelAnalysis:
             for enzyme_rate in enzyme_range:
 
                 enzyme_rate = round(enzyme_rate, 4)
+
+                if enzyme_rate == -0.0:
+                    enzyme_rate = 0.0
+
+                if enzyme_rate == 0.0:
+                    lb_enzyme_rate = enzyme_rate
+                    ub_enzyme_rate = enzyme_rate + tol
+
+                else:
+                    lb_enzyme_rate = enzyme_rate - tol
+                    ub_enzyme_rate = enzyme_rate + tol
+
                 columns.append(f'{enzyme}_rate_{enzyme_rate}')
 
                 with self.model:
 
                     # limiting enzyme rate to the previously determined
-                    self.get_reaction(enzyme).bounds = (enzyme_rate, enzyme_rate)
+                    self.get_reaction(enzyme).bounds = (lb_enzyme_rate, ub_enzyme_rate)
 
                     fba_sol = self.maximize(is_pfba=False, growth=False)
 
@@ -1052,38 +1107,18 @@ class ModelAnalysis:
                     if fva_sol.empty:
                         sol = DataFrame(columns=['flux', 'minimum', 'maximum'])
                         sol.loc['status'] = ['infeasible'] * 3
-                        data.append(sol)
 
-                        continue
+                    else:
 
-                    # cobrapy model summary method can only accept fva solutions performed for the exchange reactions
-                    fva_sol_exchanges = fva_sol.loc[exchanges_ids, :].copy()
+                        sol = self.summary_from_fva(fva_solution=fva_sol, fba_solution=fba_sol)
 
-                    # final solution for the inputs and outputs flattened
-                    sol = self.summary_from_solution(solution=fva_sol_exchanges,
-                                                     fva=True,
-                                                     objectives=True,
-                                                     cols_to_drop=['reaction', 'metabolite', 'factor']
-                                                     )
-
-                    # add additional information
-                    for rxn in rxns_to_track:
-
-                        rxn_sol = [fba_sol.fluxes.loc[rxn],
-                                   fva_sol.loc[rxn, 'minimum'],
-                                   fva_sol.loc[rxn, 'maximum']]
-
-                        sol.loc[rxn] = rxn_sol
-
-                    sol = sol.fillna(0)
-
-                    sol = sol * -1
-
-                    sol.loc['status'] = ['optimal'] * 3
+                        sol.loc['status'] = ['optimal'] * 3
 
                     data.append(sol)
 
         data = concat(data, axis=1, join='outer', keys=columns)
+        data.fillna(0, inplace=True)
+
         return data
 
     @register
@@ -1092,6 +1127,8 @@ class ModelAnalysis:
                                    sheet,
                                    enzyme,
                                    rxns_to_track=None,
+                                   tol=1E-5,
+                                   special_conditions=None,
                                    output=None,
                                    output_sheet=None,
                                    minimum_growth=0.1,
@@ -1103,6 +1140,8 @@ class ModelAnalysis:
                                          enzyme=enzyme,
                                          constraint_growth=False,
                                          rxns_to_track=rxns_to_track,
+                                         tol=tol,
+                                         special_conditions=special_conditions,
                                          output=output,
                                          output_sheet=output_sheet,
                                          minimum_growth=minimum_growth, )
@@ -1113,6 +1152,8 @@ class ModelAnalysis:
                                       sheet,
                                       enzyme,
                                       rxns_to_track=None,
+                                      tol=1E-5,
+                                      special_conditions=None,
                                       output=None,
                                       output_sheet=None,
                                       minimum_growth=0.1,
@@ -1124,6 +1165,8 @@ class ModelAnalysis:
                                          enzyme=enzyme,
                                          constraint_growth=True,
                                          rxns_to_track=rxns_to_track,
+                                         tol=tol,
+                                         special_conditions=special_conditions,
                                          output=output,
                                          output_sheet=output_sheet,
                                          minimum_growth=minimum_growth, )
