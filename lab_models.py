@@ -387,6 +387,10 @@ def lab_models(directory,
     _models_analysis = []
     _analysis = []
 
+    conditions = 'wild_type_conditions.xlsx',
+    carbon_sources_conditions = 'carbon_sources_conditions.xlsx',
+    ppp_conditions = 'ppp_conditions.xlsx',
+
     main_metabolites = ['h',
                         'h2o',
                         'atp',
@@ -504,9 +508,9 @@ def lab_models(directory,
 
         icc390_analysis = build_analysis(model_analysis=icc390,
                                          model_id=icc390.model.id,
-                                         conditions='wild_type_conditions.xlsx',
-                                         carbon_sources_conditions='carbon_sources_conditions.xlsx',
-                                         ppp_conditions='ppp_conditions.xlsx',
+                                         conditions=conditions,
+                                         carbon_sources_conditions=carbon_sources_conditions,
+                                         ppp_conditions=ppp_conditions,
                                          analysis_to_build=analysis_to_build,
                                          analysis_to_drop=analysis_to_drop,
                                          main_metabolites=main_metabolites,
@@ -597,13 +601,13 @@ def lab_models(directory,
 
         objective_linspace = list(linspace(0.1, 1.5, 15))
 
-        rxns_to_track = ['PDHm']
+        rxns_to_track = ['PDH']
 
         icc431_analysis = build_analysis(model_analysis=icc431,
                                          model_id=icc431.model.id,
-                                         conditions='wild_type_conditions.xlsx',
-                                         carbon_sources_conditions='carbon_sources_conditions.xlsx',
-                                         ppp_conditions='ppp_conditions.xlsx',
+                                         conditions=conditions,
+                                         carbon_sources_conditions=carbon_sources_conditions,
+                                         ppp_conditions=ppp_conditions,
                                          analysis_to_build=analysis_to_build,
                                          analysis_to_drop=analysis_to_drop,
                                          main_metabolites=main_metabolites,
@@ -704,9 +708,9 @@ def lab_models(directory,
 
         icc464_analysis = build_analysis(model_analysis=icc464,
                                          model_id=icc464.model.id,
-                                         conditions='wild_type_conditions.xlsx',
-                                         carbon_sources_conditions='carbon_sources_conditions.xlsx',
-                                         ppp_conditions='ppp_conditions.xlsx',
+                                         conditions=conditions,
+                                         carbon_sources_conditions=carbon_sources_conditions,
+                                         ppp_conditions=ppp_conditions,
                                          analysis_to_build=analysis_to_build,
                                          analysis_to_drop=analysis_to_drop,
                                          main_metabolites=main_metabolites,
@@ -810,13 +814,13 @@ def lab_models(directory,
 
         objective_linspace = list(linspace(0.01, 0.6, 15))
 
-        rxns_to_track = []
+        rxns_to_track = ['PDH', 'PKETX']
 
         icc644_analysis = build_analysis(model_analysis=icc644,
                                          model_id=icc644.model.id,
-                                         conditions='wild_type_conditions.xlsx',
-                                         carbon_sources_conditions='carbon_sources_conditions.xlsx',
-                                         ppp_conditions='ppp_conditions.xlsx',
+                                         conditions=conditions,
+                                         carbon_sources_conditions=carbon_sources_conditions,
+                                         ppp_conditions=ppp_conditions,
                                          analysis_to_build=analysis_to_build,
                                          analysis_to_drop=analysis_to_drop,
                                          main_metabolites=main_metabolites,
@@ -872,15 +876,15 @@ if __name__ == '__main__':
     #                      'maintenance_atp_tuning',
     #                      'robustness_analysis']
 
-    _analysis_to_build = ['enzyme_fva_analysis_no_growth', 'enzyme_fva_analysis_growth']
+    _analysis_to_build = ['connectivity', 'topological_analysis']
 
     _ = lab_models(directory=_directory,
                    results_directory=_results_directory,
                    conditions_directory=_conditions_directory,
                    analysis_to_build=_analysis_to_build,
                    # analysis_to_drop=_analysis_to_drop,
-                   icc390=_icc390,
-                   icc431=_icc431,
-                   icc464=_icc464,
+                   # icc390=_icc390,
+                   # icc431=_icc431,
+                   # icc464=_icc464,
                    icc644=_icc644,
                    )

@@ -14281,6 +14281,20 @@
 "gene_reaction_rule":""
 },
 {
+"id":"LDH_D",
+"name":"D-lactate dehydrogenase",
+"metabolites":{
+"h_c":1.0,
+"lac__D_c":-1.0,
+"nad_c":-1.0,
+"nadh_c":1.0,
+"pyr_c":1.0
+},
+"lower_bound":-999999.0,
+"upper_bound":999999.0,
+"gene_reaction_rule":"LGG_00158"
+},
+{
 "id":"OGMEACPD",
 "name":"3-Oxo-glutaryl-[ACP] methyl ester dehydratase",
 "metabolites":{
@@ -19161,6 +19175,13 @@
 "name":"LG01398",
 "annotation":{
 "ncbiprotein":"LGG_01398"
+}
+},
+{
+"id":"LGG_00158",
+"name":"LG00158",
+"annotation":{
+"ncbiprotein":"LGG_00158"
 }
 },
 {

@@ -16141,7 +16141,7 @@
 }
 },
 {
-"id":"PDHm",
+"id":"PDH",
 "name":"Pyruvate dehydrogenase",
 "metabolites":{
 "accoa_c":1.0,
@@ -16155,7 +16155,7 @@
 "upper_bound":999999.0,
 "gene_reaction_rule":"( STER_0767 and STER_1465 and STER_1294 and STER_0438 ) or ( STER_1954 and STER_1465 and STER_1294 and STER_0438 )",
 "annotation":{
-"bigg.reaction":"PDHm",
+"bigg.reaction":"PDH",
 "ec-code":[
 "1.2.4.1",
 "1.8.1.4"
@@ -18569,8 +18569,8 @@
 }
 },
 {
-"id":"r0173",
-"name":"(S)-Lactate:NAD+ oxidoreductase Glycolysis / Gluconeogenesis / Pyruvate metabolism EC:1.1.1.27",
+"id":"LDH_L",
+"name":"L-lactate dehydrogenase",
 "metabolites":{
 "h_c":1.0,
 "lac__L_c":-1.0,
@@ -18582,7 +18582,7 @@
 "upper_bound":999999.0,
 "gene_reaction_rule":"STER_1453 or STER_0855",
 "annotation":{
-"bigg.reaction":"r0173",
+"bigg.reaction":"LDH_L",
 "ec-code":"1.1.1.27",
 "kegg.reaction":"R00703"
 }
@@ -18919,8 +18919,8 @@
 }
 },
 {
-"id":"R10506",
-"name":"R10506_((S)-2-Acetolactate+NAD+<=>Diacetyl+CO2+NADH)",
+"id":"ALOX",
+"name":"Oxidative decarboxylation of acetolacate chemical",
 "metabolites":{
 "alac__S_c":-1.0,
 "co2_c":1.0,
@@ -18932,6 +18932,7 @@
 "upper_bound":999999.0,
 "gene_reaction_rule":"",
 "annotation":{
+"bigg.reaction":"ALOX",
 "kegg.reaction":"R10506"
 }
 },
@@ -20769,8 +20770,8 @@
 }
 },
 {
-"id":"T09775",
-"name":"T09775_(1.0ATP(CYTOP)+1.0H2O(CYTOP)+1.0L-Cystathionine(EXTR)=>1.0Orthophosphate(CYTOP)+1.0ADP(CYTOP)+1.0L-Cystathionine(CYTOP)+H+)",
+"id":"T_L_Cystathionine_abc",
+"name":"L-Cystathionine ABC",
 "metabolites":{
 "adp_c":1.0,
 "atp_c":-1.0,
@@ -20789,7 +20790,7 @@
 },
 {
 "id":"T_Glyceraldehyde",
-"name":"T_Glyceraldehyde_(1.0D-Glyceraldehyde(CYTOP)<=>1.0D-Glyceraldehyde(EXTR))",
+"name":"Glyceraldehyde diffusion",
 "metabolites":{
 "glyald_c":-1.0,
 "glyald_e":1.0
@@ -20799,8 +20800,8 @@
 "gene_reaction_rule":""
 },
 {
-"id":"T06947",
-"name":"T06947_(1.0Guanine(EXTR)+1.0H+(EXTR)=>1.0Guanine(CYTOP)+1.0H+(CYTOP))",
+"id":"T_Guanine_sym",
+"name":"Guanine symport",
 "metabolites":{
 "gua_c":1.0,
 "gua_e":-1.0,
@@ -20815,8 +20816,8 @@
 }
 },
 {
-"id":"T00566",
-"name":"T00566_(1.0H2O(EXTR)<=>1.0H2O(CYTOP))",
+"id":"T_H2O_diff",
+"name":"Water diffusion",
 "metabolites":{
 "h2o_c":1.0,
 "h2o_e":-1.0
@@ -20829,8 +20830,8 @@
 }
 },
 {
-"id":"T_Ethanol_Diffusion",
-"name":"T_Ethanol_Diffusion_(1.0Ethanol(CYTOP)<=>1.0Ethanol(EXTR))",
+"id":"T_Ethanol_diff",
+"name":"Ethanol diffusion",
 "metabolites":{
 "etoh_c":-1.0,
 "etoh_e":1.0
@@ -20840,8 +20841,8 @@
 "gene_reaction_rule":""
 },
 {
-"id":"T_Diacetyl_Diffusion",
-"name":"T_Diacetyl_Diffusion_(1.0Diacetyl(CYTOP)<=>1.0Diacetyl(EXTR))",
+"id":"T_Diacetyl_diff",
+"name":"Diacetyl diffusion",
 "metabolites":{
 "diact_c":-1.0,
 "diact_e":1.0
@@ -20851,8 +20852,8 @@
 "gene_reaction_rule":""
 },
 {
-"id":"T_Oxygen_Diffusion",
-"name":"T_Oxygen_Diffusion_(1.0Oxygen(CYTOP)<=>1.0Oxygen(EXTR))",
+"id":"T_Oxygen_diff",
+"name":"Oxygen diffusion",
 "metabolites":{
 "o2_c":-1.0,
 "o2_e":1.0
@@ -20862,8 +20863,8 @@
 "gene_reaction_rule":""
 },
 {
-"id":"T_Xylose",
-"name":"T_Xylose_(1.0D-Xylose(EXTR)+1.0ATP(CYTOP)+1.0H20(CYTOP)=>1.0D-Xylose(CYTOP)+1.0Orthophosphate(CYTOP)+1.0ADP(CYTOP)+H+)",
+"id":"T_Xylose_abc",
+"name":"Xylose ABC",
 "metabolites":{
 "adp_c":1.0,
 "atp_c":-1.0,
@@ -20878,8 +20879,8 @@
 "gene_reaction_rule":""
 },
 {
-"id":"T06948_Xanthine",
-"name":"T06948_Xanthine_(1.0Xanthine(EXTR)+1.0H+(EXTR)=>1.0Xanthine(CYTOP)+1.0H+(CYTOP))",
+"id":"T_Xanthine_diff",
+"name":"Xanthine diffusion",
 "metabolites":{
 "h_c":1.0,
 "h_e":-1.0,
@@ -20894,8 +20895,8 @@
 }
 },
 {
-"id":"T_Ribose",
-"name":"T_Ribose_(1.0D-Ribose(EXTR)+1.0ATP(CYTOP)+1.0H20(CYTOP)=>1.0D-Ribose(CYTOP)+1.0Orthophosphate(CYTOP)+1.0ADP(CYTOP)+H+)",
+"id":"T_Ribose_abc",
+"name":"Ribose ABC",
 "metabolites":{
 "adp_c":1.0,
 "atp_c":-1.0,
@@ -20910,8 +20911,8 @@
 "gene_reaction_rule":""
 },
 {
-"id":"T03392_1966",
-"name":"T03392_1966_(1.04-Aminobenzoate(CYTOP)<=>1.04-Aminobenzoate(EXTR))",
+"id":"T_Aminobenzoate_diff",
+"name":"Aminobenzoate diffusion",
 "metabolites":{
 "4abz_c":-1.0,
 "4abz_e":1.0
@@ -20933,8 +20934,8 @@
 }
 },
 {
-"id":"T00315",
-"name":"T00315_(2.0Cl-(CYTOP)+1.0H+(EXTR)=>2.0Cl-(EXTR)+1.0H+(CYTOP))",
+"id":"T_Chlorine_sym",
+"name":"Chlorine symport",
 "metabolites":{
 "C00698_c":-2.0,
 "C00698_e":2.0,
@@ -20952,8 +20953,8 @@
 }
 },
 {
-"id":"T11473_2_0_1_0",
-"name":"T11473_2_0_1_0_(1.0beta-D-Fructose(EXTR)+1.0Phosphoenolpyruvate(CYTOP)=>1.0D-Fructose1-phosphate(CYTOP)+1.0Pyruvate(CYTOP))",
+"id":"T_Fructose",
+"name":"Fructose PEP",
 "metabolites":{
 "f1p_c":1.0,
 "fru_B_e":-1.0,
@@ -20968,8 +20969,8 @@
 }
 },
 {
-"id":"T03392_69",
-"name":"T03392_69_(1.0(S)-Lactate(CYTOP)<=>1.0(S)-Lactate(EXTR))",
+"id":"T_Lactate_diff",
+"name":"Lactate diffusion",
 "metabolites":{
 "lac__L_c":-1.0,
 "lac__L_e":1.0
@@ -20991,8 +20992,8 @@
 }
 },
 {
-"id":"T01840_0_5",
-"name":"T01840_0_5_(1.0D-Ribose(EXTR)+1.0H+(EXTR)=>1.0D-Ribose(CYTOP)+1.0H+(CYTOP))",
+"id":"T_Ribose_sym",
+"name":"Ribose symport",
 "metabolites":{
 "h_c":1.0,
 "h_e":-1.0,
@@ -21007,8 +21008,8 @@
 }
 },
 {
-"id":"T11401",
-"name":"T11401_(1.0Sucrose(EXTR)+1.0Phosphoenolpyruvate(CYTOP)=>1.0Sucrose6-phosphate(CYTOP)+1.0Pyruvate(CYTOP))",
+"id":"T_Sucrose_pep",
+"name":"Sucrose PEP",
 "metabolites":{
 "pep_c":-1.0,
 "pyr_c":1.0,
@@ -21026,8 +21027,8 @@
 }
 },
 {
-"id":"T00544",
-"name":"T00544_(1.0Ammonia(EXTR)<=>1.0Ammonia(CYTOP))",
+"id":"T_Ammonia_diff",
+"name":"Ammonia diffusion",
 "metabolites":{
 "NH4_c":1.0,
 "NH4_e":-1.0
@@ -21040,8 +21041,8 @@
 }
 },
 {
-"id":"T00564",
-"name":"T00564_(1.0Glycerone(EXTR)<=>1.0Glycerone(CYTOP))",
+"id":"T_Glycerone_diff",
+"name":"Glycerone diffusion",
 "metabolites":{
 "dha_c":1.0,
 "dha_e":-1.0
@@ -21054,8 +21055,8 @@
 }
 },
 {
-"id":"T03392_4986",
-"name":"T03392_4986_(1.0Formate(CYTOP)<=>1.0Formate(EXTR))",
+"id":"T_Formate_diff",
+"name":"Formate diffusion",
 "metabolites":{
 "for_c":-1.0,
 "for_e":1.0
@@ -21077,8 +21078,8 @@
 }
 },
 {
-"id":"T03392_8465",
-"name":"T03392_8465_(1.0Fumarate(CYTOP)<=>1.0Fumarate(EXTR))",
+"id":"T_Fumarate_diff",
+"name":"Fumarate diffusion",
 "metabolites":{
 "fum_c":-1.0,
 "fum_e":1.0
@@ -21101,7 +21102,7 @@
 },
 {
 "id":"T_Pyridoxal",
-"name":"T_Pyridoxal_(1.0Pyridoxal(EXTR)<=>1.0Pyridoxal(CYTOP))",
+"name":"Pyridoxal diffusion",
 "metabolites":{
 "pydx_c":1.0,
 "pydx_e":-1.0
@@ -21111,8 +21112,8 @@
 "gene_reaction_rule":""
 },
 {
-"id":"T_Acetaldehyde_Diffusion",
-"name":"T_Acetaldehyde_Diffusion_(1.0Acetaldehyde(CYTOP)<=>1.0Acetaldehyde(EXTR))",
+"id":"T_Acetaldehyde_diff",
+"name":"Acetaldehyde diffusion",
 "metabolites":{
 "acald_c":-1.0,
 "acald_e":1.0
@@ -21122,8 +21123,8 @@
 "gene_reaction_rule":""
 },
 {
-"id":"T03392_5135",
-"name":"T03392_5135_(1.0Acetate(CYTOP)<=>1.0Acetate(EXTR))",
+"id":"T_Acetate_diff",
+"name":"Acetate diffusion",
 "metabolites":{
 "ac_c":-1.0,
 "ac_e":1.0
@@ -21145,8 +21146,8 @@
 }
 },
 {
-"id":"T08911",
-"name":"T08911_(1.0ATP(CYTOP)+1.0H2O(CYTOP)+1.0Choline(EXTR)=>1.0Orthophosphate(CYTOP)+1.0Choline(CYTOP)+1.0ADP(CYTOP)+H+)",
+"id":"T_Choline_abc",
+"name":"Choline ABC",
 "metabolites":{
 "adp_c":1.0,
 "atp_c":-1.0,
@@ -21167,8 +21168,8 @@
 }
 },
 {
-"id":"T_Succinate",
-"name":"T_Succinate_(1.0Succinate(CYTOP)<=>1.0Succinate(EXTR))",
+"id":"T_Succinate_diff",
+"name":"Succinate diffusion",
 "metabolites":{
 "succ_c":-1.0,
 "succ_e":1.0
@@ -21178,8 +21179,8 @@
 "gene_reaction_rule":""
 },
 {
-"id":"T_Pantothenate",
-"name":"T_Pantothenate_(1.0Pantothenate(EXTR)<=>1.0Pantothenate(CYTOP))",
+"id":"T_Pantothenate_diff",
+"name":"Pantothenate diffusion",
 "metabolites":{
 "pnto__R_c":1.0,
 "pnto__R_e":-1.0
@@ -21195,8 +21196,8 @@
 }
 },
 {
-"id":"T_Lipoate",
-"name":"T_Lipoate_(1.0(R)-Lipoate(EXTR)<=>1.0(R)-Lipoate(CYTOP))",
+"id":"T_Lipoate_diff",
+"name":"Lipoate diffusion",
 "metabolites":{
 "C16241_c":1.0,
 "C16241_e":-1.0
@@ -21206,8 +21207,8 @@
 "gene_reaction_rule":""
 },
 {
-"id":"T_Galactose_out",
-"name":"T_Galactose_out_(1.0D-Galactose(CYTOP)+1.0Lactose(EXTR)=>1.0D-Galactose(EXTR)+Lactose(CYTOP))",
+"id":"T_Galactose_Lactose_anti",
+"name":"Galactose-Lactose antiport",
 "metabolites":{
 "gal_c":-1.0,
 "gal_e":1.0,
@@ -21222,8 +21223,8 @@
 }
 },
 {
-"id":"T_Arabinose",
-"name":"T_Arabinose_(1.0D-Arabinose(EXTR)+1.0ATP(CYTOP)+1.0H20(CYTOP)=>1.0D-Arabinose(CYTOP)+1.0Orthophosphate(CYTOP)+1.0ADP(CYTOP)+H+)",
+"id":"T_Arabinose_pep",
+"name":"Arabinose PEP",
 "metabolites":{
 "adp_c":1.0,
 "arab__D_c":1.0,
@@ -21238,8 +21239,8 @@
 "gene_reaction_rule":""
 },
 {
-"id":"T00449",
-"name":"T00449_(1.0Folate(EXTR)+1.0ATP(CYTOP)+1.0H2O(CYTOP)=>1.0Orthophosphate(CYTOP)+1.0Folate(CYTOP)+1.0ADP(CYTOP)+H+)",
+"id":"T_Folate_abc",
+"name":"Folate ABC",
 "metabolites":{
 "adp_c":1.0,
 "atp_c":-1.0,
@@ -21257,8 +21258,8 @@
 }
 },
 {
-"id":"T_Glycolaldehyde",
-"name":"T_Glycolaldehyde_(1.0Glycolaldehyde(CYTOP)<=>1.0Glycolaldehyde(EXTR))",
+"id":"T_Glycolaldehyde_diff",
+"name":"Glycolaldehyde diffusion",
 "metabolites":{
 "gcald_c":-1.0,
 "gcald_e":1.0
@@ -21268,8 +21269,8 @@
 "gene_reaction_rule":""
 },
 {
-"id":"T03392_498",
-"name":"T03392_498_(1.0Propanoate(CYTOP)<=>1.0Propanoate(EXTR))",
+"id":"T_Propanoate_diff",
+"name":"Propanoate diffusion",
 "metabolites":{
 "prpnte_c":-1.0,
 "prpnte_e":1.0
@@ -21291,8 +21292,8 @@
 }
 },
 {
-"id":"T_Nicotinamide",
-"name":"T_Nicotinamide_(1.0Nicotinamide(EXTR)<=>1.0Nicotinamide(CYTOP))",
+"id":"T_Nicotinamide_diff",
+"name":"Nicotinamide diffusion",
 "metabolites":{
 "ncam_c":1.0,
 "ncam_e":-1.0
@@ -21312,8 +21313,8 @@
 }
 },
 {
-"id":"T_Acetolactate_Diffusion",
-"name":"T_Acetolactate_Diffusion_(1.0(S)-2-Acetolactate(CYTOP)<=>1.0(S)-2-Acetolactate(EXTR))",
+"id":"T_Acetolactate_diff",
+"name":"Acetolactate diffusion",
 "metabolites":{
 "alac__S_c":-1.0,
 "alac__S_e":1.0
@@ -21323,8 +21324,8 @@
 "gene_reaction_rule":""
 },
 {
-"id":"T01784_6_0",
-"name":"T01784_6_0_(1.0Glutathione(EXTR)+1.0H+(EXTR)=>1.0Glutathione(CYTOP)+1.0H+(CYTOP))",
+"id":"T_Glutathione_sym",
+"name":"Glutathione symport",
 "metabolites":{
 "gthrd_c":1.0,
 "gthrd_e":-1.0,
@@ -21339,8 +21340,8 @@
 }
 },
 {
-"id":"T03319",
-"name":"T03319_(1.0H2O(CYTOP)<=>1.0H2O(EXTR))",
+"id":"T_H2O_diff2",
+"name":"Water diffusion",
 "metabolites":{
 "h2o_c":-1.0,
 "h2o_e":1.0
@@ -21362,8 +21363,8 @@
 }
 },
 {
-"id":"T03319_CO2",
-"name":"T03319_CO2_(1.0CO2(CYTOP)<=>1.0CO2(EXTR))",
+"id":"T_CO2_diff",
+"name":"CO2 diffusion",
 "metabolites":{
 "co2_c":-1.0,
 "co2_e":1.0
@@ -21383,8 +21384,8 @@
 }
 },
 {
-"id":"T_Sys_Orn",
-"name":"T_Sys_Orn_(1.0L-Ornithine(EXTR)+1.0H+(EXTR)=>1.0L-Ornithine(CYTOP)+1.0H+(CYTOP))",
+"id":"T_Ornithine_sym",
+"name":"Ornithine symport",
 "metabolites":{
 "C01602_c":1.0,
 "C01602_e":-1.0,
@@ -21399,8 +21400,8 @@
 }
 },
 {
-"id":"T_Acetoin_Diffusion",
-"name":"T_Acetoin_Diffusion_(1.0(R)-Acetoin(CYTOP)<=>1.0(R)-Acetoin(EXTR))",
+"id":"T_Acetoin_diff",
+"name":"Acetoin diffusion",
 "metabolites":{
 "actn__R_c":-1.0,
 "actn__R_e":1.0
@@ -21410,8 +21411,8 @@
 "gene_reaction_rule":""
 },
 {
-"id":"T10260_10_0_0_0_0",
-"name":"T10260_10_0_0_0_0_(1.0Glutathione(EXTR)+1.0ATP(CYTOP)+1.0H2O(CYTOP)=>1.0Orthophosphate(CYTOP)+1.0Glutathione(CYTOP)+1.0ADP(CYTOP)+H+)",
+"id":"T_Glutathione_abc",
+"name":"Glutathione ABC",
 "metabolites":{
 "adp_c":1.0,
 "atp_c":-1.0,
@@ -21430,7 +21431,7 @@
 },
 {
 "id":"T_Cellobiose",
-"name":"T_Cellobiose_(1.0Cellobiose(EXTR)+1.0Phosphoenolpyruvate(CYTOP)=>1.06-Phospho-beta-D-glucosyl-(1,4)-D-glucose(CYTOP)+1.0Pyruvate(CYTOP))",
+"name":"Cellobiose PEP",
 "metabolites":{
 "6pgg_c":1.0,
 "cellb_e":-1.0,

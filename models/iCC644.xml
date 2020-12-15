@@ -5756,6 +5756,19 @@
           </rdf:RDF>
         </sbml:annotation>
       </fbc:geneProduct>
+	  <fbc:geneProduct metaid="G_LGG_00158" fbc:id="G_LGG_00158" fbc:label="LGG_00158" fbc:name="LG00158">
+        <sbml:annotation>
+          <rdf:RDF>
+            <rdf:Description rdf:about="#G_LGG_00158">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/ncbiprotein/LGG_00158" />
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </sbml:annotation>
+      </fbc:geneProduct>
       <fbc:geneProduct metaid="G_LGG_01157" fbc:id="G_LGG_01157" fbc:label="LGG_01157" fbc:name="LG01157">
         <sbml:annotation>
           <rdf:RDF>
@@ -19711,6 +19724,20 @@
           <speciesReference constant="true" species="M_nadh_c" stoichiometry="1" />
           <speciesReference constant="true" species="M_pyr_c" stoichiometry="1" />
         </listOfProducts>
+      </reaction>
+	  <reaction fast="false" id="R_LDH_D" name="D-lactate dehydrogenase" reversible="true" fbc:lowerFluxBound="cobra_default_lb" fbc:upperFluxBound="cobra_default_ub">
+        <listOfReactants>
+          <speciesReference constant="true" species="M_lac__D_c" stoichiometry="1" />
+          <speciesReference constant="true" species="M_nad_c" stoichiometry="1" />
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference constant="true" species="M_h_c" stoichiometry="1" />
+          <speciesReference constant="true" species="M_nadh_c" stoichiometry="1" />
+          <speciesReference constant="true" species="M_pyr_c" stoichiometry="1" />
+        </listOfProducts>
+		<fbc:geneProductAssociation>
+          <fbc:geneProductRef fbc:geneProduct="G_LGG_00158" />
+        </fbc:geneProductAssociation>
       </reaction>
       <reaction fast="false" id="R_OGMEACPD" name="3-Oxo-glutaryl-[ACP] methyl ester dehydratase" reversible="true" fbc:lowerFluxBound="cobra_default_lb" fbc:upperFluxBound="cobra_default_ub">
         <listOfReactants>

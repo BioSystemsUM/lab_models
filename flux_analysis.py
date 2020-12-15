@@ -193,6 +193,25 @@ class ModelAnalysis:
             lb = -data_frame.loc[ex_mask, 'qs'].iloc[0]
             rxn.lower_bound = lb
 
+    @writer()
+    def fluxes_distribution(self,
+                            conditions='',
+                            sheet='',
+                            output=None,
+                            output_sheet=None,
+                            ):
+
+        if conditions and sheet:
+
+            df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
+
+            with self.model:
+                self.apply_conditions(data_frame=df)
+
+                return self.maximize(is_pfba=True, growth=False).fluxes
+
+        return self.maximize(is_pfba=True, growth=False).fluxes
+
     @register
     @writer()
     def summary(self,
