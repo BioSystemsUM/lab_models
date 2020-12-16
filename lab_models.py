@@ -1,7 +1,6 @@
 from collections import namedtuple
 from functools import partial
 
-from cobra.flux_analysis import pfba
 from numpy import arange, linspace
 
 from flux_analysis import ModelAnalysis
@@ -73,6 +72,7 @@ def build_analysis(model_analysis,
                    carbon_source_linspace=None,
                    reactions=None,
                    points=20,
+                   reactions_constraints=None,
                    dense_output=True,
                    columns_to_drop=None,
                    production_exchanges=None,
@@ -178,6 +178,9 @@ def build_analysis(model_analysis,
     if not reactions:
         reactions = []
 
+    if not reactions_constraints:
+        reactions_constraints = {}
+
     if not columns_to_drop:
         columns_to_drop = []
 
@@ -233,9 +236,6 @@ def build_analysis(model_analysis,
     if not special_conditions:
         special_conditions = {}
 
-    if minimum_growth is None:
-        minimum_growth = pfba(model_analysis.model)[model_analysis.biomass_reaction.id] * 0.1
-
     conditions_sheet = model_id
     output_sheet = model_id
 
@@ -283,6 +283,7 @@ def build_analysis(model_analysis,
                                           carbon_source_linspace=carbon_source_linspace,
                                           reactions=reactions,
                                           points=points,
+                                          reactions_constraints=reactions_constraints,
                                           dense_output=dense_output,
                                           columns_to_drop=columns_to_drop,
                                           production_exchanges=production_exchanges,
@@ -307,27 +308,26 @@ def build_analysis(model_analysis,
 def lab_models_atp(directory,
                    results_directory,
                    conditions_directory,
-                   icc390=None,
+                   icc389=None,
                    icc431=None,
-                   icc464=None,
-                   icc644=None,
+                   icc470=None,
+                   icc651=None,
                    ):
     _models_analysis = []
     _analysis = []
 
-    if icc390:
-        icc390 = ModelAnalysis(directory=directory,
-                               model=icc390[0],
-                               biomass_reaction=icc390[1],
+    if icc389:
+        icc389 = ModelAnalysis(directory=directory,
+                               model=icc389[0],
+                               biomass_reaction=icc389[1],
                                results_directory=results_directory,
                                conditions_directory=conditions_directory)
 
-        icc390_analysis = build_analysis(model_analysis=icc390,
-                                         model_id=icc390.model.id,
-                                         carbon_sources_conditions='carbon_sources_conditions.xlsx',
+        icc389_analysis = build_analysis(model_analysis=icc389,
+                                         model_id=icc389.model.id,
                                          analysis_to_build=['maintenance_atp_tuning'], )
 
-        _analysis.append(icc390_analysis)
+        _analysis.append(icc389_analysis)
 
     if icc431:
         icc431 = ModelAnalysis(directory=directory,
@@ -338,38 +338,35 @@ def lab_models_atp(directory,
 
         icc431_analysis = build_analysis(model_analysis=icc431,
                                          model_id=icc431.model.id,
-                                         carbon_sources_conditions='carbon_sources_conditions.xlsx',
                                          analysis_to_build=['growth_atp_tuning'], )
 
         _analysis.append(icc431_analysis)
 
-    if icc464:
-        icc464 = ModelAnalysis(directory=directory,
-                               model=icc464[0],
-                               biomass_reaction=icc464[1],
+    if icc470:
+        icc470 = ModelAnalysis(directory=directory,
+                               model=icc470[0],
+                               biomass_reaction=icc470[1],
                                results_directory=results_directory,
                                conditions_directory=conditions_directory)
 
-        icc464_analysis = build_analysis(model_analysis=icc464,
-                                         model_id=icc464.model.id,
-                                         carbon_sources_conditions='carbon_sources_conditions.xlsx',
+        icc470_analysis = build_analysis(model_analysis=icc470,
+                                         model_id=icc470.model.id,
                                          analysis_to_build=['growth_atp_tuning'], )
 
-        _analysis.append(icc464_analysis)
+        _analysis.append(icc470_analysis)
 
-    if icc644:
-        icc644 = ModelAnalysis(directory=directory,
-                               model=icc644[0],
-                               biomass_reaction=icc644[1],
+    if icc651:
+        icc651 = ModelAnalysis(directory=directory,
+                               model=icc651[0],
+                               biomass_reaction=icc651[1],
                                results_directory=results_directory,
                                conditions_directory=conditions_directory)
 
-        icc644_analysis = build_analysis(model_analysis=icc644,
-                                         model_id=icc644.model.id,
-                                         carbon_sources_conditions='carbon_sources_conditions.xlsx',
+        icc651_analysis = build_analysis(model_analysis=icc651,
+                                         model_id=icc651.model.id,
                                          analysis_to_build=['growth_atp_tuning'], )
 
-        _analysis.append(icc644_analysis)
+        _analysis.append(icc651_analysis)
 
     return analysis_pipeline(analysis=_analysis)
 
@@ -379,17 +376,17 @@ def lab_models(directory,
                conditions_directory,
                analysis_to_build=None,
                analysis_to_drop=None,
-               icc390=None,
+               icc389=None,
                icc431=None,
-               icc464=None,
-               icc644=None,
+               icc470=None,
+               icc651=None,
                ):
     _models_analysis = []
     _analysis = []
 
-    conditions = 'wild_type_conditions.xlsx',
-    carbon_sources_conditions = 'carbon_sources_conditions.xlsx',
-    ppp_conditions = 'ppp_conditions.xlsx',
+    conditions = 'wild_type_conditions.xlsx'
+    carbon_sources_conditions = 'carbon_sources_conditions.xlsx'
+    ppp_conditions = 'ppp_conditions.xlsx'
 
     main_metabolites = ['h',
                         'h2o',
@@ -441,10 +438,10 @@ def lab_models(directory,
     oxygen_linspace = linspace(0, 5, 3)
     growth_fraction = 0.9
 
-    if icc390:
-        icc390 = ModelAnalysis(directory=directory,
-                               model=icc390[0],
-                               biomass_reaction=icc390[1],
+    if icc389:
+        icc389 = ModelAnalysis(directory=directory,
+                               model=icc389[0],
+                               biomass_reaction=icc389[1],
                                results_directory=results_directory,
                                conditions_directory=conditions_directory)
 
@@ -498,16 +495,16 @@ def lab_models(directory,
             'EX_thr__L_e',
         ]
 
-        reactions = ['EX_glc__aD_e', 'EX_ac_e']
+        reactions = ['EX_lcts_e', 'EX_ac_e']
 
-        carbon_source_linspace = list(linspace(1, 20, 20))
+        carbon_source_linspace = list(linspace(1, 15, 20))
 
         objective_linspace = list(linspace(0.01, 0.3, 15))
 
         rxns_to_track = []
 
-        icc390_analysis = build_analysis(model_analysis=icc390,
-                                         model_id=icc390.model.id,
+        icc389_analysis = build_analysis(model_analysis=icc389,
+                                         model_id=icc389.model.id,
                                          conditions=conditions,
                                          carbon_sources_conditions=carbon_sources_conditions,
                                          ppp_conditions=ppp_conditions,
@@ -516,10 +513,11 @@ def lab_models(directory,
                                          main_metabolites=main_metabolites,
                                          carbon_sources=carbon_sources,
                                          amino_acids=amino_acids,
-                                         carbon_source='EX_glc__aD_e',
+                                         carbon_source='EX_lcts_e',
                                          carbon_source_linspace=carbon_source_linspace,
                                          reactions=reactions,
                                          points=20,
+                                         reactions_constraints={'EX_ac_e': (-5.0, 10)},
                                          dense_output=True,
                                          columns_to_drop=columns_to_drop,
                                          production_exchanges=production_exchanges,
@@ -527,15 +525,16 @@ def lab_models(directory,
                                          oxygen_linspace=oxygen_linspace,
                                          growth_fraction=growth_fraction,
                                          substrates=substrates,
-                                         objective=icc390.biomass_reaction.id,
+                                         objective=icc389.biomass_reaction.id,
                                          objective_linspace=objective_linspace,
                                          enzyme='PKETX',
                                          rxns_to_track=rxns_to_track,
                                          special_conditions={'EX_lac__D_e': (0.0, 0.0)},
                                          tol=1E-4,
+                                         minimum_growth=0.013345,
                                          )
 
-        _analysis.append(icc390_analysis)
+        _analysis.append(icc389_analysis)
 
     if icc431:
         icc431 = ModelAnalysis(directory=directory,
@@ -597,7 +596,7 @@ def lab_models(directory,
 
         reactions = ['EX_lcts_e', 'EX_ac_e']
 
-        carbon_source_linspace = list(range(2, 42, 2))
+        carbon_source_linspace = list(linspace(2, 40, 20))
 
         objective_linspace = list(linspace(0.1, 1.5, 15))
 
@@ -617,6 +616,7 @@ def lab_models(directory,
                                          carbon_source_linspace=carbon_source_linspace,
                                          reactions=reactions,
                                          points=20,
+                                         reactions_constraints={'EX_ac_e': (-5.0, 10)},
                                          dense_output=True,
                                          columns_to_drop=columns_to_drop,
                                          production_exchanges=production_exchanges,
@@ -629,14 +629,15 @@ def lab_models(directory,
                                          enzyme='PFL',
                                          rxns_to_track=rxns_to_track,
                                          tol=1E-4,
+                                         minimum_growth=0.095994,
                                          )
 
         _analysis.append(icc431_analysis)
 
-    if icc464:
-        icc464 = ModelAnalysis(directory=directory,
-                               model=icc464[0],
-                               biomass_reaction=icc464[1],
+    if icc470:
+        icc470 = ModelAnalysis(directory=directory,
+                               model=icc470[0],
+                               biomass_reaction=icc470[1],
                                results_directory=results_directory,
                                conditions_directory=conditions_directory)
 
@@ -706,8 +707,8 @@ def lab_models(directory,
 
         rxns_to_track = []
 
-        icc464_analysis = build_analysis(model_analysis=icc464,
-                                         model_id=icc464.model.id,
+        icc470_analysis = build_analysis(model_analysis=icc470,
+                                         model_id=icc470.model.id,
                                          conditions=conditions,
                                          carbon_sources_conditions=carbon_sources_conditions,
                                          ppp_conditions=ppp_conditions,
@@ -720,6 +721,7 @@ def lab_models(directory,
                                          carbon_source_linspace=carbon_source_linspace,
                                          reactions=reactions,
                                          points=20,
+                                         reactions_constraints={'EX_ac_e': (-5.0, 10)},
                                          dense_output=True,
                                          columns_to_drop=columns_to_drop,
                                          production_exchanges=production_exchanges,
@@ -727,20 +729,21 @@ def lab_models(directory,
                                          oxygen_linspace=oxygen_linspace,
                                          growth_fraction=growth_fraction,
                                          substrates=substrates,
-                                         objective=icc464.biomass_reaction.id,
+                                         objective=icc470.biomass_reaction.id,
                                          objective_linspace=objective_linspace,
                                          enzyme='PKETX',
                                          rxns_to_track=rxns_to_track,
                                          special_conditions={'EX_lac__D_e': (0.0, 0.0)},
                                          tol=1E-4,
+                                         minimum_growth=0.080287,
                                          )
 
-        _analysis.append(icc464_analysis)
+        _analysis.append(icc470_analysis)
 
-    if icc644:
-        icc644 = ModelAnalysis(directory=directory,
-                               model=icc644[0],
-                               biomass_reaction=icc644[1],
+    if icc651:
+        icc651 = ModelAnalysis(directory=directory,
+                               model=icc651[0],
+                               biomass_reaction=icc651[1],
                                results_directory=results_directory,
                                conditions_directory=conditions_directory)
 
@@ -779,6 +782,7 @@ def lab_models(directory,
             'EX_succ_e',
             'EX_acald_e',
             'EX_mal__L_e',
+            'EX_alac__S_e',
             'EX_diact_e',
             'EX_actn__R_e',
             'EX_lald__L_e',
@@ -810,14 +814,14 @@ def lab_models(directory,
 
         reactions = ['EX_glc__aD_e', 'EX_ac_e']
 
-        carbon_source_linspace = list(linspace(1, 25, 20))
+        carbon_source_linspace = list(linspace(1, 20, 20))
 
         objective_linspace = list(linspace(0.01, 0.6, 15))
 
         rxns_to_track = ['PDH', 'PKETX']
 
-        icc644_analysis = build_analysis(model_analysis=icc644,
-                                         model_id=icc644.model.id,
+        icc651_analysis = build_analysis(model_analysis=icc651,
+                                         model_id=icc651.model.id,
                                          conditions=conditions,
                                          carbon_sources_conditions=carbon_sources_conditions,
                                          ppp_conditions=ppp_conditions,
@@ -830,6 +834,7 @@ def lab_models(directory,
                                          carbon_source_linspace=carbon_source_linspace,
                                          reactions=reactions,
                                          points=20,
+                                         reactions_constraints={'EX_ac_e': (-5.0, 10)},
                                          dense_output=True,
                                          columns_to_drop=columns_to_drop,
                                          production_exchanges=production_exchanges,
@@ -837,15 +842,16 @@ def lab_models(directory,
                                          oxygen_linspace=oxygen_linspace,
                                          growth_fraction=growth_fraction,
                                          substrates=substrates,
-                                         objective=icc644.biomass_reaction.id,
+                                         objective=icc651.biomass_reaction.id,
                                          objective_linspace=objective_linspace,
                                          enzyme='PFL',
                                          rxns_to_track=rxns_to_track,
                                          special_conditions={'EX_lac__D_e': (0.0, 0.0)},
                                          tol=1E-4,
+                                         minimum_growth=0.06336,
                                          )
 
-        _analysis.append(icc644_analysis)
+        _analysis.append(icc651_analysis)
 
     return analysis_pipeline(analysis=_analysis)
 
@@ -859,32 +865,43 @@ if __name__ == '__main__':
 
     biomass_rxn = 'e_Biomass'
 
-    icc390_model = 'models/iCC390.xml'
-    _icc390 = (icc390_model, biomass_rxn)
+    icc389_model = 'models/iCC389.xml'
+    _icc389 = (icc389_model, biomass_rxn)
 
     icc431_model = 'models/iCC431.xml'
     _icc431 = (icc431_model, biomass_rxn)
 
-    icc464_model = 'models/iCC464.xml'
-    _icc464 = (icc464_model, biomass_rxn)
+    icc470_model = 'models/iCC470.xml'
+    _icc470 = (icc470_model, biomass_rxn)
 
-    icc644_model = 'models/iCC644.xml'
-    _icc644 = (icc644_model, biomass_rxn)
+    icc651_model = 'models/iCC651.xml'
+    _icc651 = (icc651_model, biomass_rxn)
 
-    # _analysis_to_drop = ['growth_atp_tuning',
-    #                      'atp_tuning',
-    #                      'maintenance_atp_tuning',
-    #                      'robustness_analysis']
+    _analysis_to_drop = ['growth_atp_tuning',
+                         'atp_tuning',
+                         'maintenance_atp_tuning',
+                         'robustness_analysis']
 
-    _analysis_to_build = ['connectivity', 'topological_analysis']
+    # _analysis_to_build = ['summary',
+    #                       # 'topological_analysis',
+    #                       ]
 
     _ = lab_models(directory=_directory,
                    results_directory=_results_directory,
                    conditions_directory=_conditions_directory,
-                   analysis_to_build=_analysis_to_build,
-                   # analysis_to_drop=_analysis_to_drop,
-                   # icc390=_icc390,
-                   # icc431=_icc431,
-                   # icc464=_icc464,
-                   icc644=_icc644,
+                   # analysis_to_build=_analysis_to_build,
+                   analysis_to_drop=_analysis_to_drop,
+                   icc389=_icc389,
+                   icc431=_icc431,
+                   icc470=_icc470,
+                   icc651=_icc651,
                    )
+
+    # _ = lab_models_atp(directory=_directory,
+    #                    results_directory=_results_directory,
+    #                    conditions_directory=_conditions_directory,
+    #                    icc389=_icc389,
+    #                    icc431=_icc431,
+    #                    icc470=_icc470,
+    #                    icc651=_icc651,
+    #                    )

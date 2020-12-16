@@ -238,6 +238,7 @@ class ModelAnalysis:
             sol = self.model.summary(fva=fva)
 
         solution_frame = sol.to_frame()
+        solution_frame.loc[:, 'flux'] = solution_frame.loc[:, 'flux'] * -1
 
         if objectives:
 
@@ -294,6 +295,7 @@ class ModelAnalysis:
         # reaction, metabolite, factor, flux, minimum, maximum
         # index are exchange ids
         solution_frame = solution.to_frame()
+        solution_frame.loc[:, 'flux'] = solution_frame.loc[:, 'flux'] * -1
 
         if objectives:
 
@@ -744,6 +746,7 @@ class ModelAnalysis:
                         sheet,
                         reactions,
                         points=20,
+                        reactions_constraints=None,
                         dense_output=False,
                         columns_to_drop=None,
                         output=None,
@@ -754,12 +757,18 @@ class ModelAnalysis:
         if not columns_to_drop:
             columns_to_drop = []
 
+        if not reactions_constraints:
+            reactions_constraints = {}
+
         # just a wrapper for cobrapy production_envelope function
         df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
 
         with self.model:
 
             self.apply_conditions(data_frame=df)
+
+            for rxn, bds in reactions_constraints.items():
+                self.get_reaction(rxn).bounds = bds
 
             _growth = self.maximize(is_pfba=True)
             if _growth < minimum_growth:
@@ -795,6 +804,7 @@ class ModelAnalysis:
                             sheet,
                             reaction,
                             points=20,
+                            reactions_constraints=None,
                             columns_to_drop=None,
                             output=None,
                             output_sheet=None,
@@ -806,6 +816,7 @@ class ModelAnalysis:
                                     sheet=sheet,
                                     reactions=[reaction],
                                     points=points,
+                                    reactions_constraints=reactions_constraints,
                                     dense_output=False,
                                     columns_to_drop=columns_to_drop,
                                     output=output,
@@ -818,6 +829,7 @@ class ModelAnalysis:
                                         sheet,
                                         reactions,
                                         points=20,
+                                        reactions_constraints=None,
                                         dense_output=True,
                                         columns_to_drop=None,
                                         output=None,
@@ -829,6 +841,7 @@ class ModelAnalysis:
                                     sheet=sheet,
                                     reactions=reactions,
                                     points=points,
+                                    reactions_constraints=reactions_constraints,
                                     dense_output=dense_output,
                                     columns_to_drop=columns_to_drop,
                                     output=output,
@@ -882,11 +895,12 @@ class ModelAnalysis:
 
                         self.get_reaction(carbon_source).lower_bound = -uptake
 
-                        _growth = self.maximize(is_pfba=False, growth=True)
-                        optimal_growth = _growth * growth_fraction
+                        _growth = self.maximize(is_pfba=False, growth=False)
+                        optimal_growth = _growth.objective_value * growth_fraction
                         self.biomass_reaction.bounds = (optimal_growth, optimal_growth)
 
                         data.loc['Optimal growth rate (h-1)', f'{oxygen_exchange}_{oxygen_uptake}'] = optimal_growth
+                        data.loc['status', f'{oxygen_exchange}_{oxygen_uptake}'] = _growth.status
 
                         for exchange in production_exchanges:
                             with self.model:

@@ -7,49 +7,49 @@ from flux_analysis import ModelAnalysis
 
 def to_json(directory,
             models_directory,
-            icc390=None,
+            icc389=None,
             icc431=None,
-            icc464=None,
-            icc644=None, ):
-    if icc390:
-        model = read_sbml_model(join(directory, models_directory, icc390))
+            icc470=None,
+            icc651=None, ):
+    if icc389:
+        model = read_sbml_model(join(directory, models_directory, icc389))
         save_json_model(model, join(directory, models_directory, f'{model.id}.json'))
 
     if icc431:
         model = read_sbml_model(join(directory, models_directory, icc431))
         save_json_model(model, join(directory, models_directory, f'{model.id}.json'))
 
-    if icc464:
-        model = read_sbml_model(join(directory, models_directory, icc464))
+    if icc470:
+        model = read_sbml_model(join(directory, models_directory, icc470))
         save_json_model(model, join(directory, models_directory, f'{model.id}.json'))
 
-    if icc644:
-        model = read_sbml_model(join(directory, models_directory, icc644))
+    if icc651:
+        model = read_sbml_model(join(directory, models_directory, icc651))
         save_json_model(model, join(directory, models_directory, f'{model.id}.json'))
 
 
 def fluxes_distribution(directory,
                         results_directory,
                         conditions_directory,
-                        icc390=None,
+                        icc389=None,
                         icc431=None,
-                        icc464=None,
-                        icc644=None, ):
+                        icc470=None,
+                        icc651=None, ):
     conditions = 'wild_type_conditions.xlsx'
 
-    if icc390:
-        icc390 = ModelAnalysis(directory=directory,
-                               model=icc390[0],
-                               biomass_reaction=icc390[1],
+    if icc389:
+        icc389 = ModelAnalysis(directory=directory,
+                               model=icc389[0],
+                               biomass_reaction=icc389[1],
                                results_directory=results_directory,
                                conditions_directory=conditions_directory)
 
-        res = icc390.fluxes_distribution(conditions=conditions,
-                                         sheet=icc390.model.id)
+        res = icc389.fluxes_distribution(conditions=conditions,
+                                         sheet=icc389.model.id)
 
         res = DataFrame(res)
 
-        res.to_csv(join(directory, results_directory, f'results_flux_distribution_{icc390.model.id}.csv'),
+        res.to_csv(join(directory, results_directory, f'results_flux_distribution_{icc389.model.id}.csv'),
                    index_label='ID')
 
     if icc431:
@@ -67,34 +67,34 @@ def fluxes_distribution(directory,
         res.to_csv(join(directory, results_directory, f'results_flux_distribution_{icc431.model.id}.csv'),
                    index_label='ID')
 
-    if icc464:
-        icc464 = ModelAnalysis(directory=directory,
-                               model=icc464[0],
-                               biomass_reaction=icc464[1],
+    if icc470:
+        icc470 = ModelAnalysis(directory=directory,
+                               model=icc470[0],
+                               biomass_reaction=icc470[1],
                                results_directory=results_directory,
                                conditions_directory=conditions_directory)
 
-        res = icc464.fluxes_distribution(conditions=conditions,
-                                         sheet=icc464.model.id)
+        res = icc470.fluxes_distribution(conditions=conditions,
+                                         sheet=icc470.model.id)
 
         res = DataFrame(res)
 
-        res.to_csv(join(directory, results_directory, f'results_flux_distribution_{icc464.model.id}.csv'),
+        res.to_csv(join(directory, results_directory, f'results_flux_distribution_{icc470.model.id}.csv'),
                    index_label='ID')
 
-    if icc644:
-        icc644 = ModelAnalysis(directory=directory,
-                               model=icc644[0],
-                               biomass_reaction=icc644[1],
+    if icc651:
+        icc651 = ModelAnalysis(directory=directory,
+                               model=icc651[0],
+                               biomass_reaction=icc651[1],
                                results_directory=results_directory,
                                conditions_directory=conditions_directory)
 
-        res = icc644.fluxes_distribution(conditions=conditions,
-                                         sheet=icc644.model.id)
+        res = icc651.fluxes_distribution(conditions=conditions,
+                                         sheet=icc651.model.id)
 
         res = DataFrame(res)
 
-        res.to_csv(join(directory, results_directory, f'results_flux_distribution_{icc644.model.id}.csv'),
+        res.to_csv(join(directory, results_directory, f'results_flux_distribution_{icc651.model.id}.csv'),
                    index_label='ID')
 
 
@@ -107,33 +107,33 @@ if __name__ == '__main__':
 
     biomass_rxn = 'e_Biomass'
 
-    icc390_model = 'iCC390.xml'
+    icc389_model = 'iCC389.xml'
     icc431_model = 'iCC431.xml'
-    icc464_model = 'iCC464.xml'
-    icc644_model = 'iCC644.xml'
+    icc470_model = 'iCC470.xml'
+    icc651_model = 'iCC651.xml'
 
     to_json(directory=_directory,
             models_directory='models/',
-            icc390=icc390_model,
+            icc389=icc389_model,
             icc431=icc431_model,
-            icc464=icc464_model,
-            icc644=icc644_model)
+            icc470=icc470_model,
+            icc651=icc651_model)
 
-    icc390_model = 'models/iCC390.xml'
-    _icc390 = (icc390_model, biomass_rxn)
+    icc389_model = 'models/iCC389.xml'
+    _icc389 = (icc389_model, biomass_rxn)
 
     icc431_model = 'models/iCC431.xml'
     _icc431 = (icc431_model, biomass_rxn)
 
-    icc464_model = 'models/iCC464.xml'
-    _icc464 = (icc464_model, biomass_rxn)
+    icc470_model = 'models/iCC470.xml'
+    _icc470 = (icc470_model, biomass_rxn)
 
-    icc644_model = 'models/iCC644.xml'
-    _icc644 = (icc644_model, biomass_rxn)
+    icc651_model = 'models/iCC651.xml'
+    _icc651 = (icc651_model, biomass_rxn)
 
     fluxes_distribution(directory=_directory, results_directory=_results_directory,
                         conditions_directory=_conditions_directory,
-                        icc390=_icc390,
+                        icc389=_icc389,
                         icc431=_icc431,
-                        icc464=_icc464,
-                        icc644=_icc644)
+                        icc470=_icc470,
+                        icc651=_icc651)
