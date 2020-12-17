@@ -11201,7 +11201,7 @@
       <parameter sboTerm="SBO:0000625" id="R_NDPK5_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_NDPK5_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_PCFPTm_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_PFLh_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_PFL_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_ILETRS_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_R09368_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_R09368_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
@@ -11408,7 +11408,7 @@
       <parameter sboTerm="SBO:0000625" id="R_ADAPAT_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_ADAPAT_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_DPMVDx_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_PDHm_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_PDH_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_34DHOXPEGOX_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_34DHOXPEGOX_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_CYSTAm_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
@@ -11606,8 +11606,8 @@
       <parameter sboTerm="SBO:0000625" id="R_HPROb_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_LDH2_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_LDH2_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_r0173_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_r0173_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_LDH_L_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_LDH_L_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_R03104_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_R03104_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_TYRTRS_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
@@ -11633,8 +11633,8 @@
       <parameter sboTerm="SBO:0000625" id="R_EX_glc__aD_e_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_CYTD_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_SHSL1h_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_R10506_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_R10506_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_ALOX_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_ALOX_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_e_Teichoic_acid_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_e_Teichuronic_acid_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_EX_glc_D_B_e_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
@@ -11812,70 +11812,70 @@
       <parameter sboTerm="SBO:0000625" id="R_PFK_2_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_DHFR_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_MTHFD_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T09775_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_L_Cystathionine_abc_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_T_Glyceraldehyde_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_T_Glyceraldehyde_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T06947_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T00566_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T00566_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Ethanol_Diffusion_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Ethanol_Diffusion_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Diacetyl_Diffusion_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Diacetyl_Diffusion_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Oxygen_Diffusion_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Oxygen_Diffusion_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Xylose_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T06948_Xanthine_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Ribose_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03392_1966_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03392_1966_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Guanine_sym_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_H2O_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_H2O_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Ethanol_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Ethanol_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Diacetyl_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Diacetyl_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Oxygen_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Oxygen_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Xylose_abc_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Xanthine_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Ribose_abc_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Aminobenzoate_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Aminobenzoate_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_T00315_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T11473_2_0_1_0_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03392_69_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03392_69_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T01840_0_5_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T11401_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T00544_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T00544_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T00564_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T00564_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03392_4986_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03392_4986_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03392_8465_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03392_8465_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Fructose_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Lactate_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Lactate_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Ribose_sym_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Sucrose_pep_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Ammonia_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Ammonia_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Glycerone_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Glycerone_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Formate_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Formate_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Fumarate_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Fumarate_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_T_Pyridoxal_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_T_Pyridoxal_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Acetaldehyde_Diffusion_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Acetaldehyde_Diffusion_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03392_5135_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03392_5135_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T08911_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Succinate_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Succinate_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Pantothenate_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Pantothenate_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Lipoate_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Lipoate_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Galactose_out_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Arabinose_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T00449_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Glycolaldehyde_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Glycolaldehyde_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03392_498_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03392_498_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Nicotinamide_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Nicotinamide_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Acetolactate_Diffusion_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Acetolactate_Diffusion_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T01784_6_0_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03319_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03319_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03319_CO2_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T03319_CO2_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Sys_Orn_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Acetoin_Diffusion_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T_Acetoin_Diffusion_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
-      <parameter sboTerm="SBO:0000625" id="R_T10260_10_0_0_0_0_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Acetaldehyde_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Acetaldehyde_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Acetate_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Acetate_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Choline_abc_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Succinate_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Succinate_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Pantothenate_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Pantothenate_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Lipoate_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Lipoate_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Galactose_Lactose_anti_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Arabinose_pep_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Folate_abc_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Glycolaldehyde_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Glycolaldehyde_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Propanoate_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Propanoate_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Nicotinamide_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Nicotinamide_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Acetolactate_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Acetolactate_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Glutathione_sym_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_H2O_diff2_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_H2O_diff2_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_CO2_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_CO2_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Ornithine_sym_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Acetoin_diff_lower_bound" value="-999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Acetoin_diff_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
+      <parameter sboTerm="SBO:0000625" id="R_T_Glutathione_abc_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_T_Cellobiose_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_TO3001084_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
       <parameter sboTerm="SBO:0000625" id="R_TO1000809_upper_bound" value="999999" units="mmol_per_gDW_per_hr" constant="true"/>
@@ -18757,15 +18757,15 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_1156"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_PFLh" id="R_PFLh" name="Pyruvate formate lyase" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_PFLh_upper_bound">
+      <reaction metaid="meta_R_PFL" id="R_PFL" name="Pyruvate formate lyase" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_PFL_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_PFLh">
+            <rdf:Description rdf:about="#meta_R_PFL">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/2.3.1.54"/>
                   <rdf:li rdf:resource="https://identifiers.org/kegg.reaction/R00212"/>
-                  <rdf:li rdf:resource="https://identifiers.org/bigg.reaction/PFLh"/>
+                  <rdf:li rdf:resource="https://identifiers.org/bigg.reaction/PFL"/>
                 </rdf:Bag>
               </bqbiol:is>
             </rdf:Description>
@@ -20360,21 +20360,21 @@
         <listOfReactants>
           <speciesReference species="M_e_Teichuronic_acid_c" stoichiometry="0.017" constant="true"/>
           <speciesReference species="M_e_Lipoteichoic_acid_c" stoichiometry="0.08" constant="true"/>
-          <speciesReference species="M_atp_c" stoichiometry="21.4967" constant="true"/>
+          <speciesReference species="M_atp_c" stoichiometry="21.93" constant="true"/>
           <speciesReference species="M_e_Teichoic_acid_c" stoichiometry="0.031" constant="true"/>
           <speciesReference species="M_e_Cofactor_c" stoichiometry="0.01" constant="true"/>
           <speciesReference species="M_e_DNA_c" stoichiometry="0.023" constant="true"/>
           <speciesReference species="M_e_Lipid_c" stoichiometry="0.034" constant="true"/>
           <speciesReference species="M_e_Protein_c" stoichiometry="0.46" constant="true"/>
-          <speciesReference species="M_h2o_c" stoichiometry="21.4967" constant="true"/>
+          <speciesReference species="M_h2o_c" stoichiometry="21.93" constant="true"/>
           <speciesReference species="M_e_Peptidoglycan_c" stoichiometry="0.118" constant="true"/>
           <speciesReference species="M_e_RNA_c" stoichiometry="0.107" constant="true"/>
           <speciesReference species="M_e_Exopolysaccharide_c" stoichiometry="0.12" constant="true"/>
         </listOfReactants>
         <listOfProducts>
-          <speciesReference species="M_adp_c" stoichiometry="21.4967" constant="true"/>
-          <speciesReference species="M_pi_c" stoichiometry="21.4967" constant="true"/>
-          <speciesReference species="M_h_c" stoichiometry="21.4967" constant="true"/>
+          <speciesReference species="M_adp_c" stoichiometry="21.93" constant="true"/>
+          <speciesReference species="M_pi_c" stoichiometry="21.93" constant="true"/>
+          <speciesReference species="M_h_c" stoichiometry="21.93" constant="true"/>
         </listOfProducts>
       </reaction>
       <reaction metaid="meta_R_AGMTm" id="R_AGMTm" name="Agmatinase (m)" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_AGMTm_upper_bound">
@@ -22689,16 +22689,16 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_0379"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_PDHm" id="R_PDHm" name="Pyruvate dehydrogenase" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_PDHm_upper_bound">
+      <reaction metaid="meta_R_PDH" id="R_PDH" name="Pyruvate dehydrogenase" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_PDH_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_PDHm">
+            <rdf:Description rdf:about="#meta_R_PDH">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/1.2.4.1"/>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/1.8.1.4"/>
                   <rdf:li rdf:resource="https://identifiers.org/kegg.reaction/R00209"/>
-                  <rdf:li rdf:resource="https://identifiers.org/bigg.reaction/PDHm"/>
+                  <rdf:li rdf:resource="https://identifiers.org/bigg.reaction/PDH"/>
                 </rdf:Bag>
               </bqbiol:is>
             </rdf:Description>
@@ -26220,15 +26220,15 @@
           </fbc:or>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_r0173" id="R_r0173" name="(S)-Lactate:NAD+ oxidoreductase Glycolysis / Gluconeogenesis / Pyruvate metabolism EC:1.1.1.27" reversible="true" fast="false" fbc:lowerFluxBound="R_r0173_lower_bound" fbc:upperFluxBound="R_r0173_upper_bound">
+      <reaction metaid="meta_R_LDH_L" id="R_LDH_L" name="L-lactate dehydrogenase" reversible="true" fast="false" fbc:lowerFluxBound="R_LDH_L_lower_bound" fbc:upperFluxBound="R_LDH_L_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_r0173">
+            <rdf:Description rdf:about="#meta_R_LDH_L">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/1.1.1.27"/>
                   <rdf:li rdf:resource="https://identifiers.org/kegg.reaction/R00703"/>
-                  <rdf:li rdf:resource="https://identifiers.org/bigg.reaction/r0173"/>
+                  <rdf:li rdf:resource="https://identifiers.org/bigg.reaction/LDH_L"/>
                 </rdf:Bag>
               </bqbiol:is>
             </rdf:Description>
@@ -26693,13 +26693,14 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_0500"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_R10506" id="R_R10506" name="R10506_((S)-2-Acetolactate+NAD+&lt;=&gt;Diacetyl+CO2+NADH)" reversible="true" fast="false" fbc:lowerFluxBound="R_R10506_lower_bound" fbc:upperFluxBound="R_R10506_upper_bound">
+      <reaction metaid="meta_R_ALOX" id="R_ALOX" name="Oxidative decarboxylation of acetolacate chemical" reversible="true" fast="false" fbc:lowerFluxBound="R_ALOX_lower_bound" fbc:upperFluxBound="R_ALOX_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_R10506">
+            <rdf:Description rdf:about="#meta_R_ALOX">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/kegg.reaction/R10506"/>
+				  <rdf:li rdf:resource="https://identifiers.org/bigg.reaction/ALOX"/>
                 </rdf:Bag>
               </bqbiol:is>
             </rdf:Description>
@@ -28724,10 +28725,10 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_0284"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_T09775" id="R_T09775" name="T09775_(1.0ATP(CYTOP)+1.0H2O(CYTOP)+1.0L-Cystathionine(EXTR)=&gt;1.0Orthophosphate(CYTOP)+1.0ADP(CYTOP)+1.0L-Cystathionine(CYTOP)+H+)" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T09775_upper_bound">
+      <reaction metaid="meta_R_T_L_Cystathionine_abc" id="R_T_L_Cystathionine_abc" name="L-Cystathionine ABC" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_L_Cystathionine_abc_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T09775">
+            <rdf:Description rdf:about="#meta_R_T_L_Cystathionine_abc">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/3.A.1.3.#"/>
@@ -28759,7 +28760,7 @@
           </fbc:or>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction id="R_T_Glyceraldehyde" name="T_Glyceraldehyde_(1.0D-Glyceraldehyde(CYTOP)&lt;=&gt;1.0D-Glyceraldehyde(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Glyceraldehyde_lower_bound" fbc:upperFluxBound="R_T_Glyceraldehyde_upper_bound">
+      <reaction id="R_T_Glyceraldehyde" name="Glyceraldehyde diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Glyceraldehyde_lower_bound" fbc:upperFluxBound="R_T_Glyceraldehyde_upper_bound">
         <listOfReactants>
           <speciesReference species="M_glyald_c" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -28767,10 +28768,10 @@
           <speciesReference species="M_glyald_e" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction metaid="meta_R_T06947" id="R_T06947" name="T06947_(1.0Guanine(EXTR)+1.0H+(EXTR)=&gt;1.0Guanine(CYTOP)+1.0H+(CYTOP))" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T06947_upper_bound">
+      <reaction metaid="meta_R_T_Guanine_sym" id="R_T_Guanine_sym" name="Guanine symport" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Guanine_sym_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T06947">
+            <rdf:Description rdf:about="#meta_R_T_Guanine_sym">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/2.A.40.7.#"/>
@@ -28791,10 +28792,10 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_1308"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_T00566" id="R_T00566" name="T00566_(1.0H2O(EXTR)&lt;=&gt;1.0H2O(CYTOP))" reversible="true" fast="false" fbc:lowerFluxBound="R_T00566_lower_bound" fbc:upperFluxBound="R_T00566_upper_bound">
+      <reaction metaid="meta_R_T_H2O_diff" id="R_T_H2O_diff" name="Water diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_H2O_diff_lower_bound" fbc:upperFluxBound="R_T_H2O_diff_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T00566">
+            <rdf:Description rdf:about="#meta_R_T_H2O_diff">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/1.A.8.2.#"/>
@@ -28813,7 +28814,7 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_1839"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction id="R_T_Ethanol_Diffusion" name="T_Ethanol_Diffusion_(1.0Ethanol(CYTOP)&lt;=&gt;1.0Ethanol(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Ethanol_Diffusion_lower_bound" fbc:upperFluxBound="R_T_Ethanol_Diffusion_upper_bound">
+      <reaction id="R_T_Ethanol_diff" name="Ethanol diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Ethanol_diff_lower_bound" fbc:upperFluxBound="R_T_Ethanol_diff_upper_bound">
         <listOfReactants>
           <speciesReference species="M_etoh_c" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -28821,7 +28822,7 @@
           <speciesReference species="M_etoh_e" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction id="R_T_Diacetyl_Diffusion" name="T_Diacetyl_Diffusion_(1.0Diacetyl(CYTOP)&lt;=&gt;1.0Diacetyl(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Diacetyl_Diffusion_lower_bound" fbc:upperFluxBound="R_T_Diacetyl_Diffusion_upper_bound">
+      <reaction id="R_T_Diacetyl_diff" name="Diacetyl diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Diacetyl_diff_lower_bound" fbc:upperFluxBound="R_T_Diacetyl_diff_upper_bound">
         <listOfReactants>
           <speciesReference species="M_diact_c" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -28829,7 +28830,7 @@
           <speciesReference species="M_diact_e" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction id="R_T_Oxygen_Diffusion" name="T_Oxygen_Diffusion_(1.0Oxygen(CYTOP)&lt;=&gt;1.0Oxygen(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Oxygen_Diffusion_lower_bound" fbc:upperFluxBound="R_T_Oxygen_Diffusion_upper_bound">
+      <reaction id="R_T_Oxygen_diff" name="Oxygen diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Oxygen_diff_lower_bound" fbc:upperFluxBound="R_T_Oxygen_diff_upper_bound">
         <listOfReactants>
           <speciesReference species="M_o2_c" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -28837,7 +28838,7 @@
           <speciesReference species="M_o2_e" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction id="R_T_Xylose" name="T_Xylose_(1.0D-Xylose(EXTR)+1.0ATP(CYTOP)+1.0H20(CYTOP)=&gt;1.0D-Xylose(CYTOP)+1.0Orthophosphate(CYTOP)+1.0ADP(CYTOP)+H+)" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Xylose_upper_bound">
+      <reaction id="R_T_Xylose_abc" name="Xylose ABC" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Xylose_abc_upper_bound">
         <listOfReactants>
           <speciesReference species="M_atp_c" stoichiometry="1" constant="true"/>
           <speciesReference species="M_h2o_c" stoichiometry="1" constant="true"/>
@@ -28850,10 +28851,10 @@
           <speciesReference species="M_xyl__D_c" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction metaid="meta_R_T06948_Xanthine" id="R_T06948_Xanthine" name="T06948_Xanthine_(1.0Xanthine(EXTR)+1.0H+(EXTR)=&gt;1.0Xanthine(CYTOP)+1.0H+(CYTOP))" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T06948_Xanthine_upper_bound">
+      <reaction metaid="meta_R_T_Xanthine_diff" id="R_T_Xanthine_diff" name="Xanthine diffusion" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Xanthine_diff_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T06948_Xanthine">
+            <rdf:Description rdf:about="#meta_R_T_Xanthine_diff">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/2.A.40.7.#"/>
@@ -28874,7 +28875,7 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_1308"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction id="R_T_Ribose" name="T_Ribose_(1.0D-Ribose(EXTR)+1.0ATP(CYTOP)+1.0H20(CYTOP)=&gt;1.0D-Ribose(CYTOP)+1.0Orthophosphate(CYTOP)+1.0ADP(CYTOP)+H+)" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Ribose_upper_bound">
+      <reaction id="R_T_Ribose_abc" name="Ribose ABC" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Ribose_abc_upper_bound">
         <listOfReactants>
           <speciesReference species="M_atp_c" stoichiometry="1" constant="true"/>
           <speciesReference species="M_h2o_c" stoichiometry="1" constant="true"/>
@@ -28887,10 +28888,10 @@
           <speciesReference species="M_rib__D_c" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction metaid="meta_R_T03392_1966" id="R_T03392_1966" name="T03392_1966_(1.04-Aminobenzoate(CYTOP)&lt;=&gt;1.04-Aminobenzoate(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T03392_1966_lower_bound" fbc:upperFluxBound="R_T03392_1966_upper_bound">
+      <reaction metaid="meta_R_T_Aminobenzoate_diff" id="R_T_Aminobenzoate_diff" name="Aminobenzoate diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Aminobenzoate_diff_lower_bound" fbc:upperFluxBound="R_T_Aminobenzoate_diff_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T03392_1966">
+            <rdf:Description rdf:about="#meta_R_T_Aminobenzoate_diff">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/1.A.22.1.#"/>
@@ -28920,7 +28921,7 @@
           </fbc:or>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_T00315" id="R_T00315" name="T00315_(2.0Cl-(CYTOP)+1.0H+(EXTR)=&gt;2.0Cl-(EXTR)+1.0H+(CYTOP))" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T00315_upper_bound">
+      <reaction metaid="meta_R_T00315" id="R_T_Chlorine_sym" name="Chlorine symport" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T00315_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_R_T00315">
@@ -28948,10 +28949,10 @@
           </fbc:or>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_T11473_2_0_1_0" id="R_T11473_2_0_1_0" name="T11473_2_0_1_0_(1.0beta-D-Fructose(EXTR)+1.0Phosphoenolpyruvate(CYTOP)=&gt;1.0D-Fructose1-phosphate(CYTOP)+1.0Pyruvate(CYTOP))" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T11473_2_0_1_0_upper_bound">
+      <reaction metaid="meta_R_T_Fructose" id="R_T_Fructose" name="Fructose PEP" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Fructose_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T11473_2_0_1_0">
+            <rdf:Description rdf:about="#meta_R_T_Fructose">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/4.A.6.1.#"/>
@@ -28969,10 +28970,10 @@
           <speciesReference species="M_pyr_c" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction metaid="meta_R_T03392_69" id="R_T03392_69" name="T03392_69_(1.0(S)-Lactate(CYTOP)&lt;=&gt;1.0(S)-Lactate(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T03392_69_lower_bound" fbc:upperFluxBound="R_T03392_69_upper_bound">
+      <reaction metaid="meta_R_T_Lactate_diff" id="R_T_Lactate_diff" name="Lactate diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Lactate_diff_lower_bound" fbc:upperFluxBound="R_T_Lactate_diff_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T03392_69">
+            <rdf:Description rdf:about="#meta_R_T_Lactate_diff">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/1.A.22.1.#"/>
@@ -29002,10 +29003,10 @@
           </fbc:or>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_T01840_0_5" id="R_T01840_0_5" name="T01840_0_5_(1.0D-Ribose(EXTR)+1.0H+(EXTR)=&gt;1.0D-Ribose(CYTOP)+1.0H+(CYTOP))" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T01840_0_5_upper_bound">
+      <reaction metaid="meta_R_T_Ribose_sym" id="R_T_Ribose_sym" name="Ribose symport" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Ribose_sym_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T01840_0_5">
+            <rdf:Description rdf:about="#meta_R_T_Ribose_sym">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/2.A.7.5.#"/>
@@ -29026,10 +29027,10 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_0097"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_T11401" id="R_T11401" name="T11401_(1.0Sucrose(EXTR)+1.0Phosphoenolpyruvate(CYTOP)=&gt;1.0Sucrose6-phosphate(CYTOP)+1.0Pyruvate(CYTOP))" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T11401_upper_bound">
+      <reaction metaid="meta_R_T_Sucrose_pep" id="R_T_Sucrose_pep" name="Sucrose PEP" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Sucrose_pep_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T11401">
+            <rdf:Description rdf:about="#meta_R_T_Sucrose_pep">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/2.A.2.2.#"/>
@@ -29048,10 +29049,10 @@
           <speciesReference species="M_pyr_c" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction metaid="meta_R_T00544" id="R_T00544" name="T00544_(1.0Ammonia(EXTR)&lt;=&gt;1.0Ammonia(CYTOP))" reversible="true" fast="false" fbc:lowerFluxBound="R_T00544_lower_bound" fbc:upperFluxBound="R_T00544_upper_bound">
+      <reaction metaid="meta_R_T_Ammonia_diff" id="R_T_Ammonia_diff" name="Ammonia diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Ammonia_diff_lower_bound" fbc:upperFluxBound="R_T_Ammonia_diff_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T00544">
+            <rdf:Description rdf:about="#meta_R_T_Ammonia_diff">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/1.A.11.2.#"/>
@@ -29070,10 +29071,10 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_0634"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_T00564" id="R_T00564" name="T00564_(1.0Glycerone(EXTR)&lt;=&gt;1.0Glycerone(CYTOP))" reversible="true" fast="false" fbc:lowerFluxBound="R_T00564_lower_bound" fbc:upperFluxBound="R_T00564_upper_bound">
+      <reaction metaid="meta_R_T_Glycerone_diff" id="R_T_Glycerone_diff" name="Glycerone diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Glycerone_diff_lower_bound" fbc:upperFluxBound="R_T_Glycerone_diff_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T00564">
+            <rdf:Description rdf:about="#meta_R_T_Glycerone_diff">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/1.A.8.2.#"/>
@@ -29092,10 +29093,10 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_1839"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_T03392_4986" id="R_T03392_4986" name="T03392_4986_(1.0Formate(CYTOP)&lt;=&gt;1.0Formate(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T03392_4986_lower_bound" fbc:upperFluxBound="R_T03392_4986_upper_bound">
+      <reaction metaid="meta_R_T_Formate_diff" id="R_T_Formate_diff" name="Formate diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Formate_diff_lower_bound" fbc:upperFluxBound="R_T_Formate_diff_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T03392_4986">
+            <rdf:Description rdf:about="#meta_R_T_Formate_diff">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/1.A.22.1.#"/>
@@ -29125,10 +29126,10 @@
           </fbc:or>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_T03392_8465" id="R_T03392_8465" name="T03392_8465_(1.0Fumarate(CYTOP)&lt;=&gt;1.0Fumarate(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T03392_8465_lower_bound" fbc:upperFluxBound="R_T03392_8465_upper_bound">
+      <reaction metaid="meta_R_T_Fumarate_diff" id="R_T_Fumarate_diff" name="Fumarate diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Fumarate_diff_lower_bound" fbc:upperFluxBound="R_T_Fumarate_diff_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T03392_8465">
+            <rdf:Description rdf:about="#meta_R_T_Fumarate_diff">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/1.A.22.1.#"/>
@@ -29158,7 +29159,7 @@
           </fbc:or>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction id="R_T_Pyridoxal" name="T_Pyridoxal_(1.0Pyridoxal(EXTR)&lt;=&gt;1.0Pyridoxal(CYTOP))" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Pyridoxal_lower_bound" fbc:upperFluxBound="R_T_Pyridoxal_upper_bound">
+      <reaction id="R_T_Pyridoxal" name="Pyridoxal diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Pyridoxal_lower_bound" fbc:upperFluxBound="R_T_Pyridoxal_upper_bound">
         <listOfReactants>
           <speciesReference species="M_pydx_e" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -29166,7 +29167,7 @@
           <speciesReference species="M_pydx_c" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction id="R_T_Acetaldehyde_Diffusion" name="T_Acetaldehyde_Diffusion_(1.0Acetaldehyde(CYTOP)&lt;=&gt;1.0Acetaldehyde(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Acetaldehyde_Diffusion_lower_bound" fbc:upperFluxBound="R_T_Acetaldehyde_Diffusion_upper_bound">
+      <reaction id="R_T_Acetaldehyde_diff" name="Acetaldehyde diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Acetaldehyde_diff_lower_bound" fbc:upperFluxBound="R_T_Acetaldehyde_diff_upper_bound">
         <listOfReactants>
           <speciesReference species="M_acald_c" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -29174,10 +29175,10 @@
           <speciesReference species="M_acald_e" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction metaid="meta_R_T03392_5135" id="R_T03392_5135" name="T03392_5135_(1.0Acetate(CYTOP)&lt;=&gt;1.0Acetate(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T03392_5135_lower_bound" fbc:upperFluxBound="R_T03392_5135_upper_bound">
+      <reaction metaid="meta_R_T_Acetate_diff" id="R_T_Acetate_diff" name="Acetate diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Acetate_diff_lower_bound" fbc:upperFluxBound="R_T_Acetate_diff_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T03392_5135">
+            <rdf:Description rdf:about="#meta_R_T_Acetate_diff">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/1.A.22.1.#"/>
@@ -29207,10 +29208,10 @@
           </fbc:or>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_T08911" id="R_T08911" name="T08911_(1.0ATP(CYTOP)+1.0H2O(CYTOP)+1.0Choline(EXTR)=&gt;1.0Orthophosphate(CYTOP)+1.0Choline(CYTOP)+1.0ADP(CYTOP)+H+)" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T08911_upper_bound">
+      <reaction metaid="meta_R_T_Choline_abc" id="R_T_Choline_abc" name="Choline ABC" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Choline_abc_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T08911">
+            <rdf:Description rdf:about="#meta_R_T_Choline_abc">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/3.A.1.135.#"/>
@@ -29235,7 +29236,7 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_0128"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction id="R_T_Succinate" name="T_Succinate_(1.0Succinate(CYTOP)&lt;=&gt;1.0Succinate(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Succinate_lower_bound" fbc:upperFluxBound="R_T_Succinate_upper_bound">
+      <reaction id="R_T_Succinate_diff" name="Succinate diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Succinate_diff_lower_bound" fbc:upperFluxBound="R_T_Succinate_diff_upper_bound">
         <listOfReactants>
           <speciesReference species="M_succ_c" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -29243,10 +29244,10 @@
           <speciesReference species="M_succ_e" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction metaid="meta_R_T_Pantothenate" id="R_T_Pantothenate" name="T_Pantothenate_(1.0Pantothenate(EXTR)&lt;=&gt;1.0Pantothenate(CYTOP))" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Pantothenate_lower_bound" fbc:upperFluxBound="R_T_Pantothenate_upper_bound">
+      <reaction metaid="meta_R_T_Pantothenate_diff" id="R_T_Pantothenate_diff" name="Pantothenate diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Pantothenate_diff_lower_bound" fbc:upperFluxBound="R_T_Pantothenate_diff_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T_Pantothenate">
+            <rdf:Description rdf:about="#meta_R_T_Pantothenate_diff">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/3.D.4.3.#"/>
@@ -29266,7 +29267,7 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_1747"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction id="R_T_Lipoate" name="T_Lipoate_(1.0(R)-Lipoate(EXTR)&lt;=&gt;1.0(R)-Lipoate(CYTOP))" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Lipoate_lower_bound" fbc:upperFluxBound="R_T_Lipoate_upper_bound">
+      <reaction id="R_T_Lipoate_diff" name="Lipoate diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Lipoate_diff_lower_bound" fbc:upperFluxBound="R_T_Lipoate_diff_upper_bound">
         <listOfReactants>
           <speciesReference species="M_C16241_e" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -29274,10 +29275,10 @@
           <speciesReference species="M_C16241_c" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction metaid="meta_R_T_Galactose_out" id="R_T_Galactose_out" name="T_Galactose_out_(1.0D-Galactose(CYTOP)+1.0Lactose(EXTR)=&gt;1.0D-Galactose(EXTR)+Lactose(CYTOP))" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Galactose_out_upper_bound">
+      <reaction metaid="meta_R_T_Galactose_Lactose_anti" id="R_T_Galactose_Lactose_anti" name="Galactose-Lactose antiport" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Galactose_Lactose_anti_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T_Galactose_out">
+            <rdf:Description rdf:about="#meta_R_T_Galactose_Lactose_anti">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/2.A.2.2.#"/>
@@ -29298,7 +29299,7 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_0098"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction id="R_T_Arabinose" name="T_Arabinose_(1.0D-Arabinose(EXTR)+1.0ATP(CYTOP)+1.0H20(CYTOP)=&gt;1.0D-Arabinose(CYTOP)+1.0Orthophosphate(CYTOP)+1.0ADP(CYTOP)+H+)" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Arabinose_upper_bound">
+      <reaction id="R_T_Arabinose_pep" name="Arabinose PEP" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Arabinose_pep_upper_bound">
         <listOfReactants>
           <speciesReference species="M_atp_c" stoichiometry="1" constant="true"/>
           <speciesReference species="M_h2o_c" stoichiometry="1" constant="true"/>
@@ -29311,10 +29312,10 @@
           <speciesReference species="M_arab__D_c" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction metaid="meta_R_T00449" id="R_T00449" name="T00449_(1.0Folate(EXTR)+1.0ATP(CYTOP)+1.0H2O(CYTOP)=&gt;1.0Orthophosphate(CYTOP)+1.0Folate(CYTOP)+1.0ADP(CYTOP)+H+)" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T00449_upper_bound">
+      <reaction metaid="meta_R_T_Folate_abc" id="R_T_Folate_abc" name="Folate ABC" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Folate_abc_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T00449">
+            <rdf:Description rdf:about="#meta_R_T_Folate_abc">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/3.A.1.28.#"/>
@@ -29338,7 +29339,7 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_0666"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction id="R_T_Glycolaldehyde" name="T_Glycolaldehyde_(1.0Glycolaldehyde(CYTOP)&lt;=&gt;1.0Glycolaldehyde(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Glycolaldehyde_lower_bound" fbc:upperFluxBound="R_T_Glycolaldehyde_upper_bound">
+      <reaction id="R_T_Glycolaldehyde_diff" name="Glycolaldehyde diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Glycolaldehyde_diff_lower_bound" fbc:upperFluxBound="R_T_Glycolaldehyde_diff_upper_bound">
         <listOfReactants>
           <speciesReference species="M_gcald_c" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -29346,10 +29347,10 @@
           <speciesReference species="M_gcald_e" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction metaid="meta_R_T03392_498" id="R_T03392_498" name="T03392_498_(1.0Propanoate(CYTOP)&lt;=&gt;1.0Propanoate(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T03392_498_lower_bound" fbc:upperFluxBound="R_T03392_498_upper_bound">
+      <reaction metaid="meta_R_T_Propanoate_diff" id="R_T_Propanoate_diff" name="Propanoate diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Propanoate_diff_lower_bound" fbc:upperFluxBound="R_T_Propanoate_diff_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T03392_498">
+            <rdf:Description rdf:about="#meta_R_T_Propanoate_diff">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/1.A.22.1.#"/>
@@ -29379,10 +29380,10 @@
           </fbc:or>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_T_Nicotinamide" id="R_T_Nicotinamide" name="T_Nicotinamide_(1.0Nicotinamide(EXTR)&lt;=&gt;1.0Nicotinamide(CYTOP))" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Nicotinamide_lower_bound" fbc:upperFluxBound="R_T_Nicotinamide_upper_bound">
+      <reaction metaid="meta_R_T_Nicotinamide_diff" id="R_T_Nicotinamide_diff" name="Nicotinamide diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Nicotinamide_diff_lower_bound" fbc:upperFluxBound="R_T_Nicotinamide_diff_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T_Nicotinamide">
+            <rdf:Description rdf:about="#meta_R_T_Nicotinamide_diff">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/3.A.5.7.#"/>
@@ -29410,7 +29411,7 @@
           </fbc:or>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction id="R_T_Acetolactate_Diffusion" name="T_Acetolactate_Diffusion_(1.0(S)-2-Acetolactate(CYTOP)&lt;=&gt;1.0(S)-2-Acetolactate(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Acetolactate_Diffusion_lower_bound" fbc:upperFluxBound="R_T_Acetolactate_Diffusion_upper_bound">
+      <reaction id="R_T_Acetolactate_diff" name="Acetolactate diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Acetolactate_diff_lower_bound" fbc:upperFluxBound="R_T_Acetolactate_diff_upper_bound">
         <listOfReactants>
           <speciesReference species="M_alac__S_c" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -29418,10 +29419,10 @@
           <speciesReference species="M_alac__S_e" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction metaid="meta_R_T01784_6_0" id="R_T01784_6_0" name="T01784_6_0_(1.0Glutathione(EXTR)+1.0H+(EXTR)=&gt;1.0Glutathione(CYTOP)+1.0H+(CYTOP))" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T01784_6_0_upper_bound">
+      <reaction metaid="meta_R_T_Glutathione_sym" id="R_T_Glutathione_sym" name="Glutathione symport" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Glutathione_sym_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T01784_6_0">
+            <rdf:Description rdf:about="#meta_R_T_Glutathione_sym">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/2.A.17.1.#"/>
@@ -29442,10 +29443,10 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_0540"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_T03319" id="R_T03319" name="T03319_(1.0H2O(CYTOP)&lt;=&gt;1.0H2O(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T03319_lower_bound" fbc:upperFluxBound="R_T03319_upper_bound">
+      <reaction metaid="meta_R_T_H2O_diff2" id="R_T_H2O_diff2" name="Water diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_H2O_diff2_lower_bound" fbc:upperFluxBound="R_T_H2O_diff2_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T03319">
+            <rdf:Description rdf:about="#meta_R_T_H2O_diff2">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/1.A.8.2.#"/>
@@ -29482,10 +29483,10 @@
           </fbc:or>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_T03319_CO2" id="R_T03319_CO2" name="T03319_CO2_(1.0CO2(CYTOP)&lt;=&gt;1.0CO2(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T03319_CO2_lower_bound" fbc:upperFluxBound="R_T03319_CO2_upper_bound">
+      <reaction metaid="meta_R_T_CO2_diff" id="R_T_CO2_diff" name="CO2 diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_CO2_diff_lower_bound" fbc:upperFluxBound="R_T_CO2_diff_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T03319_CO2">
+            <rdf:Description rdf:about="#meta_R_T_CO2_diff">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/1.A.8.2.#"/>
@@ -29518,10 +29519,10 @@
           </fbc:or>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_T_Sys_Orn" id="R_T_Sys_Orn" name="T_Sys_Orn_(1.0L-Ornithine(EXTR)+1.0H+(EXTR)=&gt;1.0L-Ornithine(CYTOP)+1.0H+(CYTOP))" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Sys_Orn_upper_bound">
+      <reaction metaid="meta_R_T_Ornithine_sym" id="R_T_Ornithine_sym" name="Ornithine symport" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Ornithine_sym_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T_Sys_Orn">
+            <rdf:Description rdf:about="#meta_R_T_Ornithine_sym">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/2.A.3.10.#"/>
@@ -29542,7 +29543,7 @@
           <fbc:geneProductRef fbc:geneProduct="G_STER_0774"/>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction id="R_T_Acetoin_Diffusion" name="T_Acetoin_Diffusion_(1.0(R)-Acetoin(CYTOP)&lt;=&gt;1.0(R)-Acetoin(EXTR))" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Acetoin_Diffusion_lower_bound" fbc:upperFluxBound="R_T_Acetoin_Diffusion_upper_bound">
+      <reaction id="R_T_Acetoin_diff" name="Acetoin diffusion" reversible="true" fast="false" fbc:lowerFluxBound="R_T_Acetoin_diff_lower_bound" fbc:upperFluxBound="R_T_Acetoin_diff_upper_bound">
         <listOfReactants>
           <speciesReference species="M_actn__R_c" stoichiometry="1" constant="true"/>
         </listOfReactants>
@@ -29550,10 +29551,10 @@
           <speciesReference species="M_actn__R_e" stoichiometry="1" constant="true"/>
         </listOfProducts>
       </reaction>
-      <reaction metaid="meta_R_T10260_10_0_0_0_0" id="R_T10260_10_0_0_0_0" name="T10260_10_0_0_0_0_(1.0Glutathione(EXTR)+1.0ATP(CYTOP)+1.0H2O(CYTOP)=&gt;1.0Orthophosphate(CYTOP)+1.0Glutathione(CYTOP)+1.0ADP(CYTOP)+H+)" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T10260_10_0_0_0_0_upper_bound">
+      <reaction metaid="meta_R_T_Glutathione_abc" id="R_T_Glutathione_abc" name="Glutathione ABC" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Glutathione_abc_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-            <rdf:Description rdf:about="#meta_R_T10260_10_0_0_0_0">
+            <rdf:Description rdf:about="#meta_R_T_Glutathione_abc">
               <bqbiol:is>
                 <rdf:Bag>
                   <rdf:li rdf:resource="https://identifiers.org/ec-code/3.A.1.5.#"/>
@@ -29582,7 +29583,7 @@
           </fbc:or>
         </fbc:geneProductAssociation>
       </reaction>
-      <reaction metaid="meta_R_T_Cellobiose" id="R_T_Cellobiose" name="T_Cellobiose_(1.0Cellobiose(EXTR)+1.0Phosphoenolpyruvate(CYTOP)=&gt;1.06-Phospho-beta-D-glucosyl-(1,4)-D-glucose(CYTOP)+1.0Pyruvate(CYTOP))" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Cellobiose_upper_bound">
+      <reaction metaid="meta_R_T_Cellobiose" id="R_T_Cellobiose" name="Cellobiose PEP" reversible="false" fast="false" fbc:lowerFluxBound="cobra_0_bound" fbc:upperFluxBound="R_T_Cellobiose_upper_bound">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:vCard4="http://www.w3.org/2006/vcard/ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
             <rdf:Description rdf:about="#meta_R_T_Cellobiose">
@@ -38218,10 +38219,10 @@
       <groups:group groups:id="G_g4" groups:name="Butanoate metabolism" groups:kind="partonomy">
         <groups:listOfMembers>
           <groups:member groups:name="Acetolactate decarboxylase" groups:idRef="R_ACLDC"/>
-          <groups:member groups:name="Pyruvate formate lyase" groups:idRef="R_PFLh"/>
+          <groups:member groups:name="Pyruvate formate lyase" groups:idRef="R_PFL"/>
           <groups:member groups:name="Hydroxymethylglutaryl CoA synthase" groups:idRef="R_HMGCOAS"/>
           <groups:member groups:name="Pyruvate:pyruvate acetaldehydetransferase (decarboxylating), chloroplast" groups:idRef="R_PPATDh"/>
-          <groups:member groups:name="R10506_((S)-2-Acetolactate+NAD+&lt;=&gt;Diacetyl+CO2+NADH)" groups:idRef="R_R10506"/>
+          <groups:member groups:name="Oxidative decarboxylation of acetolacate chemical" groups:idRef="R_ALOX"/>
         </groups:listOfMembers>
       </groups:group>
       <groups:group groups:id="G_g5" groups:name="Starch and sucrose metabolism" groups:kind="partonomy">
@@ -38265,7 +38266,7 @@
           <groups:member groups:name="Glucose-6-phosphate isomerase" groups:idRef="R_PGI"/>
           <groups:member groups:name="Phosphoglycerate mutase" groups:idRef="R_PGM"/>
           <groups:member groups:name="Glucokinase/hexokinase (glc-A)" groups:idRef="R_GLUKA"/>
-          <groups:member groups:name="(S)-Lactate:NAD+ oxidoreductase Glycolysis / Gluconeogenesis / Pyruvate metabolism EC:1.1.1.27" groups:idRef="R_r0173"/>
+          <groups:member groups:name="L-lactate dehydrogenase" groups:idRef="R_LDH_L"/>
           <groups:member groups:name="Alpha-D-Glucose 1-epimerase" groups:idRef="R_GLCE"/>
           <groups:member groups:name="Phosphoglucomutase" groups:idRef="R_PGMT"/>
           <groups:member groups:name="Pyruvate kinase" groups:idRef="R_PYK"/>
@@ -38323,12 +38324,12 @@
           <groups:member groups:name="TO0000208" groups:idRef="R_TO0000208"/>
           <groups:member groups:name="TO1000041" groups:idRef="R_TO1000041"/>
           <groups:member groups:name="TO3001060" groups:idRef="R_TO3001060"/>
-          <groups:member groups:name="T11473_2_0_1_0_(1.0beta-D-Fructose(EXTR)+1.0Phosphoenolpyruvate(CYTOP)=&gt;1.0D-Fructose1-phosphate(CYTOP)+1.0Pyruvate(CYTOP))" groups:idRef="R_T11473_2_0_1_0"/>
+          <groups:member groups:name="Fructose PEP" groups:idRef="R_T_Fructose"/>
           <groups:member groups:name="TO1000053" groups:idRef="R_TO1000053"/>
           <groups:member groups:name="TO1000381" groups:idRef="R_TO1000381"/>
           <groups:member groups:name="TO1000322" groups:idRef="R_TO1000322"/>
           <groups:member groups:name="TO1000135" groups:idRef="R_TO1000135"/>
-          <groups:member groups:name="T03392_5135_(1.0Acetate(CYTOP)&lt;=&gt;1.0Acetate(EXTR))" groups:idRef="R_T03392_5135"/>
+          <groups:member groups:name="Acetate diffusion" groups:idRef="R_T_Acetate_diff"/>
           <groups:member groups:name="TZ2900037" groups:idRef="R_TZ2900037"/>
           <groups:member groups:name="TO1000274" groups:idRef="R_TO1000274"/>
           <groups:member groups:name="TZ2900102" groups:idRef="R_TZ2900102"/>
@@ -38349,7 +38350,7 @@
           <groups:member groups:name="TO1000550" groups:idRef="R_TO1000550"/>
           <groups:member groups:name="TZ2900013" groups:idRef="R_TZ2900013"/>
           <groups:member groups:name="TZ2900114" groups:idRef="R_TZ2900114"/>
-          <groups:member groups:name="T_Pyridoxal_(1.0Pyridoxal(EXTR)&lt;=&gt;1.0Pyridoxal(CYTOP))" groups:idRef="R_T_Pyridoxal"/>
+          <groups:member groups:name="Pyridoxal diffusion" groups:idRef="R_T_Pyridoxal"/>
           <groups:member groups:name="TZ2900055" groups:idRef="R_TZ2900055"/>
           <groups:member groups:name="TR1000039" groups:idRef="R_TR1000039"/>
           <groups:member groups:name="TZ2900063" groups:idRef="R_TZ2900063"/>
@@ -38363,18 +38364,18 @@
           <groups:member groups:name="TR0000021" groups:idRef="R_TR0000021"/>
           <groups:member groups:name="TZ2900110" groups:idRef="R_TZ2900110"/>
           <groups:member groups:name="TI2000030" groups:idRef="R_TI2000030"/>
-          <groups:member groups:name="T00544_(1.0Ammonia(EXTR)&lt;=&gt;1.0Ammonia(CYTOP))" groups:idRef="R_T00544"/>
+          <groups:member groups:name="Ammonia diffusion" groups:idRef="R_T_Ammonia_diff"/>
           <groups:member groups:name="TO1001977" groups:idRef="R_TO1001977"/>
-          <groups:member groups:name="T_Oxygen_Diffusion_(1.0Oxygen(CYTOP)&lt;=&gt;1.0Oxygen(EXTR))" groups:idRef="R_T_Oxygen_Diffusion"/>
+          <groups:member groups:name="Oxygen diffusion" groups:idRef="R_T_Oxygen_diff"/>
           <groups:member groups:name="TZ3107045" groups:idRef="R_TZ3107045"/>
           <groups:member groups:name="TO3000768" groups:idRef="R_TO3000768"/>
-          <groups:member groups:name="T06947_(1.0Guanine(EXTR)+1.0H+(EXTR)=&gt;1.0Guanine(CYTOP)+1.0H+(CYTOP))" groups:idRef="R_T06947"/>
+          <groups:member groups:name="Guanine symport" groups:idRef="R_T_Guanine_sym"/>
           <groups:member groups:name="TO1000033" groups:idRef="R_TO1000033"/>
           <groups:member groups:name="TO1000064" groups:idRef="R_TO1000064"/>
           <groups:member groups:name="TO1000226" groups:idRef="R_TO1000226"/>
           <groups:member groups:name="TO3001055" groups:idRef="R_TO3001055"/>
           <groups:member groups:name="TR1900008" groups:idRef="R_TR1900008"/>
-          <groups:member groups:name="T01784_6_0_(1.0Glutathione(EXTR)+1.0H+(EXTR)=&gt;1.0Glutathione(CYTOP)+1.0H+(CYTOP))" groups:idRef="R_T01784_6_0"/>
+          <groups:member groups:name="Glutathione symport" groups:idRef="R_T_Glutathione_sym"/>
           <groups:member groups:name="TO3001091" groups:idRef="R_TO3001091"/>
           <groups:member groups:name="TO1000186" groups:idRef="R_TO1000186"/>
           <groups:member groups:name="TO1000065" groups:idRef="R_TO1000065"/>
@@ -38385,37 +38386,37 @@
           <groups:member groups:name="TO1000066" groups:idRef="R_TO1000066"/>
           <groups:member groups:name="TO3000385" groups:idRef="R_TO3000385"/>
           <groups:member groups:name="TO0000971" groups:idRef="R_TO0000971"/>
-          <groups:member groups:name="T_Glyceraldehyde_(1.0D-Glyceraldehyde(CYTOP)&lt;=&gt;1.0D-Glyceraldehyde(EXTR))" groups:idRef="R_T_Glyceraldehyde"/>
-          <groups:member groups:name="T_Cellobiose_(1.0Cellobiose(EXTR)+1.0Phosphoenolpyruvate(CYTOP)=&gt;1.06-Phospho-beta-D-glucosyl-(1,4)-D-glucose(CYTOP)+1.0Pyruvate(CYTOP))" groups:idRef="R_T_Cellobiose"/>
+          <groups:member groups:name="Glyceraldehyde diffusion" groups:idRef="R_T_Glyceraldehyde"/>
+          <groups:member groups:name="Cellobiose PEP" groups:idRef="R_T_Cellobiose"/>
           <groups:member groups:name="TO0000205" groups:idRef="R_TO0000205"/>
-          <groups:member groups:name="T03392_8465_(1.0Fumarate(CYTOP)&lt;=&gt;1.0Fumarate(EXTR))" groups:idRef="R_T03392_8465"/>
+          <groups:member groups:name="Fumarate diffusion" groups:idRef="R_T_Fumarate_diff"/>
           <groups:member groups:name="TO0000305" groups:idRef="R_TO0000305"/>
           <groups:member groups:name="TR0000268" groups:idRef="R_TR0000268"/>
           <groups:member groups:name="TZ2900106" groups:idRef="R_TZ2900106"/>
           <groups:member groups:name="TR0000421" groups:idRef="R_TR0000421"/>
           <groups:member groups:name="TO1000227" groups:idRef="R_TO1000227"/>
-          <groups:member groups:name="T00566_(1.0H2O(EXTR)&lt;=&gt;1.0H2O(CYTOP))" groups:idRef="R_T00566"/>
+          <groups:member groups:name="Water diffusion" groups:idRef="R_T_H2O_diff"/>
           <groups:member groups:name="TO1002027" groups:idRef="R_TO1002027"/>
           <groups:member groups:name="TZ3101342" groups:idRef="R_TZ3101342"/>
-          <groups:member groups:name="T08911_(1.0ATP(CYTOP)+1.0H2O(CYTOP)+1.0Choline(EXTR)=&gt;1.0Orthophosphate(CYTOP)+1.0Choline(CYTOP)+1.0ADP(CYTOP)+H+)" groups:idRef="R_T08911"/>
+          <groups:member groups:name="Choline ABC" groups:idRef="R_T_Choline_abc"/>
           <groups:member groups:name="TO3001097" groups:idRef="R_TO3001097"/>
           <groups:member groups:name="TO1000119" groups:idRef="R_TO1000119"/>
-          <groups:member groups:name="T03319_CO2_(1.0CO2(CYTOP)&lt;=&gt;1.0CO2(EXTR))" groups:idRef="R_T03319_CO2"/>
+          <groups:member groups:name="CO2 diffusion" groups:idRef="R_T_CO2_diff"/>
           <groups:member groups:name="TO3000333" groups:idRef="R_TO3000333"/>
           <groups:member groups:name="TR0000239" groups:idRef="R_TR0000239"/>
           <groups:member groups:name="TO3000383" groups:idRef="R_TO3000383"/>
           <groups:member groups:name="TO1100322" groups:idRef="R_TO1100322"/>
           <groups:member groups:name="TZ2900010" groups:idRef="R_TZ2900010"/>
           <groups:member groups:name="TZ2900105" groups:idRef="R_TZ2900105"/>
-          <groups:member groups:name="T03392_4986_(1.0Formate(CYTOP)&lt;=&gt;1.0Formate(EXTR))" groups:idRef="R_T03392_4986"/>
+          <groups:member groups:name="Formate diffusion" groups:idRef="R_T_Formate_diff"/>
           <groups:member groups:name="TO1003402" groups:idRef="R_TO1003402"/>
           <groups:member groups:name="TO3001058" groups:idRef="R_TO3001058"/>
           <groups:member groups:name="TO1000060" groups:idRef="R_TO1000060"/>
           <groups:member groups:name="TZ3101373" groups:idRef="R_TZ3101373"/>
           <groups:member groups:name="TO1000128" groups:idRef="R_TO1000128"/>
           <groups:member groups:name="TI3000040" groups:idRef="R_TI3000040"/>
-          <groups:member groups:name="T_Acetoin_Diffusion_(1.0(R)-Acetoin(CYTOP)&lt;=&gt;1.0(R)-Acetoin(EXTR))" groups:idRef="R_T_Acetoin_Diffusion"/>
-          <groups:member groups:name="T00564_(1.0Glycerone(EXTR)&lt;=&gt;1.0Glycerone(CYTOP))" groups:idRef="R_T00564"/>
+          <groups:member groups:name="Acetoin diffusion" groups:idRef="R_T_Acetoin_diff"/>
+          <groups:member groups:name="Glycerone diffusion" groups:idRef="R_T_Glycerone_diff"/>
           <groups:member groups:name="TR0000149" groups:idRef="R_TR0000149"/>
           <groups:member groups:name="TZ2900064" groups:idRef="R_TZ2900064"/>
           <groups:member groups:name="TR0001048" groups:idRef="R_TR0001048"/>
@@ -38427,28 +38428,28 @@
           <groups:member groups:name="TR0001012" groups:idRef="R_TR0001012"/>
           <groups:member groups:name="TO1000516" groups:idRef="R_TO1000516"/>
           <groups:member groups:name="TO0000073" groups:idRef="R_TO0000073"/>
-          <groups:member groups:name="T_Nicotinamide_(1.0Nicotinamide(EXTR)&lt;=&gt;1.0Nicotinamide(CYTOP))" groups:idRef="R_T_Nicotinamide"/>
+          <groups:member groups:name="Nicotinamide diffusion" groups:idRef="R_T_Nicotinamide_diff"/>
           <groups:member groups:name="TO3001076" groups:idRef="R_TO3001076"/>
-          <groups:member groups:name="T_Acetolactate_Diffusion_(1.0(S)-2-Acetolactate(CYTOP)&lt;=&gt;1.0(S)-2-Acetolactate(EXTR))" groups:idRef="R_T_Acetolactate_Diffusion"/>
-          <groups:member groups:name="T_Galactose_out_(1.0D-Galactose(CYTOP)+1.0Lactose(EXTR)=&gt;1.0D-Galactose(EXTR)+Lactose(CYTOP))" groups:idRef="R_T_Galactose_out"/>
+          <groups:member groups:name="Acetolactate diffusion" groups:idRef="R_T_Acetolactate_diff"/>
+          <groups:member groups:name="Galactose-Lactose antiport" groups:idRef="R_T_Galactose_Lactose_anti"/>
           <groups:member groups:name="TO1000129" groups:idRef="R_TO1000129"/>
           <groups:member groups:name="TO0000254" groups:idRef="R_TO0000254"/>
           <groups:member groups:name="TO1000467" groups:idRef="R_TO1000467"/>
           <groups:member groups:name="TO1900010" groups:idRef="R_TO1900010"/>
           <groups:member groups:name="TO3001084" groups:idRef="R_TO3001084"/>
-          <groups:member groups:name="T_Succinate_(1.0Succinate(CYTOP)&lt;=&gt;1.0Succinate(EXTR))" groups:idRef="R_T_Succinate"/>
+          <groups:member groups:name="Succinate diffusion" groups:idRef="R_T_Succinate_diff"/>
           <groups:member groups:name="TO1000017" groups:idRef="R_TO1000017"/>
           <groups:member groups:name="TO1000019" groups:idRef="R_TO1000019"/>
-          <groups:member groups:name="T_Sys_Orn_(1.0L-Ornithine(EXTR)+1.0H+(EXTR)=&gt;1.0L-Ornithine(CYTOP)+1.0H+(CYTOP))" groups:idRef="R_T_Sys_Orn"/>
+          <groups:member groups:name="Ornithine symport" groups:idRef="R_T_Ornithine_sym"/>
           <groups:member groups:name="TO1000161" groups:idRef="R_TO1000161"/>
           <groups:member groups:name="TR0000030" groups:idRef="R_TR0000030"/>
           <groups:member groups:name="TO1100156" groups:idRef="R_TO1100156"/>
           <groups:member groups:name="TR0000009" groups:idRef="R_TR0000009"/>
-          <groups:member groups:name="T01840_0_5_(1.0D-Ribose(EXTR)+1.0H+(EXTR)=&gt;1.0D-Ribose(CYTOP)+1.0H+(CYTOP))" groups:idRef="R_T01840_0_5"/>
-          <groups:member groups:name="T_Pantothenate_(1.0Pantothenate(EXTR)&lt;=&gt;1.0Pantothenate(CYTOP))" groups:idRef="R_T_Pantothenate"/>
+          <groups:member groups:name="Ribose symport" groups:idRef="R_T_Ribose_sym"/>
+          <groups:member groups:name="Pantothenate diffusion" groups:idRef="R_T_Pantothenate_diff"/>
           <groups:member groups:name="TO1900076" groups:idRef="R_TO1900076"/>
           <groups:member groups:name="TZ4900041" groups:idRef="R_TZ4900041"/>
-          <groups:member groups:name="T06948_Xanthine_(1.0Xanthine(EXTR)+1.0H+(EXTR)=&gt;1.0Xanthine(CYTOP)+1.0H+(CYTOP))" groups:idRef="R_T06948_Xanthine"/>
+          <groups:member groups:name="Xanthine diffusion" groups:idRef="R_T_Xanthine_diff"/>
           <groups:member groups:name="TO3000331" groups:idRef="R_TO3000331"/>
           <groups:member groups:name="TZ2900115" groups:idRef="R_TZ2900115"/>
           <groups:member groups:name="TZ2900062" groups:idRef="R_TZ2900062"/>
@@ -38456,31 +38457,31 @@
           <groups:member groups:name="TO3001073" groups:idRef="R_TO3001073"/>
           <groups:member groups:name="TZ3100029" groups:idRef="R_TZ3100029"/>
           <groups:member groups:name="TI3000207" groups:idRef="R_TI3000207"/>
-          <groups:member groups:name="T_Acetaldehyde_Diffusion_(1.0Acetaldehyde(CYTOP)&lt;=&gt;1.0Acetaldehyde(EXTR))" groups:idRef="R_T_Acetaldehyde_Diffusion"/>
+          <groups:member groups:name="Acetaldehyde diffusion" groups:idRef="R_T_Acetaldehyde_diff"/>
           <groups:member groups:name="TZ2900116" groups:idRef="R_TZ2900116"/>
-          <groups:member groups:name="T_Arabinose_(1.0D-Arabinose(EXTR)+1.0ATP(CYTOP)+1.0H20(CYTOP)=&gt;1.0D-Arabinose(CYTOP)+1.0Orthophosphate(CYTOP)+1.0ADP(CYTOP)+H+)" groups:idRef="R_T_Arabinose"/>
+          <groups:member groups:name="Arabinose PEP" groups:idRef="R_T_Arabinose_pep"/>
           <groups:member groups:name="TO1001101" groups:idRef="R_TO1001101"/>
           <groups:member groups:name="TZ2900054" groups:idRef="R_TZ2900054"/>
           <groups:member groups:name="TO1100054" groups:idRef="R_TO1100054"/>
           <groups:member groups:name="TR0000063" groups:idRef="R_TR0000063"/>
-          <groups:member groups:name="T_Glycolaldehyde_(1.0Glycolaldehyde(CYTOP)&lt;=&gt;1.0Glycolaldehyde(EXTR))" groups:idRef="R_T_Glycolaldehyde"/>
+          <groups:member groups:name="Glycolaldehyde diffusion" groups:idRef="R_T_Glycolaldehyde_diff"/>
           <groups:member groups:name="TZ3100218" groups:idRef="R_TZ3100218"/>
-          <groups:member groups:name="T03319_(1.0H2O(CYTOP)&lt;=&gt;1.0H2O(EXTR))" groups:idRef="R_T03319"/>
-          <groups:member groups:name="T11401_(1.0Sucrose(EXTR)+1.0Phosphoenolpyruvate(CYTOP)=&gt;1.0Sucrose6-phosphate(CYTOP)+1.0Pyruvate(CYTOP))" groups:idRef="R_T11401"/>
-          <groups:member groups:name="T10260_10_0_0_0_0_(1.0Glutathione(EXTR)+1.0ATP(CYTOP)+1.0H2O(CYTOP)=&gt;1.0Orthophosphate(CYTOP)+1.0Glutathione(CYTOP)+1.0ADP(CYTOP)+H+)" groups:idRef="R_T10260_10_0_0_0_0"/>
+          <groups:member groups:name="Water diffusion" groups:idRef="R_T_H2O_diff2"/>
+          <groups:member groups:name="Sucrose PEP" groups:idRef="R_T_Sucrose_pep"/>
+          <groups:member groups:name="Glutathione ABC" groups:idRef="R_T_Glutathione_abc"/>
           <groups:member groups:name="TO0000030" groups:idRef="R_TO0000030"/>
-          <groups:member groups:name="T_Ribose_(1.0D-Ribose(EXTR)+1.0ATP(CYTOP)+1.0H20(CYTOP)=&gt;1.0D-Ribose(CYTOP)+1.0Orthophosphate(CYTOP)+1.0ADP(CYTOP)+H+)" groups:idRef="R_T_Ribose"/>
+          <groups:member groups:name="Ribose ABC" groups:idRef="R_T_Ribose_abc"/>
           <groups:member groups:name="TZ3101377" groups:idRef="R_TZ3101377"/>
           <groups:member groups:name="TO1000132" groups:idRef="R_TO1000132"/>
-          <groups:member groups:name="T00315_(2.0Cl-(CYTOP)+1.0H+(EXTR)=&gt;2.0Cl-(EXTR)+1.0H+(CYTOP))" groups:idRef="R_T00315"/>
+          <groups:member groups:name="Chlorine symport" groups:idRef="R_T_Chlorine_sym"/>
           <groups:member groups:name="TO3001056" groups:idRef="R_TO3001056"/>
           <groups:member groups:name="TR1000033" groups:idRef="R_TR1000033"/>
           <groups:member groups:name="TO3001078" groups:idRef="R_TO3001078"/>
           <groups:member groups:name="TI3001633" groups:idRef="R_TI3001633"/>
           <groups:member groups:name="TO3001082" groups:idRef="R_TO3001082"/>
           <groups:member groups:name="TO3001053" groups:idRef="R_TO3001053"/>
-          <groups:member groups:name="T03392_498_(1.0Propanoate(CYTOP)&lt;=&gt;1.0Propanoate(EXTR))" groups:idRef="R_T03392_498"/>
-          <groups:member groups:name="T03392_1966_(1.04-Aminobenzoate(CYTOP)&lt;=&gt;1.04-Aminobenzoate(EXTR))" groups:idRef="R_T03392_1966"/>
+          <groups:member groups:name="Propanoate diffusion" groups:idRef="R_T_Propanoate_diff"/>
+          <groups:member groups:name="Aminobenzoate diffusion" groups:idRef="R_T_Aminobenzoate_diff"/>
           <groups:member groups:name="TI3000027" groups:idRef="R_TI3000027"/>
           <groups:member groups:name="TO1003289" groups:idRef="R_TO1003289"/>
           <groups:member groups:name="TO1000822" groups:idRef="R_TO1000822"/>
@@ -38499,7 +38500,7 @@
           <groups:member groups:name="TO1000051" groups:idRef="R_TO1000051"/>
           <groups:member groups:name="TI0000254" groups:idRef="R_TI0000254"/>
           <groups:member groups:name="TO1000084" groups:idRef="R_TO1000084"/>
-          <groups:member groups:name="T00449_(1.0Folate(EXTR)+1.0ATP(CYTOP)+1.0H2O(CYTOP)=&gt;1.0Orthophosphate(CYTOP)+1.0Folate(CYTOP)+1.0ADP(CYTOP)+H+)" groups:idRef="R_T00449"/>
+          <groups:member groups:name="Folate ABC" groups:idRef="R_T_Folate_abc"/>
           <groups:member groups:name="TR0003387" groups:idRef="R_TR0003387"/>
           <groups:member groups:name="TO0000034" groups:idRef="R_TO0000034"/>
           <groups:member groups:name="TR0000242" groups:idRef="R_TR0000242"/>
@@ -38508,11 +38509,11 @@
           <groups:member groups:name="TO3000332" groups:idRef="R_TO3000332"/>
           <groups:member groups:name="TZ3101375" groups:idRef="R_TZ3101375"/>
           <groups:member groups:name="TZ3000000" groups:idRef="R_TZ3000000"/>
-          <groups:member groups:name="T_Lipoate_(1.0(R)-Lipoate(EXTR)&lt;=&gt;1.0(R)-Lipoate(CYTOP))" groups:idRef="R_T_Lipoate"/>
+          <groups:member groups:name="Lipoate diffusion" groups:idRef="R_T_Lipoate_diff"/>
           <groups:member groups:name="TO0000021" groups:idRef="R_TO0000021"/>
-          <groups:member groups:name="T_Xylose_(1.0D-Xylose(EXTR)+1.0ATP(CYTOP)+1.0H20(CYTOP)=&gt;1.0D-Xylose(CYTOP)+1.0Orthophosphate(CYTOP)+1.0ADP(CYTOP)+H+)" groups:idRef="R_T_Xylose"/>
+          <groups:member groups:name="Xylose ABC" groups:idRef="R_T_Xylose_abc"/>
           <groups:member groups:name="TO3001095" groups:idRef="R_TO3001095"/>
-          <groups:member groups:name="T_Ethanol_Diffusion_(1.0Ethanol(CYTOP)&lt;=&gt;1.0Ethanol(EXTR))" groups:idRef="R_T_Ethanol_Diffusion"/>
+          <groups:member groups:name="Ethanol diffusion" groups:idRef="R_T_Ethanol_diff"/>
           <groups:member groups:name="TO0000063" groups:idRef="R_TO0000063"/>
           <groups:member groups:name="TR0000254" groups:idRef="R_TR0000254"/>
           <groups:member groups:name="TZ4900011" groups:idRef="R_TZ4900011"/>
@@ -38522,14 +38523,14 @@
           <groups:member groups:name="TO1000092" groups:idRef="R_TO1000092"/>
           <groups:member groups:name="TO1000023" groups:idRef="R_TO1000023"/>
           <groups:member groups:name="TO0001012" groups:idRef="R_TO0001012"/>
-          <groups:member groups:name="T03392_69_(1.0(S)-Lactate(CYTOP)&lt;=&gt;1.0(S)-Lactate(EXTR))" groups:idRef="R_T03392_69"/>
+          <groups:member groups:name="Lactate diffusion" groups:idRef="R_T_Lactate_diff"/>
           <groups:member groups:name="TO0000058" groups:idRef="R_TO0000058"/>
           <groups:member groups:name="TO1000054" groups:idRef="R_TO1000054"/>
-          <groups:member groups:name="T_Diacetyl_Diffusion_(1.0Diacetyl(CYTOP)&lt;=&gt;1.0Diacetyl(EXTR))" groups:idRef="R_T_Diacetyl_Diffusion"/>
+          <groups:member groups:name="Diacetyl diffusion" groups:idRef="R_T_Diacetyl_diff"/>
           <groups:member groups:name="TZ2900058" groups:idRef="R_TZ2900058"/>
           <groups:member groups:name="TR0000205" groups:idRef="R_TR0000205"/>
           <groups:member groups:name="TO3000755" groups:idRef="R_TO3000755"/>
-          <groups:member groups:name="T09775_(1.0ATP(CYTOP)+1.0H2O(CYTOP)+1.0L-Cystathionine(EXTR)=&gt;1.0Orthophosphate(CYTOP)+1.0ADP(CYTOP)+1.0L-Cystathionine(CYTOP)+H+)" groups:idRef="R_T09775"/>
+          <groups:member groups:name="L-Cystathionine ABC" groups:idRef="R_T_L_Cystathionine_abc"/>
           <groups:member groups:name="TO3001087" groups:idRef="R_TO3001087"/>
           <groups:member groups:name="TO1000343" groups:idRef="R_TO1000343"/>
           <groups:member groups:name="TO3001094" groups:idRef="R_TO3001094"/>
@@ -38596,7 +38597,7 @@
           <groups:member groups:name="Isocitrate dehydrogenase (NADP)" groups:idRef="R_ICDHyr"/>
           <groups:member groups:name="Glucose-6-phosphate isomerase, chloroplast (g6p-A)" groups:idRef="R_PGIAh"/>
           <groups:member groups:name="Phospho-L-serine phosphatase (periplasmic)" groups:idRef="R_PSP_Lpp"/>
-          <groups:member groups:name="Pyruvate dehydrogenase" groups:idRef="R_PDHm"/>
+          <groups:member groups:name="Pyruvate dehydrogenase" groups:idRef="R_PDH"/>
           <groups:member groups:name="Phosphotransacetylase" groups:idRef="R_PTAr"/>
           <groups:member groups:name="Sedoheptulose 1,7-bisphosphate D-glyceraldehyde-3-phosphate-lyase" groups:idRef="R_FBA3hi"/>
         </groups:listOfMembers>
@@ -39333,12 +39334,12 @@
         <groups:listOfMembers>
           <groups:member groups:name="Hydroxyacylglutathione hydrolase  mitochondrial" groups:idRef="R_GLYOXm"/>
           <groups:member groups:name="Acetate kinase" groups:idRef="R_ACKr"/>
-          <groups:member groups:name="Pyruvate formate lyase" groups:idRef="R_PFLh"/>
+          <groups:member groups:name="Pyruvate formate lyase" groups:idRef="R_PFL"/>
           <groups:member groups:name="Phosphoenolpyruvate carboxylase" groups:idRef="R_PPC"/>
           <groups:member groups:name="2 isopropylmalate synthase  mitochondrial" groups:idRef="R_IPPSm"/>
           <groups:member groups:name="Acetyl-CoA carboxylase" groups:idRef="R_ACCOAC"/>
           <groups:member groups:name="Lactoylglutathione lyase" groups:idRef="R_LGTHL"/>
-          <groups:member groups:name="(S)-Lactate:NAD+ oxidoreductase Glycolysis / Gluconeogenesis / Pyruvate metabolism EC:1.1.1.27" groups:idRef="R_r0173"/>
+          <groups:member groups:name="L-lactate dehydrogenase" groups:idRef="R_LDH_L"/>
           <groups:member groups:name="Acylphosphatase" groups:idRef="R_APhi"/>
           <groups:member groups:name="Phosphotransacetylase" groups:idRef="R_PTAr"/>
           <groups:member groups:name="Pyruvate kinase" groups:idRef="R_PYK"/>
@@ -39373,7 +39374,7 @@
       </groups:group>
       <groups:group groups:id="G_g60" groups:name="Non enzymatic" groups:kind="partonomy">
         <groups:listOfMembers>
-          <groups:member groups:name="R10506_((S)-2-Acetolactate+NAD+&lt;=&gt;Diacetyl+CO2+NADH)" groups:idRef="R_R10506"/>
+          <groups:member groups:name="Oxidative decarboxylation of acetolacate chemical" groups:idRef="R_ALOX"/>
           <groups:member groups:name="L-glutamate 5-semialdehyde dehydratase (spontaneous)" groups:idRef="R_G5SADs"/>
         </groups:listOfMembers>
       </groups:group>
@@ -39862,7 +39863,7 @@
           <groups:member groups:name="Ribose-5-phosphate isomerase" groups:idRef="R_RPI"/>
           <groups:member groups:name="Anthrnailate synthase" groups:idRef="R_ATNS"/>
           <groups:member groups:name="Aspartate kinase" groups:idRef="R_ASPK_1"/>
-          <groups:member groups:name="(S)-Lactate:NAD+ oxidoreductase Glycolysis / Gluconeogenesis / Pyruvate metabolism EC:1.1.1.27" groups:idRef="R_r0173"/>
+          <groups:member groups:name="L-lactate dehydrogenase" groups:idRef="R_LDH_L"/>
           <groups:member groups:name="N-acetylglucosamine-6-phosphate deacetylase" groups:idRef="R_AGDC"/>
           <groups:member groups:name="L threonine deaminase  mitochondrial" groups:idRef="R_THRD_Lm"/>
           <groups:member groups:name="Phosphoribosylpyrophosphate synthetase" groups:idRef="R_PRPPS"/>
