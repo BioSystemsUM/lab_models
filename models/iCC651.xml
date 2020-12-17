@@ -15043,19 +15043,19 @@
           <speciesReference constant="true" species="M_M8801_c" stoichiometry="0.059" />
           <speciesReference constant="true" species="M_M8807_c" stoichiometry="0.087" />
           <speciesReference constant="true" species="M_M8811_c" stoichiometry="0.081" />
-          <speciesReference constant="true" species="M_atp_c" stoichiometry="43.36" />
+          <speciesReference constant="true" species="M_atp_c" stoichiometry="41.61" />
           <speciesReference constant="true" species="M_e_Cofactor_c" stoichiometry="0.026" />
           <speciesReference constant="true" species="M_e_DNA_c" stoichiometry="0.063" />
           <speciesReference constant="true" species="M_e_Lipid_c" stoichiometry="0.079" />
           <speciesReference constant="true" species="M_e_Protein_c" stoichiometry="0.308" />
           <speciesReference constant="true" species="M_e_RNA_c" stoichiometry="0.297" />
-          <speciesReference constant="true" species="M_h2o_c" stoichiometry="43.36" />
+          <speciesReference constant="true" species="M_h2o_c" stoichiometry="41.61" />
         </listOfReactants>
         <listOfProducts>
-          <speciesReference constant="true" species="M_adp_c" stoichiometry="43.36" />
+          <speciesReference constant="true" species="M_adp_c" stoichiometry="41.61" />
           <speciesReference constant="true" species="M_e_Biomass_c" stoichiometry="1" />
-          <speciesReference constant="true" species="M_h_c" stoichiometry="43.36" />
-          <speciesReference constant="true" species="M_pi_c" stoichiometry="43.36" />
+          <speciesReference constant="true" species="M_h_c" stoichiometry="41.61" />
+          <speciesReference constant="true" species="M_pi_c" stoichiometry="41.61" />
         </listOfProducts>
       </reaction>
       <reaction fast="false" id="R_R08361" metaid="R_R08361" name="Trypanothione + Tryparedoxin disulfide &lt;=&gt; Trypanothione disulfide + Tryparedoxin" reversible="true" fbc:lowerFluxBound="cobra_default_lb" fbc:upperFluxBound="cobra_default_ub">

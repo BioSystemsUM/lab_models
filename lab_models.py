@@ -748,26 +748,26 @@ def lab_models(directory,
                                conditions_directory=conditions_directory)
 
         carbon_sources = {
-            'EX_lcts_e': (-4.415, 999999),
-            'EX_sucr_e': (-4.415, 999999),
-            'EX_glc__aD_e': (-8.83, 999999),
-            'EX_glc_D_B_e': (-8.83, 999999),
-            'EX_fru_B_e': (-8.83, 999999),
-            'EX_man_e': (-8.83, 999999),
-            'EX_a_gal__D_e': (-8.83, 999999),
-            'EX_gal_bD_e': (-8.83, 999999),
-            'EX_arbt_e': (-4.415, 999999),
-            'EX_malt_e': (-4.415, 999999),
-            'EX_acgam_e': (-4.415, 999999),
-            'EX_tre_e': (-4.415, 999999),
-            'EX_cellb_e': (-4.415, 999999),
-            'EX_melib_e': (-4.415, 999999),
-            'EX_rib__D_e': (-8.83, 999999),
-            'EX_HC00832_e': (-8.83, 999999),
-            'EX_tag__D_e': (-8.83, 999999),
-            'EX_srb__L_e': (-8.83, 999999),
-            'EX_HC00822_e': (-4.415, 999999),
-            'EX_rmn_e': (-8.83, 999999),
+            'EX_lcts_e': (-5.955, 999999),
+            'EX_sucr_e': (-5.955, 999999),
+            'EX_glc__aD_e': (-11.91, 999999),
+            'EX_glc_D_B_e': (-11.91, 999999),
+            'EX_fru_B_e': (-11.91, 999999),
+            'EX_man_e': (-11.91, 999999),
+            'EX_a_gal__D_e': (-11.91, 999999),
+            'EX_gal_bD_e': (-11.91, 999999),
+            'EX_arbt_e': (-5.955, 999999),
+            'EX_malt_e': (-5.955, 999999),
+            'EX_acgam_e': (-5.955, 999999),
+            'EX_tre_e': (-5.955, 999999),
+            'EX_cellb_e': (-5.955, 999999),
+            'EX_melib_e': (-5.955, 999999),
+            'EX_rib__D_e': (-11.91, 999999),
+            'EX_HC00832_e': (-11.91, 999999),
+            'EX_tag__D_e': (-11.91, 999999),
+            'EX_srb__L_e': (-11.91, 999999),
+            'EX_HC00822_e': (-5.955, 999999),
+            'EX_rmn_e': (-11.91, 999999),
         }
 
         production_exchanges = [
@@ -816,7 +816,7 @@ def lab_models(directory,
 
         carbon_source_linspace = list(linspace(1, 20, 20))
 
-        objective_linspace = list(linspace(0.01, 0.6, 15))
+        objective_linspace = list(linspace(0.01, 0.7, 15))
 
         rxns_to_track = ['PDH', 'PKETX']
 
@@ -848,7 +848,7 @@ def lab_models(directory,
                                          rxns_to_track=rxns_to_track,
                                          special_conditions={'EX_lac__D_e': (0.0, 0.0)},
                                          tol=1E-4,
-                                         minimum_growth=0.06336,
+                                         minimum_growth=0.03936,
                                          )
 
         _analysis.append(icc651_analysis)

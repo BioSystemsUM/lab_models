@@ -114,26 +114,26 @@ if __name__ == '__main__':
 
     to_json(directory=_directory,
             models_directory='models/',
-            icc389=icc389_model,
-            icc431=icc431_model,
-            icc470=icc470_model,
+            # icc389=icc389_model,
+            # icc431=icc431_model,
+            # icc470=icc470_model,
             icc651=icc651_model)
 
-    icc389_model = 'models/iCC389.xml'
-    _icc389 = (icc389_model, biomass_rxn)
-
-    icc431_model = 'models/iCC431.xml'
-    _icc431 = (icc431_model, biomass_rxn)
-
-    icc470_model = 'models/iCC470.xml'
-    _icc470 = (icc470_model, biomass_rxn)
+    # icc389_model = 'models/iCC389.xml'
+    # _icc389 = (icc389_model, biomass_rxn)
+    #
+    # icc431_model = 'models/iCC431.xml'
+    # _icc431 = (icc431_model, biomass_rxn)
+    #
+    # icc470_model = 'models/iCC470.xml'
+    # _icc470 = (icc470_model, biomass_rxn)
 
     icc651_model = 'models/iCC651.xml'
     _icc651 = (icc651_model, biomass_rxn)
 
     fluxes_distribution(directory=_directory, results_directory=_results_directory,
                         conditions_directory=_conditions_directory,
-                        icc389=_icc389,
-                        icc431=_icc431,
-                        icc470=_icc470,
+                        # icc389=_icc389,
+                        # icc431=_icc431,
+                        # icc470=_icc470,
                         icc651=_icc651)
