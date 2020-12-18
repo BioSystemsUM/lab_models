@@ -4,6 +4,9 @@ import pandas as pd
 import numpy as np
 import copy
 from matplotlib import rc
+from PIL import Image
+import PIL
+
 
 
 species = [r"$\it{S. thermophilus}$ LMD-9", "$\it{L. acidophilus}$ La-14", "$\it{L. rhamnosus}$ GG", "$\it{L. helveticus}$ CNRZ32"]
@@ -55,18 +58,18 @@ def dataframes_for_robustness(dataframes, compounds):
         for unique in oxygen:
             dataframes_dict[unique] = df.loc[df['Oxygen'] == unique]
             dataframes_dict[unique] = dataframes_dict[unique].drop("Oxygen", axis=1)
-            dataframes_dict[unique].index = list(range(2, 42, 2))
+            dataframes_dict[unique].index = list(range(2, 62, 2))
             for column in dataframes_dict[unique].columns:
                 dataframes_dict[unique] = dataframes_dict[unique].rename(columns = {column: column + "__" +unique+"__" + codes[i]})
-        df = pd.DataFrame(index =list(range(2, 42, 2)))
+        df = pd.DataFrame(index =list(range(2, 62, 2)))
         for data in dataframes_dict.keys():
             df = df.merge(dataframes_dict[data], left_index=True, right_index=True)
-        df['carbon_uptake'] = list(range(2, 42, 2))
+        df['carbon_uptake'] = list(range(2, 62, 2))
         dataframes_res.append(df)
         i+=1
     dataframes_compounds = {}
     for compound in compounds:
-        dataframes_compounds[compound] = pd.DataFrame(index =list(range(2, 42, 2)))
+        dataframes_compounds[compound] = pd.DataFrame(index =list(range(2, 32, 2)))
         for data in dataframes_res:
             regex = compound + '.*'
             temp_df = data.filter(regex=regex)
@@ -107,11 +110,47 @@ def apply_symetric(dataframes):
                 dataframes[i][column]= dataframes[i][column].apply(lambda x: -x if type(x) != str else x)
     return dataframes
 
+def change_df(dataframes, axis):
+    for i in range(len(dataframes)):
+        if axis[i] == 1:
+            dataframes[i].index = dataframes[i].iloc[:, 0].to_list()
+            dataframes[i] = dataframes[i].iloc[:, 1:]
+            dataframes[i] = dataframes[i].T
+    return dataframes
+
+
+def combine_images(directory,filename, filenames):
+    im1 = Image.open(directory + filenames[0])
+    im2 = Image.open(directory + filenames[1])
+    dst = Image.new('RGB', (im1.width, im1.height + im2.height))
+    dst.paste(im1, (0, 0))
+    dst.paste(im2, (0, im1.height))
+    dst.show()
+    dst.save(directory + filename + '.png')
+
+
+
+def plot_gr(directory, filename,dataframes, column_x, column_y, x_label, ylabel,axis = 0, column_y_axis_2=None, ylabel_axis2=None,grid_kws = {"hspace": 0.2, "wspace":0.3},figsize = (12,12), subplots_number=(2,2),
+              title=None, titles=species,group_by='-',personalized_labels=None,color_map=None,linestyle_map=None, ylim=None):
+    fig, (ax) = plt.subplots(subplots_number, figsize=figsize, gridspec_kw=grid_kws)
+    fig.suptitle(title, fontsize=14, y=0.95)
+    plots = []
+    labels =[]
+    for dataframe in dataframes:
+        plots+=ax.plot(dataframe[column_x], dataframe[column_y])
+    ax.set_xlabel(x_label, rotation=0, fontsize=10, color="k")
+    ax.set_ylabel(ylabel, fontsize=10, color="k")
+    [labels.append(x) for x in column_y if x not in labels]
+    labels = get_labels_by_order(labels, personalized_labels)
+    ax.legend(plots, labels)
+    # fig.show()
+    fig.savefig(directory + filename + '.png')
 
 def line_plot(directory, filename,dataframes, column_x, column_y, x_label, ylabel,axis = 0, column_y_axis_2=None, ylabel_axis2=None,grid_kws = {"hspace": 0.2, "wspace":0.3},figsize = (12,12), subplots_number=(2,2),
               title=None, titles=species,group_by='-',personalized_labels=None,color_map=None,linestyle_map=None, ylim=None):
     fig, axes = plt.subplots(subplots_number[0],subplots_number[1], figsize = figsize, gridspec_kw = grid_kws )
-    fig.suptitle(title, fontsize = 14, y=0.95)
+    if title:
+        fig.suptitle(title, fontsize = 14, y=0.95)
     secondary_axis = []
     k=0
     df = 0
@@ -120,9 +159,9 @@ def line_plot(directory, filename,dataframes, column_x, column_y, x_label, ylabe
     for i in range(subplots_number[0]):
         for j in range(subplots_number[1]):
             dataframe = dataframes[df]
-            if axis==1:
-                dataframe.index = dataframe.iloc[:,0].to_list()
-                dataframe = dataframe.iloc[:,1:]
+            if axis == 1:
+                dataframe.index = dataframe.iloc[:, 0].to_list()
+                dataframe = dataframe.iloc[:, 1:]
                 dataframe = dataframe.T
             dataframe = rename_columns(dataframe)
             columny = get_existing_columns(dataframe,column_y )
@@ -134,8 +173,9 @@ def line_plot(directory, filename,dataframes, column_x, column_y, x_label, ylabe
                     plots += axes[i,j].plot(dataframe[column_x], dataframe[col], color = color_map[col.split('__')[-1]], linestyle = linestyle_map[col.split('__')[-2].split('_')[-1]])
                 else:
                     plots += axes[i, j].plot(dataframe[column_x], dataframe[col])
-            if ylim and codes[df] in ylim.keys():
-                axes[i, j].set_ylim(ylim[codes[df]][0],ylim[codes[df]][1])
+            if ylim and df<len(codes):
+                if codes[df] in ylim.keys():
+                    axes[i, j].set_ylim(ylim[codes[df]][0],ylim[codes[df]][1])
             [labels.append(x) for x in columny if x not in labels]
             axes[i,j].set_title(titles[df], fontstyle='italic')
             if i==subplots_number[0]-1:
@@ -156,7 +196,7 @@ def line_plot(directory, filename,dataframes, column_x, column_y, x_label, ylabe
         else:
             labels = personalized_labels
     fig.legend(plots, labels, loc='lower center', ncol=2)
-    fig.show()
+    # fig.show()
     fig.savefig(directory + filename + '.png')
 
 
@@ -182,12 +222,17 @@ def fva_plot(directory, filename,dataframes, column_x = None, column_y= None, x_
                     plots += axes[i, j].bar(maximum[columnx], [x[0] for x in maximum[column_y].values.tolist()], width=2.5, label='Maximum')
                     plots += axes[i, j].bar(minimum[columnx], [x[0] for x in minimum[column_y].values.tolist()],
                                             width=2.5, color='orange', label='Minimum')
-                if ylim:
-                    plots+= axes[i, j].set_ylim(flux[column_y].min().min() - ylim[0], flux[column_y].max().max() + ylim[1])
+                if ylim and codes[df] in ylim.keys():
+                    plots+= axes[i, j].set_ylim(flux[column_y].min().min() - ylim[codes[df]][0], flux[column_y].max().max() + ylim[codes[df]][1])
                 axes[i,j].plot(flux[columnx], flux[column_y], label = 'Flux')
-                axes[i,j].set_title(titles[df])
-                axes[i, j].set_xlabel(xlabel)
-                axes[i, j].set_ylabel(y_label)
+            else:
+                axes[i, j].plot(flux[columnx], [0 for i in range(0,len(flux[columnx]))] , label='Flux')
+                plots += axes[i, j].bar(maximum[columnx], [0 for i in range(0,len(flux[columnx]))], width=2.5,  label='Maximum')
+                plots += axes[i, j].bar(minimum[columnx],[0 for i in range(0,len(flux[columnx]))] , width=2.5, color='orange', label='Minimum')
+                axes[i, j].set_ylim(-0.01,0.5)
+            axes[i,j].set_title(titles[df])
+            axes[i, j].set_xlabel(xlabel)
+            axes[i, j].set_ylabel(y_label)
             df+=1
     if columns:
         h, l = axes[i,j].get_legend_handles_labels()
@@ -257,6 +302,24 @@ def connectivity_pie(directory,directory_to_save, column_x, column_y, filename, 
 
 
 
+def append_growth_rate(dataframes):
+    new_df = pd.DataFrame(index=np.arange(1,31,1),data = np.arange(1,31,1))
+
+    for dataframe in dataframes:
+        dataframe.set_index('Unnamed: 0', inplace=True)
+        dataframe = dataframe.T
+        dataframe = rename_columns(dataframe)
+        dataframe.index = np.arange(1,31,1)
+        new_df = new_df.merge(dataframe[['e_Biomass']], left_index=True, right_index=True)
+    new_df.columns = ['carbon_uptake'] + codes
+    # dataframes = [new_df] + dataframes
+    return new_df
+
+
+
+
+
+
 def get_labels_by_order(old_labels, labels):
     res = []
     for lab in old_labels:
@@ -313,4 +376,7 @@ def robustness_plot(directory):
               ylabel='Growth Rate ($h^{-1}$)',
               directory=directory,
               filename="Robustness")
+
+
+
 
