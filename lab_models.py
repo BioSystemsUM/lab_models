@@ -1,3 +1,5 @@
+import traceback
+
 from collections import namedtuple
 from functools import partial
 
@@ -26,19 +28,16 @@ def run_analysis(analysis: Analysis):
 
     for _analysis, method in analysis.configuration.items():
 
-        # debug
-        # print(f'Running {_analysis} for {analysis.model_analysis.model.id}')
-        # _results[_analysis] = method()
-
         try:
             print(f'Running {_analysis} for {analysis.model_analysis.model.id}')
 
             _results[_analysis] = method()
 
-        except Exception as ex:
+        except Exception:
             print(f'Failed running {_analysis} for {analysis.model_analysis.model.id}')
-            print(ex)
-            print(ex.args)
+
+            traceback.print_exc()
+
             with open('Logger.txt', 'a') as text_file:
                 text_file.write(f'Failed running {_analysis} for {analysis.model_analysis.model.id} \n')
 
@@ -88,7 +87,6 @@ def build_analysis(model_analysis,
                    special_conditions=None,
                    minimum_growth=None,
                    ):
-
     if not conditions:
         conditions = 'wild_type_conditions.xlsx'
 
@@ -381,6 +379,7 @@ def lab_models(directory,
                icc470=None,
                icc651=None,
                ):
+
     _models_analysis = []
     _analysis = []
 
@@ -396,7 +395,7 @@ def lab_models(directory,
                         'ppi',
                         'nad',
                         'nadh',
-                        'glu__L_',
+                        'glu__L',
                         'nadp',
                         'nadph',
                         'NH4',
@@ -433,6 +432,10 @@ def lab_models(directory,
                        'mass_yield_minimum',
                        'carbon_yield_maximum',
                        'mass_yield_maximum']
+
+    points = 30
+
+    carbon_source_linspace = list(linspace(0, 30, points))
 
     oxygen_exchange = 'EX_o2_e'
     oxygen_linspace = linspace(0, 5, 3)
@@ -495,9 +498,7 @@ def lab_models(directory,
             'EX_thr__L_e',
         ]
 
-        reactions = ['EX_lcts_e', 'EX_ac_e']
-
-        carbon_source_linspace = list(linspace(1, 15, 20))
+        reactions = ['EX_glc__aD_e', 'EX_ac_e']
 
         objective_linspace = list(linspace(0.01, 0.3, 15))
 
@@ -513,10 +514,10 @@ def lab_models(directory,
                                          main_metabolites=main_metabolites,
                                          carbon_sources=carbon_sources,
                                          amino_acids=amino_acids,
-                                         carbon_source='EX_lcts_e',
+                                         carbon_source='EX_glc__aD_e',
                                          carbon_source_linspace=carbon_source_linspace,
                                          reactions=reactions,
-                                         points=20,
+                                         points=points,
                                          reactions_constraints={'EX_ac_e': (-5.0, 10)},
                                          dense_output=True,
                                          columns_to_drop=columns_to_drop,
@@ -596,8 +597,6 @@ def lab_models(directory,
 
         reactions = ['EX_lcts_e', 'EX_ac_e']
 
-        carbon_source_linspace = list(linspace(2, 40, 20))
-
         objective_linspace = list(linspace(0.1, 1.5, 15))
 
         rxns_to_track = ['PDH']
@@ -615,7 +614,7 @@ def lab_models(directory,
                                          carbon_source='EX_lcts_e',
                                          carbon_source_linspace=carbon_source_linspace,
                                          reactions=reactions,
-                                         points=20,
+                                         points=points,
                                          reactions_constraints={'EX_ac_e': (-5.0, 10)},
                                          dense_output=True,
                                          columns_to_drop=columns_to_drop,
@@ -659,7 +658,6 @@ def lab_models(directory,
             'EX_melib_e': (-8.2, 999999),
             'EX_raffin_e': (-5.5, 999999),
             'EX_rib__D_e': (-16.4, 999999),
-            'EX_C16639_e': (-16.4, 999999),
         }
 
         production_exchanges = [
@@ -701,8 +699,6 @@ def lab_models(directory,
 
         reactions = ['EX_glc__aD_e', 'EX_ac_e']
 
-        carbon_source_linspace = list(linspace(1, 25, 20))
-
         objective_linspace = list(linspace(0.1, 1.5, 15))
 
         rxns_to_track = []
@@ -720,7 +716,7 @@ def lab_models(directory,
                                          carbon_source='EX_glc__aD_e',
                                          carbon_source_linspace=carbon_source_linspace,
                                          reactions=reactions,
-                                         points=20,
+                                         points=points,
                                          reactions_constraints={'EX_ac_e': (-5.0, 10)},
                                          dense_output=True,
                                          columns_to_drop=columns_to_drop,
@@ -814,8 +810,6 @@ def lab_models(directory,
 
         reactions = ['EX_glc__aD_e', 'EX_ac_e']
 
-        carbon_source_linspace = list(linspace(1, 20, 20))
-
         objective_linspace = list(linspace(0.01, 0.7, 15))
 
         rxns_to_track = ['PDH', 'PKETX']
@@ -833,7 +827,7 @@ def lab_models(directory,
                                          carbon_source='EX_glc__aD_e',
                                          carbon_source_linspace=carbon_source_linspace,
                                          reactions=reactions,
-                                         points=20,
+                                         points=points,
                                          reactions_constraints={'EX_ac_e': (-5.0, 10)},
                                          dense_output=True,
                                          columns_to_drop=columns_to_drop,
@@ -877,31 +871,35 @@ if __name__ == '__main__':
     icc651_model = 'models/iCC651.xml'
     _icc651 = (icc651_model, biomass_rxn)
 
-    _analysis_to_drop = ['growth_atp_tuning',
-                         'atp_tuning',
-                         'maintenance_atp_tuning',
-                         'robustness_analysis']
+    _analysis_to_drop = [
+        'growth_atp_tuning',
+        'atp_tuning',
+        'maintenance_atp_tuning',
+        'robustness_analysis',
+        'topological_analysis',
+    ]
 
-    # _analysis_to_build = ['summary',
-    #                       # 'topological_analysis',
-    #                       ]
+    _analysis_to_build = [
+        'connectivity',
+        'topological_analysis',
+    ]
 
-    _ = lab_models(directory=_directory,
-                   results_directory=_results_directory,
-                   conditions_directory=_conditions_directory,
-                   # analysis_to_build=_analysis_to_build,
-                   analysis_to_drop=_analysis_to_drop,
-                   icc389=_icc389,
-                   icc431=_icc431,
-                   icc470=_icc470,
-                   icc651=_icc651,
-                   )
+    # _ = lab_models(directory=_directory,
+    #                results_directory=_results_directory,
+    #                conditions_directory=_conditions_directory,
+    #                # analysis_to_build=_analysis_to_build,
+    #                analysis_to_drop=_analysis_to_drop,
+    #                icc389=_icc389,
+    #                icc431=_icc431,
+    #                icc470=_icc470,
+    #                icc651=_icc651,
+    #                )
 
-    # _ = lab_models_atp(directory=_directory,
-    #                    results_directory=_results_directory,
-    #                    conditions_directory=_conditions_directory,
-    #                    icc389=_icc389,
-    #                    icc431=_icc431,
-    #                    icc470=_icc470,
-    #                    icc651=_icc651,
-    #                    )
+    _ = lab_models_atp(directory=_directory,
+                       results_directory=_results_directory,
+                       conditions_directory=_conditions_directory,
+                       icc389=_icc389,
+                       # icc431=_icc431,
+                       # icc470=_icc470,
+                       # icc651=_icc651,
+                       )

@@ -193,6 +193,37 @@ class ModelAnalysis:
             lb = -data_frame.loc[ex_mask, 'qs'].iloc[0]
             rxn.lower_bound = lb
 
+    @writer(index=False)
+    def environmental_conditions(self,
+                                 output=None,
+                                 output_sheet=None,
+                                 **kwargs):
+
+        def get_metabolite(reaction):
+
+            reaction = self.get_reaction(reaction)
+
+            if reaction.boundary:
+                if len(reaction.reactants) == 1:
+                    return reaction.reactants[0]
+
+            return reaction
+
+        data = {'exchange': [],
+                'metabolite': [],
+                'name': []}
+
+        for exchange in self.model.exchanges:
+            data['exchange'].append(exchange.id)
+
+            _met = get_metabolite(exchange.id)
+            data['metabolite'].append(_met.id)
+            data['name'].append(_met.name)
+
+        df = DataFrame.from_dict(data=data)
+
+        return df
+
     @writer()
     def fluxes_distribution(self,
                             conditions='',
@@ -202,7 +233,6 @@ class ModelAnalysis:
                             ):
 
         if conditions and sheet:
-
             df = read_excel(os.path.join(self.conditions_directory, conditions), sheet)
 
             with self.model:
@@ -352,7 +382,6 @@ class ModelAnalysis:
         flux_col = []
 
         for _reaction in fva_solution.index:
-
             new_index.append(get_metabolite(_reaction))
             flux_col.append(fba_solution.fluxes.get(_reaction, 0))
 
