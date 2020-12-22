@@ -316,10 +316,6 @@ def append_growth_rate(dataframes):
     return new_df
 
 
-
-
-
-
 def get_labels_by_order(old_labels, labels):
     res = []
     for lab in old_labels:

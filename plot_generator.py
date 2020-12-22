@@ -9,17 +9,17 @@ if __name__ == "__main__":
     _plots_directory = r"C:\Users\Bisbii\OneDrive - Universidade do Minho\Python scripts\LAB__git\lab_models\plots_plt/"
 
 #### Connectivity
-    connectivity_pie(directory=_results_directory,
-                     directory_to_save = _plots_directory,
-                     column_x='Unnamed: 0',
-                     column_y="sum",
-                     filename="Connectivity",
-                     title='Connectivity Analysis'
-                     )
+    # connectivity_pie(directory=_results_directory,
+    #                  directory_to_save = _plots_directory,
+    #                  column_x='Unnamed: 0',
+    #                  column_y="sum",
+    #                  filename="Connectivity",
+    #                  title='Connectivity Analysis'
+    #                  )
 
     ##### Robustness
     # dataframes = read_results(_results_directory + "results_production_robustness_analysis" + ".xlsx")
-    # compounds =  ['EX_lac__L_e', 'EX_ac_e', 'EX_etoh_e', 'EX_for_e','EX_fum_e', 'EX_succ_e','EX_acald_e','EX_alac__S_e', 'EX_diact_e', 'EX_actn__R_e']
+    # compounds =  ['EX_lac__L_e', 'EX_ac_e',  'EX_for_e','EX_etoh_e','EX_acald_e', 'EX_fum_e','EX_succ_e','EX_alac__S_e', 'EX_diact_e', 'EX_actn__R_e']
     # dataframes = dataframes_for_robustness(dataframes,compounds)
     # cols = [ (compounds), ('0.0','5.0'), ('Sth', 'La', 'Lr', 'Lh')]
     # cols = get_column_name(cols)
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     #           figsize=(12,16),
     #           subplots_number = (5,2) ,
     #           title='Robustness Analysis',
-    #           titles = ['Lactate', 'Acetate', "Ethanol", 'Formate', 'Fumarate', 'Succinate', 'Acetaldehyde','Acetolactate', 'Diacetyl', 'Acetoin'],
+    #           titles = ['Lactate', 'Acetate',  'Formate',"Ethanol", 'Acetaldehyde', 'Fumarate', 'Succinate','Acetolactate', 'Diacetyl', 'Acetoin'],
     #           group_by = (['blue','green','red','black','blue','green','red','black'],['-','-','-','-','--','--','--','--']),
     #           personalized_labels =  ['O2=0, ' +  r"$\it{S. thermophilus}$ LMD-9", 'O2=0, ' + "$\it{L. acidophilus}$ La-14", 'O2=0, ' + "$\it{L. rhamnosus}$ GG",'O2=0, ' +  "$\it{L. helveticus}$ CNRZ32",
     #                                   'O2=5, ' +  r"$\it{S. thermophilus}$ LMD-9", 'O2=5, ' + "$\it{L. acidophilus}$ La-14", 'O2=5, ' + "$\it{L. rhamnosus}$ GG",'O2=5, ' +  "$\it{L. helveticus}$ CNRZ32"],
@@ -51,12 +51,12 @@ if __name__ == "__main__":
               dataframes=dataframes,
               column_x="carbon_uptake",
               column_y=["Sth", "La", "Lr","Lh"],
-              x_label='Percentage of Carbon Uptake (%)',
+              x_label='Carbon Source Uptake ($mmol.gDW^{-1}.h^{-1}$)',
               ylabel='Growth Rate ($h^{-1}$)',
               subplots_number=1,
               title='Maximizing for Growth',
               titles=None,
-              figsize=(12,4),
+              figsize=(12,4.5),
               personalized_labels={'Sth':  r"$\it{S. thermophilus}$ LMD-9", 'La':"$\it{L. acidophilus}$ La-14", 'Lr': "$\it{L. rhamnosus}$ GG",'Lh':  "$\it{L. helveticus}$ CNRZ32" },
               )
 
@@ -84,7 +84,7 @@ if __name__ == "__main__":
     combine_images(directory=_plots_directory,
                    filename = "maximizing_for_growth",
                    filenames = ["growth_rate.png", "results_carbon_source_analysis.png"])
-
+    #
 
 
     # ##### Minimizing substrate uptake
@@ -102,7 +102,7 @@ if __name__ == "__main__":
     #           column_y_axis_2=["lac__L_e"],
     #           ylabel_axis2="Lactate production ($mmol.gDW^{-1}.h^{-1}$)",
     #           personalized_labels={'ac_e': 'Acetate', 'etoh_e': 'Ethanol', 'for_e': "Formate", "lac__L_e": 'Lactate'},
-    #           ylim={"La": (0, 1)}
+    #           ylim={"La": (0, 0.5)}
     #           )
 
     # # # #####
