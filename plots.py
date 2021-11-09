@@ -119,13 +119,26 @@ def change_df(dataframes, axis):
     return dataframes
 
 
-def combine_images(directory,filename, filenames):
-    im1 = Image.open(directory + filenames[0])
-    im2 = Image.open(directory + filenames[1])
-    dst = Image.new('RGB', (im1.width, im1.height + im2.height))
-    dst.paste(im1, (0, 0))
-    dst.paste(im2, (0, im1.height))
-    dst.show()
+def combine_images(directory,filename, filenames, cut=0):
+    imgs = {}
+    for file in filenames:
+        imgs[file] = Image.open(directory + file + '.png')
+    max_height = 0
+    heights = [0]
+    i=1
+    old_height=0
+    for key in imgs.keys():
+        max_height+=imgs[key].height
+        heights.append(old_height+imgs[key].height)
+        old_height = heights[i]
+        i+=1
+    # max_height = max_height - cut *len(filenames)
+    dst = Image.new('RGB', (imgs[filenames[0]].width, max_height))
+    i=0
+    for key in  imgs.keys():
+        dst.paste(imgs[key], (0, heights[i]))
+        i+=1
+    # dst.show()
     dst.save(directory + filename + '.png')
 
 
@@ -144,10 +157,10 @@ def plot_gr(directory, filename,dataframes, column_x, column_y, x_label, ylabel,
     labels = get_labels_by_order(labels, personalized_labels)
     ax.legend(plots, labels)
     # fig.show()
-    fig.savefig(directory + filename + '.png')
+    fig.savefig(directory + filename + '.png',bbox_inches='tight')
 
 def line_plot(directory, filename,dataframes, column_x, column_y, x_label, ylabel,axis = 0, column_y_axis_2=None, ylabel_axis2=None,grid_kws = {"hspace": 0.2, "wspace":0.3},figsize = (12,12), subplots_number=(2,2),
-              title=None, titles=species,group_by='-',personalized_labels=None,color_map=None,linestyle_map=None, ylim=None):
+              title=None, titles=species,group_by='-', personalized_labels=None, color_map=None, linestyle_map=None, ylim=None):
     fig, axes = plt.subplots(subplots_number[0],subplots_number[1], figsize = figsize, gridspec_kw = grid_kws )
     if title:
         fig.suptitle(title, fontsize = 14, y=0.95)
@@ -197,15 +210,14 @@ def line_plot(directory, filename,dataframes, column_x, column_y, x_label, ylabe
             labels = personalized_labels
     fig.legend(plots, labels, loc='lower center', ncol=2)
     # fig.show()
-    fig.savefig(directory + filename + '.png')
+    fig.savefig(directory + filename + '.png',bbox_inches='tight')
 
 
 
-def fva_plot(directory, filename,dataframes, column_x = None, column_y= None, x_label= None, y_label= None,axis = 0, column_y_axis_2=None, ylabel_axis2=None,figsize = (12,12), subplots_number=(2,2),title = None,
-             titles=species,group_by='-',personalized_labels=None,columns=True, ylim=None):
-    grid_kws = {"hspace": 0.25, "wspace": 0.3}  # , gridspec_kw=grid_kws,figsize = (7,18)
+def fva_plot(directory, filename,dataframes, column_x = None, column_y= None, x_label= None, y_label= None,figsize = (12,12), subplots_number=(2,2),title = None,grid_kws = {"hspace": 0.25, "wspace": 0.3},
+             titles=species,insert_legend=True,columns=True, ylim=None):
     fig, axes = plt.subplots(subplots_number[0], subplots_number[1], figsize=figsize, gridspec_kw=grid_kws)
-    fig.suptitle(title, fontsize = 14, y=0.95)
+    fig.suptitle(title, fontsize = 18, y=0.95)
     df=0
     plots = []
     labels = []
@@ -230,14 +242,17 @@ def fva_plot(directory, filename,dataframes, column_x = None, column_y= None, x_
                 plots += axes[i, j].bar(maximum[columnx], [0 for i in range(0,len(flux[columnx]))], width=2.5,  label='Maximum')
                 plots += axes[i, j].bar(minimum[columnx],[0 for i in range(0,len(flux[columnx]))] , width=2.5, color='orange', label='Minimum')
                 axes[i, j].set_ylim(-0.01,0.5)
-            axes[i,j].set_title(titles[df])
-            axes[i, j].set_xlabel(xlabel)
-            axes[i, j].set_ylabel(y_label)
+            axes[i,j].set_title(titles[df], fontsize = 16)
+            axes[i, j].set_xlabel(xlabel, fontsize = 13)
+            plt.rc('text')
+
+
+            axes[i, j].set_ylabel(y_label, fontsize = 13)
             df+=1
-    if columns:
+    if columns and insert_legend:
         h, l = axes[i,j].get_legend_handles_labels()
         fig.legend(h, l , loc='lower center', ncol=3)
-    fig.show()
+    # fig.show()
     fig.savefig(directory + filename + '.png')
 
 def phenotypic_phase_plane(directory, filename,dataframes, column_x = None, column_y= None,column_z=None, x_label= None, y_label= None,z_label= None,figsize = (12,12), subplots_number=(2,2),title = None,

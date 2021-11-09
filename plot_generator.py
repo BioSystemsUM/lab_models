@@ -44,47 +44,47 @@ if __name__ == "__main__":
 
 
     ##### Maximizing for growth
-    dataframes = read_results(_results_directory + "results_carbon_source_analysis" + ".xlsx")
-    dataframes = [append_growth_rate(dataframes)]
-    plot_gr(directory=_plots_directory,
-              filename='growth_rate',
-              dataframes=dataframes,
-              column_x="carbon_uptake",
-              column_y=["Sth", "La", "Lr","Lh"],
-              x_label='Carbon Source Uptake ($mmol.gDW^{-1}.h^{-1}$)',
-              ylabel='Growth Rate ($h^{-1}$)',
-              subplots_number=1,
-              title='Maximizing for Growth',
-              titles=None,
-              figsize=(12,4.5),
-              personalized_labels={'Sth':  r"$\it{S. thermophilus}$ LMD-9", 'La':"$\it{L. acidophilus}$ La-14", 'Lr': "$\it{L. rhamnosus}$ GG",'Lh':  "$\it{L. helveticus}$ CNRZ32" },
-              )
-
-    dataframes = read_results(_results_directory + "results_carbon_source_analysis" + ".xlsx")
-    dataframes = change_df(dataframes, [1,1,1,1])
-    # dataframes=apply_symetric(dataframes)
-    line_plot(directory=_plots_directory,
-              filename='results_carbon_source_analysis',
-              dataframes=dataframes,
-              column_x= "carbon_uptake",
-              column_y=["ac_e", "etoh_e","for_e"],
-              x_label='Carbon Source Uptake ($mmol.gDW^{-1}.h^{-1}$)',
-              ylabel='Production Rate ($mmol.gDW^{-1}.h^{-1}$)',
-              subplots_number= (2,2),
-              axis=0,
-              # title= 'Maximizing for Growth',
-              title=None,
-              figsize=(12, 8),
-              column_y_axis_2= ["lac__L_e"],
-              ylabel_axis2= "Lactate production ($mmol.gDW^{-1}.h^{-1}$)",
-              personalized_labels={'ac_e': 'Acetate', 'etoh_e': 'Ethanol', 'for_e' : "Formate", "lac__L_e":  'Lactate', 'Sth':''},
-              ylim = {"La": (0,0.7)}
-              )
-
-    combine_images(directory=_plots_directory,
-                   filename = "maximizing_for_growth",
-                   filenames = ["growth_rate.png", "results_carbon_source_analysis.png"])
+    # dataframes = read_results(_results_directory + "results_carbon_source_analysis" + ".xlsx")
+    # dataframes = [append_growth_rate(dataframes)]
+    # plot_gr(directory=_plots_directory,
+    #           filename='growth_rate',
+    #           dataframes=dataframes,
+    #           column_x="carbon_uptake",
+    #           column_y=["Sth", "La", "Lr","Lh"],
+    #           x_label='Carbon Source Uptake ($mmol.gDW^{-1}.h^{-1}$)',
+    #           ylabel='Growth Rate ($h^{-1}$)',
+    #           subplots_number=1,
+    #           title='Maximizing for Growth',
+    #           titles=None,
+    #           figsize=(12.5,4.5),
+    #           personalized_labels={'Sth':  r"$\it{S. thermophilus}$ LMD-9", 'La':"$\it{L. acidophilus}$ La-14", 'Lr': "$\it{L. rhamnosus}$ GG",'Lh':  "$\it{L. helveticus}$ CNRZ32" },
+    #           )
     #
+    # dataframes = read_results(_results_directory + "results_carbon_source_analysis" + ".xlsx")
+    # dataframes = change_df(dataframes, [1,1,1,1])
+    # # dataframes=apply_symetric(dataframes)
+    # line_plot(directory=_plots_directory,
+    #           filename='results_carbon_source_analysis',
+    #           dataframes=dataframes,
+    #           column_x= "carbon_uptake",
+    #           column_y=["ac_e", "etoh_e","for_e"],
+    #           x_label='Carbon Source Uptake ($mmol.gDW^{-1}.h^{-1}$)',
+    #           ylabel='Production Rate ($mmol.gDW^{-1}.h^{-1}$)',
+    #           subplots_number= (2,2),
+    #           axis=0,
+    #           # title= 'Maximizing for Growth',
+    #           title=None,
+    #           figsize=(12, 10),
+    #           column_y_axis_2= ["lac__L_e"],
+    #           ylabel_axis2= "Lactate production ($mmol.gDW^{-1}.h^{-1}$)",
+    #           personalized_labels={'ac_e': 'Acetate', 'etoh_e': 'Ethanol', 'for_e' : "Formate", "lac__L_e":  'Lactate', 'Sth':''},
+    #           ylim = {"La": (0,0.7)}
+    #           )
+    #
+    # combine_images(directory=_plots_directory,
+    #                filename = "maximizing_for_growth",
+    #                filenames = ["growth_rate", "results_carbon_source_analysis"])
+
 
 
     # ##### Minimizing substrate uptake
@@ -133,6 +133,7 @@ if __name__ == "__main__":
     #          columns=False,
     #          ylim = [0.1,0.1]
     #          )
+    fig_size = (20,7.5)
     # dataframes = read_results(_results_directory + "results_enzyme_fva_analysis_no_growth" + ".xlsx")
     # dataframes = dataframes_for_fva(dataframes)
     # fva_plot(directory=_plots_directory,
@@ -140,10 +141,13 @@ if __name__ == "__main__":
     #          dataframes=dataframes,
     #          column_x=['PFL', 'PKETX', 'PFL', 'PKETX'],
     #          column_y=["lac__L_e"],
-    #          x_label=' expression',
-    #          y_label='Lactate Production Rate ($mmol.gDW^{-1}.h^{-1}$)',
+    #          x_label=' expression (%)',
+    #          grid_kws={"hspace": 0.4, "wspace": 0.25},
+    #          y_label='Production Rate \n ($mmol.gDW^{-1}.h^{-1}$)',
     #          title = 'L-Lactate',
-    #          ylim= {"Sth": [2,2], "Lr": [2,2],"La": [2,2], "Lh": [2,2]}
+    #          figsize=fig_size,
+    #          ylim= {"Sth": [2,2], "Lr": [2,2],"La": [2,2], "Lh": [2,2]},
+    #          insert_legend=False
     #          )
     #
     # dataframes = read_results(_results_directory + "results_enzyme_fva_analysis_no_growth" + ".xlsx")
@@ -153,10 +157,13 @@ if __name__ == "__main__":
     #          dataframes=dataframes,
     #          column_x=['PFL', 'PKETX', 'PFL', 'PKETX'],
     #          column_y=["ac_e"],
-    #          x_label=' expression',
-    #          y_label='Acetate Production Rate ($mmol.gDW^{-1}.h^{-1}$)',
+    #          figsize=fig_size,
+    #          x_label=' expression (%)',
+    #          grid_kws={"hspace": 0.4, "wspace": 0.25},
+    #          y_label='Production Rate \n ($mmol.gDW^{-1}.h^{-1}$)',
     #          title = 'Acetate',
-    #          ylim = {"Lr": [0.5, 3]}
+    #          ylim = {"Lr": [0.5, 3]},
+    #          insert_legend=False
     #          )
     # dataframes = read_results(_results_directory + "results_enzyme_fva_analysis_no_growth" + ".xlsx")
     # dataframes = dataframes_for_fva(dataframes)
@@ -165,9 +172,12 @@ if __name__ == "__main__":
     #          dataframes=dataframes,
     #          column_x=['PFL', 'PKETX', 'PFL', 'PKETX'],
     #          column_y=["for_e"],
-    #          x_label=' expression',
-    #          y_label='Formate Production Rate ($mmol.gDW^{-1}.h^{-1}$)',
-    #          title='Formate'
+    #          x_label=' expression (%)',
+    #          grid_kws={"hspace": 0.4, "wspace": 0.25},
+    #          figsize=fig_size,
+    #          y_label='Production Rate \n ($mmol.gDW^{-1}.h^{-1}$)',
+    #          title='Formate',
+    #          insert_legend=False
     #          )
     # dataframes = read_results(_results_directory + "results_enzyme_fva_analysis_no_growth" + ".xlsx")
     # dataframes = dataframes_for_fva(dataframes)
@@ -176,57 +186,82 @@ if __name__ == "__main__":
     #          dataframes=dataframes,
     #          column_x=['PFL', 'PKETX', 'PFL', 'PKETX'],
     #          column_y=["etoh_e"],
-    #          x_label=' expression',
-    #          y_label='Ethanol Production Rate ($mmol.gDW^{-1}.h^{-1}$)',
+    #          x_label=' expression (%)',
+    #          grid_kws={"hspace": 0.4, "wspace": 0.25},
+    #          figsize=fig_size,
+    #          y_label='Production Rate \n ($mmol.gDW^{-1}.h^{-1}$)',
     #          title='Ethanol'
     #          )
-    # dataframes = read_results(_results_directory + "results_enzyme_fva_analysis_growth" + ".xlsx")
-    # dataframes = dataframes_for_fva(dataframes)
-    # fva_plot(directory=_plots_directory,
-    #          filename='results_enzyme_fva_analysis_growth_Lactate',
-    #          dataframes=dataframes,
-    #          column_x=['PFL', 'PKETX', 'PFL', 'PKETX'],
-    #          column_y=["lac__L_e"],
-    #          x_label=' expression',
-    #          y_label='Lactate Production Rate ($mmol.gDW^{-1}.h^{-1}$)',
-    #          title='L-Lactate',
-    #          ylim= {"Sth": [2,2], "Lr": [2,2],"La": [2,2], "Lh": [2,2]}
-    #          )
+    dataframes = read_results(_results_directory + "results_enzyme_fva_analysis_growth" + ".xlsx")
+    dataframes = dataframes_for_fva(dataframes)
+    fva_plot(directory=_plots_directory,
+             filename='results_enzyme_fva_analysis_growth_Lactate',
+             dataframes=dataframes,
+             column_x=['PFL', 'PKETX', 'PFL', 'PKETX'],
+             column_y=["lac__L_e"],
+             x_label=' expression (%)',
+             grid_kws={"hspace": 0.4, "wspace": 0.25},
+             figsize=fig_size,
+             y_label='Production Rate \n ($mmol.gDW^{-1}.h^{-1}$)',
+             title='L-Lactate',
+             insert_legend=False,
+             ylim= {"Sth": [2,2], "Lr": [2,2],"La": [2,2], "Lh": [2,2]}
+             )
     #
-    # dataframes = read_results(_results_directory + "results_enzyme_fva_analysis_growth" + ".xlsx")
-    # dataframes = dataframes_for_fva(dataframes)
-    # fva_plot(directory=_plots_directory,
-    #          filename='results_enzyme_fva_analysis_growth_Acetate',
-    #          dataframes=dataframes,
-    #          column_x=['PFL', 'PKETX', 'PFL', 'PKETX'],
-    #          column_y=["ac_e"],
-    #          x_label=' expression',
-    #          y_label='Acetate Production Rate ($mmol.gDW^{-1}.h^{-1}$)',
-    #          title='Acetate'
-    #          )
-    # dataframes = read_results(_results_directory + "results_enzyme_fva_analysis_growth" + ".xlsx")
-    # dataframes = dataframes_for_fva(dataframes)
-    # fva_plot(directory=_plots_directory,
-    #          filename='results_enzyme_fva_analysis_growth_Formate',
-    #          dataframes=dataframes,
-    #          column_x=['PFL', 'PKETX', 'PFL', 'PKETX'],
-    #          column_y=["for_e"],
-    #          x_label=' expression',
-    #          y_label='Formate Production Rate ($mmol.gDW^{-1}.h^{-1}$)',
-    #          title='Formate'
-    #          )
-    # dataframes = read_results(_results_directory + "results_enzyme_fva_analysis_growth" + ".xlsx")
-    # dataframes = dataframes_for_fva(dataframes)
-    # fva_plot(directory=_plots_directory,
-    #          filename='results_enzyme_fva_analysis_growth_Ethanol',
-    #          dataframes=dataframes,
-    #          column_x=['PFL', 'PKETX', 'PFL', 'PKETX'],
-    #          column_y=["etoh_e"],
-    #          x_label=' expression',
-    #          y_label='Ethanol Production Rate ($mmol.gDW^{-1}.h^{-1}$)',
-    #          title='Ethanol',
-    #          ylim= {"Sth": [0,0.1], "Lr": [0.85,0.4]}
-    #          )
+    dataframes = read_results(_results_directory + "results_enzyme_fva_analysis_growth" + ".xlsx")
+    dataframes = dataframes_for_fva(dataframes)
+    fva_plot(directory=_plots_directory,
+             filename='results_enzyme_fva_analysis_growth_Acetate',
+             dataframes=dataframes,
+             column_x=['PFL', 'PKETX', 'PFL', 'PKETX'],
+             column_y=["ac_e"],
+             x_label=' expression (%)',
+             figsize=fig_size,
+             grid_kws={"hspace": 0.4, "wspace": 0.25},
+             insert_legend=False,
+             y_label='Production Rate \n ($mmol.gDW^{-1}.h^{-1}$)',
+             title='Acetate'
+             )
+    dataframes = read_results(_results_directory + "results_enzyme_fva_analysis_growth" + ".xlsx")
+    dataframes = dataframes_for_fva(dataframes)
+    fva_plot(directory=_plots_directory,
+             filename='results_enzyme_fva_analysis_growth_Formate',
+             dataframes=dataframes,
+             column_x=['PFL', 'PKETX', 'PFL', 'PKETX'],
+             column_y=["for_e"],
+             x_label=' expression (%)',
+             grid_kws={"hspace": 0.4, "wspace": 0.25},
+             figsize=fig_size,
+             insert_legend=False,
+             y_label='Production Rate \n ($mmol.gDW^{-1}.h^{-1}$)',
+             title='Formate'
+             )
+    dataframes = read_results(_results_directory + "results_enzyme_fva_analysis_growth" + ".xlsx")
+    dataframes = dataframes_for_fva(dataframes)
+    fva_plot(directory=_plots_directory,
+             filename='results_enzyme_fva_analysis_growth_Ethanol',
+             dataframes=dataframes,
+             column_x=['PFL', 'PKETX', 'PFL', 'PKETX'],
+             column_y=["etoh_e"],
+             x_label=' expression (%)',
+             grid_kws={"hspace": 0.4, "wspace": 0.25},
+             figsize=fig_size,
+             y_label='Production Rate \n ($mmol.gDW^{-1}.h^{-1}$)',
+             title='Ethanol',
+             ylim= {"Sth": [0,0.1], "Lr": [0.85,0.4]}
+             )
+
+    # combine_images(directory=_plots_directory,
+    #                filename = "fva_analysis",
+    #                filenames = ["results_enzyme_fva_analysis_no_growth_Lactate", "results_enzyme_fva_analysis_no_growth_Acetate",
+    #                             "results_enzyme_fva_analysis_no_growth_Formate", "results_enzyme_fva_analysis_no_growth_Ethanol"],
+    #                cut = 10)
+
+    combine_images(directory=_plots_directory,
+                   filename="fva_analysis_growth",
+                   filenames=["results_enzyme_fva_analysis_growth_Lactate", "results_enzyme_fva_analysis_growth_Acetate",
+                              "results_enzyme_fva_analysis_growth_Formate", "results_enzyme_fva_analysis_growth_Ethanol"],
+                   cut=10)
 
     # dataframes = read_results(_results_directory + "results_phenotypic_phase_plane_analysis" + ".xlsx")
     # phenotypic_phase_plane(directory=_plots_directory,
@@ -241,3 +276,4 @@ if __name__ == "__main__":
     #          z_label='Growth rate ($h^{-1}$)',
     #          title='Phenotypic Phase Plane'
     #          )
+
